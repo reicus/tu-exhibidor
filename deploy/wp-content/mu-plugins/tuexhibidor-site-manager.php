@@ -10,4 +10,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-require_once __DIR__ . '/tuexhibidor-site-manager/bootstrap.php';
+$bootstrap = __DIR__ . '/tuexhibidor-site-manager/bootstrap.php';
+if ( ! is_readable( $bootstrap ) ) {
+	add_action(
+		'admin_notices',
+		static function () {
+			echo '<div class="notice notice-error"><p><strong>Sitio Premium:</strong> faltan archivos del plugin. Sube la carpeta <code>mu-plugins/tuexhibidor-site-manager/</code> completa al servidor.</p></div>';
+		}
+	);
+	return;
+}
+
+require_once $bootstrap;
