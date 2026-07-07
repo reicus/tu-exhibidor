@@ -1,4 +1,4 @@
-const IMG = (p) => `../${p}`;
+const IMG = (p) => `/${p}`;
 
 const RESPONSIVE_WIDTHS = [400, 800, 1200, 1600];
 
@@ -15,7 +15,7 @@ function assetAlt(asset, fallback = 'Tu Exhibidor') {
 }
 
 function mediaPath(base, width, format) {
-  return `../${base}-${width}.${format}`;
+  return `/${base}-${width}.${format}`;
 }
 
 function pictureHtml(asset, { sizes = '100vw', className = '', loading = 'lazy' } = {}) {

@@ -56,7 +56,7 @@ function tuexhibidor_landing_sections(){
 	<div class="tuexhibidor-valores">
 	<span>Calidad</span><span>Innovacion</span><span>Compromiso</span><span>Experiencia</span>
 	</div>
-	<a class="tuexhibidor-catalogo-btn" href="https://tuexhibidor.cl/wp-content/uploads/2026/07/catalogo_tuexhibidor.pdf" target="_blank" rel="noopener">Descargar catálogo completo (85+ modelos)</a>
+	<a class="tuexhibidor-catalogo-btn" href="https://tuexhibidor.cl/wp-content/uploads/2026/07/catalogo_tuexhibidor.pdf" target="_blank" rel="noopener">Descargar Catalogo</a>
 	</div>
 	</section>
 	<section id="contacto" class="tuexhibidor-section tuexhibidor-contacto">
@@ -433,7 +433,7 @@ function tuexhibidor_round3_fix_output($html){
 <div class="tuexhibidor-valor-item"><span class="tuexhibidor-valor-num">03</span><span class="tuexhibidor-valor-txt">Compromiso</span></div>
 <div class="tuexhibidor-valor-item"><span class="tuexhibidor-valor-num">04</span><span class="tuexhibidor-valor-txt">Experiencia</span></div>
 </div>
-<a href="https://tuexhibidor.cl/wp-content/uploads/2026/07/catalogo_tuexhibidor.pdf" target="_blank" rel="noopener" class="tuexhibidor-catalogo-btn">Descargar cat\u{00e1}logo completo (85+ modelos)</a>
+<a href="https://tuexhibidor.cl/wp-content/uploads/2026/07/catalogo_tuexhibidor.pdf" target="_blank" rel="noopener" class="tuexhibidor-catalogo-btn">Descargar Cat\u{00e1}logo</a>
 </div>
 </section>
 HTML;
