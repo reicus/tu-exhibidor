@@ -1,0 +1,64 @@
+.tuex-sm-wrap .description { max-width: 720px; }
+.tuex-sm-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin: 16px 0;
+}
+.tuex-sm-filters input[type="search"] { min-width: 220px; }
+.tuex-sm-count { color: #646970; margin-left: 8px; }
+.tuex-sm-panel { margin-top: 12px; }
+.tuex-sm-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 12px;
+}
+.tuex-sm-grid-wide {
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+.tuex-sm-card {
+  background: #fff;
+  border: 1px solid #c3c4c7;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 1px 1px rgba(0,0,0,.04);
+}
+.tuex-sm-thumb {
+  aspect-ratio: 1;
+  background: #f0ebe3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.tuex-sm-thumb-wide { aspect-ratio: 16/9; }
+.tuex-sm-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.tuex-sm-no-img { color: #787c82; font-size: 12px; }
+.tuex-sm-card-body { padding: 12px; }
+.tuex-sm-card-body p {
+  margin: 4px 0 10px;
+  font-size: 12px;
+  color: #50575e;
+  line-height: 1.4;
+}
+.tuex-sm-card-body code { font-size: 11px; word-break: break-all; }
+.tuex-sm-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+.tuex-sm-alt { margin-top: 4px; }
+.tuex-sm-card.is-loading { opacity: .55; pointer-events: none; }
+.tuex-sm-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #1d2327;
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 4px;
+  z-index: 100001;
+  box-shadow: 0 4px 12px rgba(0,0,0,.2);
+}

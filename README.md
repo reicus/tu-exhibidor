@@ -34,9 +34,19 @@ npm run pack:operativo    # Backup limpio solo sitio operativo
 npm run deploy:pack       # Empaquetar para FTP/WordPress
 ```
 
-## Deploy
+## Admin de imágenes (WordPress)
 
-Ver `HANDOFF-COWORK-PROD.md` y `deploy/README-DEPLOY.md`.
+Tras subir el mu-plugin `tuexhibidor-site-manager` al servidor:
+
+1. Entra a **https://tuexhibidor.cl/login**
+2. Menú lateral → **Sitio Premium**
+3. Pestañas: **Catálogo** | **Hero** | **Galería** | **Marca**
+4. Clic en **Cambiar imagen** → biblioteca de medios → publicación inmediata en `/site/`
+
+Archivos en servidor:
+- `wp-content/mu-plugins/tuexhibidor-site-manager.php`
+- `wp-content/mu-plugins/tuexhibidor-site-manager/` (carpeta completa)
+
 
 ## Contacto negocio
 
