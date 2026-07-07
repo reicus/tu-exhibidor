@@ -4,8 +4,8 @@ node_modules/
 __pycache__/
 *.pyc
 
-# Generados / reempaquetables
-PhotosDrive/PROCESSED/
+# Fuente local Google Drive (no subir al repo)
+PhotosDrive/
 public/images/catalog/originals/PROCESSED/
 **/log_procesamiento.csv
 **/propuesta_nombres.csv
@@ -25,6 +25,7 @@ desktop.ini
 .env
 .env.*
 *.log
+docs/CREDENCIALES-TU-EXHIBIDOR.pdf
 
 # Temporales ImgSEO
 *.warm.tmp.jpg
