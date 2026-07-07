@@ -81,7 +81,7 @@ function tuexhibidor_landing_sections(){
 		var contacto = document.getElementById("contacto");
 		var footer = document.querySelector(".site-footer");
 		if(footer && somos && contacto){ footer.parentNode.insertBefore(somos, footer); if(instagram){ footer.parentNode.insertBefore(instagram, footer); } footer.parentNode.insertBefore(contacto, footer); }
-		var map = { "CADENAS Y COLLARES":"#catalogo", "ARETES Y ANILLOS":"#catalogo", "PULSERAS Y RELOJES":"#catalogo", "VITRINA":"#catalogo", "QUIENES SOMOS":"#somos" };
+		var map = { "CADENAS Y COLLARES":"#catalogo", "ARETES Y ANILLOS":"#catalogo", "PULSERAS Y RELOJES":"#catalogo", "VITRINA":"#catalogo", "QUIENES SOMOS":"#nosotros", "QUIÉNES SOMOS":"#nosotros", "NOSOTROS":"#nosotros", "INICIO":"#inicio", "CATÁLOGO":"#catalogo", "CATALOGO":"#catalogo", "GALERÍA":"#galeria", "GALERIA":"#galeria", "CONTACTO":"#contacto", "A MEDIDA":"#medida" };
 		document.querySelectorAll(".main-menu a").forEach(function(a){
 			var t = a.textContent.trim();
 			if(map[t]){ a.setAttribute("href", map[t]); }
@@ -95,7 +95,7 @@ function tuexhibidor_menu_anchors_everywhere(){
 	if(is_front_page()) return;
 	echo '<script>
 	document.addEventListener("DOMContentLoaded", function(){
-		var map = { "CADENAS Y COLLARES":"/#catalogo", "ARETES Y ANILLOS":"/#catalogo", "PULSERAS Y RELOJES":"/#catalogo", "VITRINA":"/#catalogo", "QUIENES SOMOS":"/#somos" };
+		var map = { "CADENAS Y COLLARES":"/site/#catalogo", "ARETES Y ANILLOS":"/site/#catalogo", "PULSERAS Y RELOJES":"/site/#catalogo", "VITRINA":"/site/#catalogo", "QUIENES SOMOS":"/site/#nosotros", "QUIÉNES SOMOS":"/site/#nosotros", "NOSOTROS":"/site/#nosotros", "INICIO":"/site/#inicio", "CATÁLOGO":"/site/#catalogo", "CATALOGO":"/site/#catalogo", "GALERÍA":"/site/#galeria", "GALERIA":"/site/#galeria", "CONTACTO":"/site/#contacto", "A MEDIDA":"/site/#medida", "TIENDA":"/shop/", "SHOP":"/shop/" };
 		document.querySelectorAll(".main-menu a").forEach(function(a){
 			var t = a.textContent.trim();
 			if(map[t]){ a.setAttribute("href", map[t]); }
@@ -114,14 +114,14 @@ function tuexhibidor_fonts(){
 add_action('wp_head', 'tuexhibidor_landing_css');
 function tuexhibidor_landing_css(){
 	echo '<style>
-	:root{ --gold:#b8935f; --gold-dark:#96723f; --ink:#2b2926; --cream:#faf7f2; }
+	:root{ --gold:#b8935f; --gold-dark:#96723f; --ink:#2b2926; --cream:#ebe3d8; --cream-warm:#e3d9cc; --muted:#8a8378; }
 	html{ scroll-behavior:smooth; }
 	body{ font-family:"Poppins",sans-serif; color:var(--ink); background:var(--cream); }
 	h1,h2,h3,h4,h5,.site-title,.site-title a{ font-family:"Playfair Display",serif !important; letter-spacing:.3px; }
 	.price,.woocommerce-Price-amount,.woocommerce-Price-currencySymbol{ display:none !important; }
 	.cart-counter,.cart-icon,.lab-mini-cart,.cart-info,a.cart-counter,.widget_shopping_cart,[class*="mini-cart"]{ display:none !important; }
 	a[href*="/cart/"], a[href*="/checkout/"]{ display:none !important; }
-	.site-header{ background:#fff !important; box-shadow:0 2px 16px rgba(0,0,0,.06) !important; border:none !important; }
+	.site-header{ background:rgba(235,227,216,.94) !important; backdrop-filter:blur(12px); box-shadow:none !important; border-bottom:1px solid rgba(184,147,95,.2) !important; }
 	.main-menu > ul > li > a{ font-weight:500; letter-spacing:1.5px; text-transform:uppercase; font-size:12.5px; color:var(--ink) !important; transition:color .25s ease; cursor:pointer; }
 	.main-menu > ul > li > a:hover{ color:var(--gold) !important; }
 	.vc_row{ border-radius:18px !important; overflow:hidden; scroll-margin-top:110px; }
@@ -134,8 +134,8 @@ function tuexhibidor_landing_css(){
 	.tuexhibidor-wa-btn{ background:linear-gradient(135deg,#25D366,#1DA851) !important; color:#fff !important; border-radius:30px !important; padding:10px 18px !important; text-decoration:none; font-size:12.5px; font-weight:600; letter-spacing:.4px; box-shadow:0 4px 12px rgba(37,211,102,.35); transition:transform .25s ease, box-shadow .25s ease; border:none !important; }
 	.tuexhibidor-wa-btn:hover{ transform:translateY(-2px); box-shadow:0 8px 20px rgba(37,211,102,.45); color:#fff !important; }
 	a.button, .wpb_button, .vc_btn3{ border-radius:30px !important; letter-spacing:1px !important; text-transform:uppercase; font-weight:500 !important; transition:all .3s ease !important; }
-	.site-footer{ background:#211f1d !important; }
-	.site-footer a{ color:#d8cfc2 !important; }
+	.site-footer{ background:var(--cream-warm) !important; color:var(--muted) !important; border-top:1px solid rgba(184,147,95,.25); }
+	.site-footer a{ color:var(--gold-dark) !important; }
 	.site-footer a:hover{ color:var(--gold) !important; }
 	.tuexhibidor-section{ padding:80px 24px; scroll-margin-top:90px; }
 	.tuexhibidor-section-inner{ max-width:820px; margin:0 auto; text-align:center; }
@@ -319,7 +319,7 @@ function tuexhibidor_final_css(){
 	.tuexhibidor-galeria{ background:#fff !important; }
 	.tuexhibidor-somos{ background:var(--cream) !important; }
 	.tuexhibidor-contacto{ background:linear-gradient(180deg,#2b2926,#1c1a18) !important; }
-	.site-footer{ background:#1c1a18 !important; }
+	.site-footer{ background:var(--cream-warm) !important; }
 
 	/* Divisor y bloque instagram dentro de contacto */
 	.tuexhibidor-contacto-divider{ width:60px; height:1px; background:rgba(255,255,255,.2); margin:38px auto 26px; }
@@ -537,15 +537,18 @@ function tuexhibidor_gallery_lightbox(){
 /* == TE-MENU-CATALOGO: CATALOGO como ancla del landing == */
 add_filter('wp_nav_menu_objects', 'te_catalogo_anchor', 10, 2);
 function te_catalogo_anchor($items, $args){
-    foreach($items as $it){
-        $t = mb_strtoupper(trim(strip_tags($it->title)));
-        if($t==='CATÁLOGO'||$t==='CATALOGO'){ $it->url = home_url('/#catalogo'); }
-        elseif($t==='GALERÍA'||$t==='GALERIA'){ $it->url = home_url('/#galeria'); }
-        elseif($t==='QUIÉNES SOMOS'||$t==='QUIENES SOMOS'){ $it->url = home_url('/#somos'); }
-        elseif($t==='CONTACTO'){ $it->url = home_url('/#contacto'); }
-        elseif($t==='INICIO'){ $it->url = home_url('/'); }
-    }
-    return $items;
+	$base = trailingslashit( home_url( '/site' ) );
+	foreach($items as $it){
+		$t = mb_strtoupper(trim(strip_tags($it->title)));
+		if($t==='CATÁLOGO'||$t==='CATALOGO'){ $it->url = $base . '#catalogo'; }
+		elseif($t==='GALERÍA'||$t==='GALERIA'){ $it->url = $base . '#galeria'; }
+		elseif($t==='QUIÉNES SOMOS'||$t==='QUIENES SOMOS'||$t==='NOSOTROS'){ $it->url = $base . '#nosotros'; }
+		elseif($t==='CONTACTO'){ $it->url = $base . '#contacto'; }
+		elseif($t==='INICIO'||$t==='HOME'){ $it->url = $base . '#inicio'; }
+		elseif($t==='A MEDIDA'){ $it->url = $base . '#medida'; }
+		elseif($t==='TIENDA'||$t==='SHOP'){ $it->url = home_url('/shop/'); }
+	}
+	return $items;
 }
 /* == fin TE-MENU-CATALOGO == */
 
@@ -748,3 +751,126 @@ add_action('send_headers', function(){
 	header('X-Frame-Options: SAMEORIGIN');
 }, 11);
 /* == fin TE-SECURITY-HEADERS == */
+
+
+/* == TE-UNIFICADO: navegación + paleta sitio premium en WordPress == */
+function te_site_base_url() {
+	return trailingslashit( home_url( '/site' ) );
+}
+
+add_action( 'template_redirect', 'te_redirect_wp_home_to_static', 1 );
+function te_redirect_wp_home_to_static() {
+	if ( is_admin() || wp_doing_ajax() || is_customize_preview() ) {
+		return;
+	}
+	if ( is_front_page() && ! is_paged() ) {
+		wp_safe_redirect( te_site_base_url(), 302 );
+		exit;
+	}
+}
+
+add_filter( 'woocommerce_breadcrumb_defaults', 'te_unified_breadcrumbs' );
+function te_unified_breadcrumbs( $defaults ) {
+	$defaults['home'] = 'Inicio';
+	$defaults['wrap_before'] = '<nav class="woocommerce-breadcrumb te-breadcrumb" aria-label="Breadcrumb">';
+	return $defaults;
+}
+
+add_filter( 'woocommerce_get_breadcrumb', 'te_breadcrumb_home_link', 10, 2 );
+function te_breadcrumb_home_link( $crumbs, $breadcrumb ) {
+	if ( ! empty( $crumbs[0][0] ) ) {
+		$crumbs[0][1] = te_site_base_url() . '#inicio';
+	}
+	return $crumbs;
+}
+
+add_action( 'wp_head', 'te_unified_premium_skin', 3 );
+function te_unified_premium_skin() {
+	echo '<style>
+	:root{
+		--gold:#b8935f;
+		--gold-dark:#96723f;
+		--cream:#ebe3d8;
+		--cream-warm:#e3d9cc;
+		--surface:#ddd3c8;
+		--ink:#2b2926;
+		--muted:#8a8378;
+	}
+	body{ background:var(--cream) !important; color:var(--ink); }
+	.site-header, header.site-header, .header-wrapper{
+		background:rgba(235,227,216,.94) !important;
+		backdrop-filter:blur(12px);
+		border-bottom:1px solid rgba(184,147,95,.2) !important;
+		box-shadow:none !important;
+	}
+	.main-menu > ul > li > a,
+	.top-menu a,
+	.mobile-menu a{
+		color:var(--ink) !important;
+		font-weight:500;
+		letter-spacing:.06em;
+		text-transform:none;
+		font-size:14px;
+	}
+	.main-menu > ul > li > a:hover,
+	.top-menu a:hover{ color:var(--gold-dark) !important; }
+	.site-footer{
+		background:var(--cream-warm) !important;
+		color:var(--muted) !important;
+		border-top:1px solid rgba(184,147,95,.25);
+	}
+	.site-footer a{ color:var(--gold-dark) !important; }
+	.site-footer a:hover{ color:var(--gold) !important; }
+	.woocommerce-products-header,
+	.woocommerce-page .page-title,
+	.archive .page-title{
+		font-family:"Playfair Display",serif !important;
+		color:var(--ink);
+	}
+	li.product, li.shop-item{
+		background:#fff !important;
+		border-radius:16px !important;
+		box-shadow:0 4px 18px rgba(43,41,38,.07) !important;
+		border:none !important;
+	}
+	.te-breadcrumb{
+		max-width:1180px;
+		margin:0 auto;
+		padding:12px 20px 0;
+		font-size:13px;
+		color:var(--muted);
+	}
+	.te-breadcrumb a{ color:var(--gold-dark); text-decoration:none; }
+	.te-breadcrumb a:hover{ color:var(--gold); }
+	.te-wp-back{
+		display:inline-flex;
+		align-items:center;
+		gap:8px;
+		margin:14px 20px 0;
+		padding:8px 16px;
+		border-radius:999px;
+		background:#fff;
+		border:1px solid rgba(184,147,95,.35);
+		color:var(--gold-dark);
+		text-decoration:none;
+		font-size:13px;
+		font-weight:500;
+	}
+	.te-wp-back:hover{ background:var(--gold); color:#fff; border-color:var(--gold); }
+	</style>';
+}
+
+add_action( 'wp_body_open', 'te_shop_back_to_premium', 5 );
+add_action( 'woocommerce_before_main_content', 'te_shop_back_to_premium', 5 );
+function te_shop_back_to_premium() {
+	static $done = false;
+	if ( $done || is_admin() ) {
+		return;
+	}
+	if ( ! ( function_exists( 'is_woocommerce' ) && ( is_woocommerce() || is_shop() || is_product_taxonomy() ) ) ) {
+		return;
+	}
+	$done = true;
+	echo '<a class="te-wp-back" href="' . esc_url( te_site_base_url() . '#catalogo' ) . '">← Volver al catálogo premium</a>';
+}
+/* == fin TE-UNIFICADO == */

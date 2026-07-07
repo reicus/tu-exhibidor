@@ -74,6 +74,16 @@ final class Tuexhibidor_Site_Manager_Admin {
 		?>
 		<div class="wrap tuex-sm-wrap">
 			<h1>Sitio Premium — Imágenes en vivo</h1>
+			<div class="tuex-sm-quicklinks notice notice-info inline">
+				<p><strong>Enlaces rápidos</strong></p>
+				<p>
+					<a class="button button-primary" href="<?php echo esc_url( home_url( '/imagenes' ) ); ?>">tuexhibidor.cl/imagenes</a>
+					<a class="button" href="<?php echo esc_url( home_url( '/medios' ) ); ?>">Medios WordPress</a>
+					<a class="button" href="<?php echo esc_url( home_url( '/site/' ) ); ?>" target="_blank" rel="noopener">Ver sitio público</a>
+					<a class="button" href="<?php echo esc_url( admin_url( 'upload.php' ) ); ?>">Biblioteca WP</a>
+				</p>
+				<p class="description">Comparte <code><?php echo esc_html( home_url( '/imagenes' ) ); ?></code> para gestionar catálogo, hero, galería y marca del sitio premium.</p>
+			</div>
 			<p class="description">
 				Administra las fotos del sitio público en
 				<a href="<?php echo esc_url( home_url( '/site/' ) ); ?>" target="_blank" rel="noopener">tuexhibidor.cl/site/</a>.

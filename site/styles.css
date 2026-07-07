@@ -500,6 +500,17 @@ img { display: block; max-width: 100%; }
   font-weight: 500;
 }
 .footer-credit a:hover { color: var(--gold); text-decoration: underline; }
+.footer-admin {
+  margin-top: 8px;
+  font-size: 11px;
+}
+.footer-admin a {
+  color: var(--muted);
+  text-decoration: none;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.footer-admin a:hover { color: var(--gold-dark); }
 
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(8px); }

@@ -1,4 +1,7 @@
 .tuex-sm-wrap .description { max-width: 720px; }
+.tuex-sm-quicklinks { margin: 12px 0 18px; padding: 12px 16px !important; }
+.tuex-sm-quicklinks p { margin: .4em 0; }
+.tuex-sm-quicklinks .button { margin-right: 6px; margin-bottom: 6px; }
 .tuex-sm-filters {
   display: flex;
   flex-wrap: wrap;
