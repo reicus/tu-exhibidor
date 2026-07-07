@@ -49,7 +49,15 @@ function readLog() {
   return map;
 }
 
+function safeReplaceFile(file, buf) {
+  const tmp = `${file}.tmp`;
+  fs.writeFileSync(tmp, buf);
+  try { fs.unlinkSync(file); } catch { /* nuevo */ }
+  fs.renameSync(tmp, file);
+}
+
 async function webpToJpg(webpPath, outJpg, size) {
+  try { fs.unlinkSync(outJpg); } catch { /* nuevo */ }
   let pipe = sharp(webpPath, { failOn: 'none' }).rotate();
   if (size) {
     pipe = pipe.resize(size, size, { fit: 'inside', withoutEnlargement: true, background: CREAM });
@@ -89,7 +97,7 @@ function warmJpg(file) {
       }
       const buf = await sharp(data, { raw: { width: info.width, height: info.height, channels: ch } })
         .jpeg({ quality: 88, mozjpeg: true }).toBuffer();
-      fs.writeFileSync(file, buf);
+      safeReplaceFile(file, buf);
     });
 }
 

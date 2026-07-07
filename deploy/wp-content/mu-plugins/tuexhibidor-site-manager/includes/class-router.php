@@ -39,27 +39,33 @@ final class Tuexhibidor_Site_Manager_Router {
 
 	public static function handle_redirects(): void {
 		if ( get_query_var( 'tuex_imagenes' ) ) {
-			self::redirect_admin(
+			self::redirect_authenticated(
 				admin_url( 'admin.php?page=tuexhibidor-site-manager' ),
-				'imagenes'
+				'manage_options'
 			);
 		}
 		if ( get_query_var( 'tuex_medios' ) ) {
-			self::redirect_admin(
+			self::redirect_authenticated(
 				admin_url( 'upload.php' ),
-				'medios'
+				'upload_files'
 			);
 		}
 	}
 
-	private static function redirect_admin( string $target, string $slug ): void {
-		if ( is_user_logged_in() && current_user_can( 'manage_options' ) ) {
-			wp_safe_redirect( $target );
+	private static function redirect_authenticated( string $target, string $cap ): void {
+		if ( ! is_user_logged_in() ) {
+			$login = home_url( '/login' );
+			wp_safe_redirect( $login . '?redirect_to=' . rawurlencode( $target ) );
 			exit;
 		}
-		$login = home_url( '/login' );
-		$redirect_to = rawurlencode( $target );
-		wp_safe_redirect( $login . '?redirect_to=' . $redirect_to . '&tuex=' . $slug );
+		if ( ! current_user_can( $cap ) ) {
+			wp_die(
+				esc_html__( 'No tienes permisos para acceder a esta sección.', 'tuexhibidor' ),
+				esc_html__( 'Acceso denegado', 'tuexhibidor' ),
+				array( 'response' => 403 )
+			);
+		}
+		wp_safe_redirect( $target );
 		exit;
 	}
 
@@ -89,15 +95,6 @@ final class Tuexhibidor_Site_Manager_Router {
 				'parent' => 'tuex-imagenes',
 				'title'  => 'Medios WordPress',
 				'href'   => home_url( '/medios' ),
-			)
-		);
-		$bar->add_node(
-			array(
-				'id'     => 'tuex-ver-sitio',
-				'parent' => 'tuex-imagenes',
-				'title'  => 'Ver sitio público',
-				'href'   => home_url( '/site/' ),
-				'meta'   => array( 'target' => '_blank' ),
 			)
 		);
 	}

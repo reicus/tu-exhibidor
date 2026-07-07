@@ -1,5 +1,13 @@
 const IMG = (p) => `/${p}`;
 
+const TE_CAROUSEL_PREV = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>';
+const TE_CAROUSEL_NEXT = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>';
+
+function upgradeCarouselButtons(root = document) {
+  root.querySelectorAll('.carousel-btn.prev').forEach((btn) => { btn.innerHTML = TE_CAROUSEL_PREV; });
+  root.querySelectorAll('.carousel-btn.next').forEach((btn) => { btn.innerHTML = TE_CAROUSEL_NEXT; });
+}
+
 const RESPONSIVE_WIDTHS = [400, 800, 1200, 1600];
 
 function isResponsiveAsset(asset) {
@@ -36,6 +44,10 @@ function resolveImgSrc(asset, width = 800) {
   return IMG(assetBase(asset));
 }
 
+function productUrl(slug) {
+  return slug ? `/product/${slug}/` : '';
+}
+
 function waUrl(code, name) {
   const clean = name.replace(/\s*\([^)]*\)\s*$/, '');
   return `https://wa.me/56937490214?text=${encodeURIComponent(`Hola, me interesa ${code}: ${clean}`)}`;
@@ -47,16 +59,20 @@ function cleanName(name) {
 
 function productCard(p, compact = false) {
   const img = IMG(p.image);
-  return `
-    <article class="card${compact ? ' card-compact' : ''}${p.imageOk === false ? ' card-no-img' : ''}">
+  const href = productUrl(p.slug);
+  const inner = `
       <div class="card-img-wrap">
         <img src="${img}" alt="${cleanName(p.name)}" loading="lazy">
       </div>
       <div class="info">
         <div class="code">${p.code}</div>
         <h4>${cleanName(p.name)}</h4>
-      </div>
-    </article>`;
+      </div>`;
+  const cls = `card${compact ? ' card-compact' : ''}${p.imageOk === false ? ' card-no-img' : ''}`;
+  if (href) {
+    return `<a class="card-link ${cls}" href="${href}">${inner}</a>`;
+  }
+  return `<article class="${cls}">${inner}</article>`;
 }
 
 /** Imagen de slide: siempre JPG, eager, object-fit via CSS */
@@ -298,8 +314,8 @@ function renderCatalog(products, site) {
       <p class="panel-count">${byCat[key].length} modelos · consulta con el código al taller</p>
       <div class="carousel catalog-carousel peek-carousel" data-autoplay="5000">
         <div class="carousel-track catalog-track"></div>
-        <button type="button" class="carousel-btn prev" aria-label="Anterior">‹</button>
-        <button type="button" class="carousel-btn next" aria-label="Siguiente">›</button>
+        <button type="button" class="carousel-btn prev" aria-label="Anterior">${TE_CAROUSEL_PREV}</button>
+        <button type="button" class="carousel-btn next" aria-label="Siguiente">${TE_CAROUSEL_NEXT}</button>
       </div>
       <div class="catalog-grid hidden"></div>
       <button type="button" class="btn btn-outline toggle-grid">Ver todos (${byCat[key].length})</button>`;
@@ -338,6 +354,8 @@ function renderCatalog(products, site) {
     card.addEventListener('click', go);
     card.addEventListener('keydown', (e) => { if (e.key === 'Enter') go(); });
   });
+
+  window._teSetCatalogCat = setActive;
 
   search?.addEventListener('input', () => {
     const q = search.value.trim().toLowerCase();
@@ -467,10 +485,22 @@ function initSite() {
   }
 
   initWaWidget();
+  upgradeCarouselButtons();
+
+  const deepCat = new URLSearchParams(window.location.search).get('cat');
+  if (deepCat && window._teSetCatalogCat) {
+    window._teSetCatalogCat(deepCat);
+    requestAnimationFrame(() => {
+      document.getElementById('catalogo')?.scrollIntoView({ behavior: 'smooth' });
+    });
+  }
 }
 
 document.querySelector('.nav-toggle')?.addEventListener('click', () => {
-  document.querySelector('.main-nav')?.classList.toggle('open');
+  const nav = document.querySelector('.main-nav');
+  const open = nav?.classList.toggle('open');
+  const toggle = document.querySelector('.nav-toggle');
+  if (toggle) toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
 });
 
 document.querySelectorAll('.main-nav a').forEach((a) => {

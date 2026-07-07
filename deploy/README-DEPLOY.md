@@ -11,9 +11,8 @@ WP Admin → Productos → Importar → `import/catalogo-completo.csv`
 ## 3. Tema y seguridad
 - `wp-content/themes/aurum-child/` → reemplazar en servidor
 - `wp-content/mu-plugins/tuexhibidor-security.php` → subir
-- `wp-content/mu-plugins/tuexhibidor-site-manager.php` + carpeta `tuexhibidor-site-manager/` → panel **Sitio Premium** en wp-admin
 
 ## 4. PHP y plugins
 Ver LEER-PRIMERO-SEGURIDAD.md — PHP 8.2 + actualizar WooCommerce primero.
 
-Generado: 2026-07-07T14:31:17.051Z
+Generado: 2026-07-07T18:08:00.432Z

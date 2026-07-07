@@ -2,34 +2,7 @@
 
 > Guía para aplicar en **rooster.hostingplus.cl** (cPanel). No incluye contraseñas.
 
-## Estado producción (2026-07-07)
-
-| Componente | Versión producción | Notas |
-|------------|-------------------|--------|
-| WordPress | 7.0 | Al día |
-| PHP | **8.2** (ea-php82) | Aplicado en MultiPHP Manager |
-| WooCommerce | **10.9.3** | Actualizado |
-| WPBakery (js_composer) | 5.7 | Parche PHP 8.2 aplicado — ver `deploy/patches/wpbakery-php82-ternary.md` |
-| LayerSlider | 6.8.1 | Pendiente actualizar (requiere licencia Envato) |
-| ACF PRO | 5.7.13 | Pendiente actualizar (requiere licencia) |
-| Envato Market | 2.0.1 | **Activado** — falta token API en Ajustes |
-| Sitio estático | `/site/` | Footer: Desarrollado por Tecnotix Solutions |
-| Homepage | redirect 302 | `RewriteRule ^$ /site/` en `.htaccess` |
-
-### Licencias pendientes (3 plugins)
-
-Para actualizar ACF PRO, LayerSlider y WPBakery:
-
-1. Ir a **Envato Market** en wp-admin
-2. Generar token en https://build.envato.com/create-token/
-3. Pegar token y guardar — aparecerán compras de ThemeForest/CodeCanyon
-4. Actualizar en **Escritorio → Actualizaciones**
-
-Sin token Envato, los 3 plugins premium no pueden descargar actualizaciones.
-
----
-
-## Estado backup JetBackup (referencia histórica)
+## Estado actual detectado (backup JetBackup)
 
 | Componente | Versión backup | Riesgo |
 |------------|----------------|--------|
@@ -148,8 +121,8 @@ Tras actualizar WooCommerce, verificar que los filtros siguen activos.
 
 ## 7. Checklist post-actualización
 
-- [x] PHP 8.2 activo
-- [x] WooCommerce ≥ 8.x funcional
+- [ ] PHP 8.2 activo
+- [ ] WooCommerce ≥ 8.x funcional
 - [ ] Formulario contacto envía email
 - [ ] WhatsApp flotante operativo
 - [ ] Sin widgets demo en footer

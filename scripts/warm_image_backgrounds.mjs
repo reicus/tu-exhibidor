@@ -49,7 +49,10 @@ async function warmFile(file) {
   const buf = await sharp(data, { raw: { width: info.width, height: info.height, channels: info.channels } })
     .jpeg({ quality: 88, mozjpeg: true })
     .toBuffer();
-  fs.writeFileSync(file, buf);
+  const tmp = `${file}.tmp`;
+  fs.writeFileSync(tmp, buf);
+  try { fs.unlinkSync(file); } catch { /* nuevo */ }
+  fs.renameSync(tmp, file);
 }
 
 async function main() {
