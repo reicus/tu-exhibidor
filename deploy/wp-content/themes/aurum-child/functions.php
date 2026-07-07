@@ -2198,6 +2198,7 @@ function te_single_product_layout_css() {
 	.single-product div.product{
 		display:grid !important;
 		grid-template-columns:minmax(0, 1fr) minmax(0, 1fr) !important;
+		grid-template-areas:"gallery summary" "related related" !important;
 		gap:20px 24px !important;
 		max-width:1140px !important;
 		margin:0 auto 24px !important;
@@ -2207,6 +2208,34 @@ function te_single_product_layout_css() {
 		width:100% !important;
 	}
 	.single-product div.product::after{ display:none !important; }
+	.single-product div.product > div.images,
+	.single-product div.product > .product-images-container{
+		grid-area:gallery !important;
+		width:100% !important;
+		float:none !important;
+		margin:0 !important;
+		min-width:0 !important;
+		max-width:100% !important;
+		overflow:hidden !important;
+	}
+	.single-product div.product > .summary.entry-summary,
+	.single-product div.product > div.summary{
+		grid-area:summary !important;
+		width:100% !important;
+		float:none !important;
+		margin:0 !important;
+		min-width:0 !important;
+		max-width:100% !important;
+		overflow:hidden !important;
+	}
+	.single-product div.product > .related.products{
+		grid-area:related !important;
+		grid-column:1 / -1 !important;
+		width:100% !important;
+		max-width:100% !important;
+		margin:8px 0 0 !important;
+		padding:0 0 24px !important;
+	}
 	.single-product div.product div.images,
 	.single-product div.product div.summary{
 		width:100% !important;
@@ -2216,15 +2245,36 @@ function te_single_product_layout_css() {
 		max-width:100% !important;
 		overflow:hidden !important;
 	}
-	.single-product .product-images-container{
+	.single-product .product-images-container,
+	.single-product .product-images-container.thumbnails-vertical{
 		display:flex !important;
 		flex-direction:column !important;
 		align-items:stretch !important;
 		gap:12px !important;
+		width:100% !important;
+		max-width:100% !important;
 		background:var(--img-well,#ddd3c8) !important;
 		border-radius:16px !important;
 		padding:16px !important;
 		border:1px solid rgba(184,147,95,.15) !important;
+	}
+	.single-product .product-images-container .product-images,
+	.single-product .product-images-container.thumbnails-vertical .product-images{
+		display:flex !important;
+		flex-direction:column !important;
+		align-items:stretch !important;
+		width:100% !important;
+		max-width:100% !important;
+		gap:12px !important;
+	}
+	.single-product .product-images-container .product-images--main,
+	.single-product .product-images-container.thumbnails-vertical .product-images--main{
+		order:1 !important;
+		width:100% !important;
+		max-width:100% !important;
+		min-width:0 !important;
+		flex:1 1 auto !important;
+		align-self:stretch !important;
 	}
 	.single-product .product-images--main{
 		flex:1 1 auto !important;
@@ -2239,13 +2289,18 @@ function te_single_product_layout_css() {
 	.single-product .product-images--main .woocommerce-product-gallery__image.slick-active{
 		display:block !important;
 	}
-	.single-product .product-images--thumbnails{
+	.single-product .product-images--thumbnails,
+	.single-product .product-images--thumbnails.thumbnails-vertical{
 		flex:0 0 auto !important;
 		width:100% !important;
+		max-width:100% !important;
 		order:2 !important;
 		display:flex !important;
+		flex-direction:row !important;
 		flex-wrap:wrap !important;
+		justify-content:flex-start !important;
 		gap:8px !important;
+		position:static !important;
 	}
 	.single-product .product-images--thumbnails .slick-list,
 	.single-product .product-images--thumbnails .slick-track{
@@ -2322,9 +2377,10 @@ function te_single_product_layout_css() {
 	}
 	.related.products{
 		clear:both;
-		max-width:1140px;
-		margin:0 auto;
-		padding:0 20px 40px;
+		width:100% !important;
+		max-width:100% !important;
+		margin:0 !important;
+		padding:0 !important;
 	}
 	.related.products > h2{
 		text-align:center;
@@ -2440,6 +2496,7 @@ function te_single_product_layout_css() {
 	@media (max-width: 960px){
 		.single-product div.product{
 			grid-template-columns:1fr !important;
+			grid-template-areas:"gallery" "summary" "related" !important;
 			gap:20px !important;
 			padding:0 16px !important;
 		}
