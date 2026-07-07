@@ -1,0 +1,430 @@
+{
+  "generatedAt": "2026-07-05T23:41:32.485Z",
+  "quality": {
+    "TUE-BA-001": {
+      "ok": true,
+      "source": "PhotosDrive/IMG_20191206_162658.jpg",
+      "image": "public/images/catalog/tue-ba-001-bandeja-para-cadenas-o-pulseras-con-canales-y-gancho.jpg"
+    },
+    "TUE-BA-002": {
+      "ok": true,
+      "source": "PhotosDrive/IMG-20200223-WA0058.jpg",
+      "image": "public/images/catalog/tue-ba-002-bandeja-a-cuadros-para-joyas-varias.jpg"
+    },
+    "TUE-BA-003": {
+      "ok": true,
+      "source": "PhotosDrive/IMG_20191012_174313.jpg",
+      "image": "public/images/catalog/tue-ba-003-bandeja-con-ranuras-acolchada-para-anillos.jpg"
+    },
+    "TUE-BA-009": {
+      "ok": true,
+      "source": "PhotosDrive/IMG_20191104_135242.jpg",
+      "image": "public/images/catalog/tue-ba-009-bandeja-plana-para-joyas-varias.jpg"
+    },
+    "TUE-BA-004": {
+      "ok": true,
+      "source": "PhotosDrive/IMG_20200118_200403.jpg",
+      "image": "public/images/catalog/tue-ba-004-bandeja-para-set-de-aros-colgantes-con-ranura-cadenas.jpg"
+    },
+    "TUE-BA-010": {
+      "ok": true,
+      "source": "PhotosDrive/IMG_20200218_162335_335.jpg",
+      "image": "public/images/catalog/tue-ba-010-bandeja-para-dos-set-de-aros-colgantes.jpg"
+    },
+    "TUE-BA-011": {
+      "ok": true,
+      "source": "PhotosDrive/IMG_20200630_142353_831.jpg",
+      "image": "public/images/catalog/tue-ba-011-bandeja-para-dos-set-de-aros-colgantes.jpg"
+    },
+    "TUE-BA-005": {
+      "ok": true,
+      "source": "PhotosDrive/PicsArt_10-25-09.39.09.jpg",
+      "image": "public/images/catalog/tue-ba-005-bandeja-con-gancho-para-cadenas.jpg"
+    },
+    "TUE-BA-012": {
+      "ok": true,
+      "source": "PhotosDrive/IMG_20190720_135012.jpg",
+      "image": "public/images/catalog/tue-ba-012-bandeja-con-gancho-para-cadenas.jpg"
+    },
+    "TUE-BA-013": {
+      "ok": true,
+      "source": "PhotosDrive/IMG_20200207_113255217.jpg",
+      "image": "public/images/catalog/tue-ba-013-bandeja-con-ganchos-para-anillos.jpg"
+    },
+    "TUE-BA-006": {
+      "ok": true,
+      "source": "public/images/catalog/originals/tue-ba-006-bandeja-con-ganchos-para-anillos.jpg",
+      "image": "public/images/catalog/tue-ba-006-bandeja-con-ganchos-para-anillos.jpg"
+    },
+    "TUE-BC-001": {
+      "ok": true,
+      "source": "PhotosDrive/IMG_20191012_174313.jpg",
+      "image": "public/images/catalog/tue-bc-001-bandeja-para-charms-encantos-cuadros-5-cm-x-5-cm-35-cuadros.jpg"
+    },
+    "TUE-BC-002": {
+      "ok": true,
+      "source": "public/images/catalog/originals/tue-bc-002-bandeja-para-charms-encantos-cuadros-5-cm-x-5-cm-35-cuadros.jpg",
+      "image": "public/images/catalog/tue-bc-002-bandeja-para-charms-encantos-cuadros-5-cm-x-5-cm-35-cuadros.jpg"
+    },
+    "TUE-BC-003": {
+      "ok": true,
+      "source": "PhotosDrive/IMG_20191012_173259.jpg",
+      "image": "public/images/catalog/tue-bc-003-bandeja-para-charms-encantos-con-tapa-removible-cuadros-5-cm-.jpg"
+    },
+    "TUE-BC-004": {
+      "ok": true,
+      "source": "public/images/catalog/originals/tue-bc-004-bandeja-para-charms-encantos-y-anillos-cuadros-5-cm-x-5-cm.jpg",
+      "image": "public/images/catalog/tue-bc-004-bandeja-para-charms-encantos-y-anillos-cuadros-5-cm-x-5-cm.jpg"
+    },
+    "TUE-S-009": {
+      "ok": true,
+      "source": "public/images/catalog/originals/tue-s-009-accesorio-set-anillo-y-aros.jpg",
+      "image": "public/images/catalog/tue-s-009-accesorio-set-anillo-y-aros.jpg"
+    },
+    "TUE-AN-010": {
+      "ok": true,
+      "source": "public/images/catalog/originals/tue-an-010-exhibidor-set-para-anillos.jpg",
+      "image": "public/images/catalog/tue-an-010-exhibidor-set-para-anillos.jpg"
+    },
+    "TUE-AN-021": {
+      "ok": true,
+      "source": "public/images/catalog/originals/tue-an-021-exhibidor-para-anillo-individual.jpg",
+      "image": "public/images/catalog/tue-an-021-exhibidor-para-anillo-individual.jpg"
+    },
+    "TUE-AN-019": {
+      "ok": true,
+      "source": "public/images/catalog/originals/tue-an-019-set-de-cilindros-para-anillos.jpg",
+      "image": "public/images/catalog/tue-an-019-set-de-cilindros-para-anillos.jpg"
+    },
+    "TUE-AN-011": {
+      "ok": true,
+      "source": "public/images/catalog/originals/tue-an-011-set-de-cilindros-para-anillos.jpg",
+      "image": "public/images/catalog/tue-an-011-set-de-cilindros-para-anillos.jpg"
+    },
+    "TUE-AN-012": {
+      "ok": true,
+      "source": "public/images/catalog/originals/tue-an-012-cilindro-para-anillo.jpg",
+      "image": "public/images/catalog/tue-an-012-cilindro-para-anillo.jpg"
+    },
+    "TUE-AN-020": {
+      "ok": true,
+      "source": "PhotosDrive/IMG_20191012_174112.jpg",
+      "image": "public/images/catalog/tue-an-020-set-de-cilindros-para-anillos.jpg"
+    },
+    "TUE-AN-013": {
+      "ok": true,
+      "source": "PhotosDrive/IMG_20191027_074040_282.jpg",
+      "image": "public/images/catalog/tue-an-013-set-exhibidor-para-5-anillos.jpg"
+    },
+    "TUE-AN-014": {
+      "ok": true,
+      "source": "PhotosDrive/IMG_20190908_164930.jpg",
+      "image": "public/images/catalog/tue-an-014-exhibidor-para-anillos.jpg"
+    },
+    "TUE-AN-015": {
+      "ok": true,
+      "source": "PhotosDrive/IMG-20200726-WA0005.jpg",
+      "image": "public/images/catalog/tue-an-015-exhibidor-para-anillos.jpg"
+    },
+    "TUE-AN-016": {
+      "ok": true,
+      "source": "PhotosDrive/IMG_20191012_174112.jpg",
+      "image": "public/images/catalog/tue-an-016-exhibidor-hexagonal-para-14-anillos.jpg"
+    },
+    "TUE-AN-017": {
+      "ok": true,
+      "source": "PhotosDrive/IMG_20190927_112733_118.jpg",
+      "image": "public/images/catalog/tue-an-017-bandeja-exhibidor-para-12-anillos.jpg"
+    },
+    "TUE-AN-018": {
+      "ok": true,
+      "source": "public/images/catalog/originals/tue-an-018-bandeja-exhibidor-para-7-anillos.jpg",
+      "image": "public/images/catalog/tue-an-018-bandeja-exhibidor-para-7-anillos.jpg"
+    },
+    "TUE-019": {
+      "ok": true,
+      "source": "PhotosDrive/IMG-20190529-WA0053.jpg",
+      "image": "public/images/catalog/tue-019-set-hexagonales-3-tamanos-altura-hexagonos-10-cm-8-cm-6-cm.jpg"
+    },
+    "TUE-CI-001": {
+      "ok": true,
+      "source": "PhotosDrive/IMG_20191025_090553.jpg",
+      "image": "public/images/catalog/tue-ci-001-te-exhibidor-cintillos-o-diademas-altura-19-cm.jpg"
+    },
+    "TUE-CI-002": {
+      "ok": true,
+      "source": "PhotosDrive/IMG_20191006_082555_714.jpg",
+      "image": "public/images/catalog/tue-ci-002-te-exhibidor-cintillos-o-diademas-altura-19-cm-y-27-cm.jpg"
+    },
+    "TUE-CI-003": {
+      "ok": true,
+      "source": "PhotosDrive/IMG_20191107_124644.jpg",
+      "image": "public/images/catalog/tue-ci-003-exhibidor-cintillos-o-diademas-altura-25-cm.jpg"
+    },
+    "TUE-PU-022": {
+      "ok": true,
+      "source": "public/images/catalog/originals/tue-pu-022-exhibidor-para-pulseras-rigidas-altura-3-cm.jpg",
+      "image": "public/images/catalog/tue-pu-022-exhibidor-para-pulseras-rigidas-altura-3-cm.jpg"
+    },
+    "TUE-PU-023": {
+      "ok": true,
+      "source": "PhotosDrive/IMG-20200320-WA0017.jpg",
+      "image": "public/images/catalog/tue-pu-023-media-luna-individual-para-pulsera-altura-4-5-cm.jpg"
+    },
+    "TUE-PU-024": {
+      "ok": true,
+      "source": "public/images/catalog/originals/tue-pu-024-exhibidor-media-luna-para-pulseras-altura-10-cm.jpg",
+      "image": "public/images/catalog/tue-pu-024-exhibidor-media-luna-para-pulseras-altura-10-cm.jpg"
+    },
+    "TUE-PU-025": {
+      "ok": true,
+      "source": "PhotosDrive/IMG_20191114_192422.jpg",
+      "image": "public/images/catalog/tue-pu-025-cilindro-diagonal-sencillo-para-pulseras.jpg"
+    },
+    "TUE-PU-026": {
+      "ok": true,
+      "source": "public/images/catalog/originals/tue-pu-026-cilindro-vertical-sencillo-para-pulseras.jpg",
+      "image": "public/images/catalog/tue-pu-026-cilindro-vertical-sencillo-para-pulseras.jpg"
+    },
+    "TUE-PU-027": {
+      "ok": true,
+      "source": "public/images/catalog/originals/tue-pu-027-exhibidor-de-pulseras-con-doble-soporte-horizontal-sencillo.jpg",
+      "image": "public/images/catalog/tue-pu-027-exhibidor-de-pulseras-con-doble-soporte-horizontal-sencillo.jpg"
+    },
+    "TUE-PU-028": {
+      "ok": true,
+      "source": "PhotosDrive/IMG_20191022_083028.jpg",
+      "image": "public/images/catalog/tue-pu-028-exhibidor-de-pulseras-con-doble-soporte-horizontal-triple.jpg"
+    },
+    "TUE-PU-029": {
+      "ok": true,
+      "source": "PhotosDrive/Screenshot_20200720_205102_com.instagram.android.jpg",
+      "image": "public/images/catalog/tue-pu-029-te-exhibidor-de-pulseras-sencillo.jpg"
+    },
+    "TUE-PU-030": {
+      "ok": true,
+      "source": "PhotosDrive/IMG_20191126_143240.jpg",
+      "image": "public/images/catalog/tue-pu-030-te-exhibidor-de-pulseras-doble.jpg"
+    },
+    "TUE-PU-031": {
+      "ok": true,
+      "source": "PhotosDrive/IMG-20200219-WA0003.jpg",
+      "image": "public/images/catalog/tue-pu-031-te-exhibidor-de-pulseras-triple.jpg"
+    },
+    "TUE-RE-032": {
+      "ok": true,
+      "source": "public/images/catalog/originals/tue-re-032-accesorio-para-pulseras-reloj-horizontal.jpg",
+      "image": "public/images/catalog/tue-re-032-accesorio-para-pulseras-reloj-horizontal.jpg"
+    },
+    "TUE-RE-033": {
+      "ok": true,
+      "source": "public/images/catalog/originals/tue-re-033-accesorio-para-pulseras-reloj-vertical.jpg",
+      "image": "public/images/catalog/tue-re-033-accesorio-para-pulseras-reloj-vertical.jpg"
+    },
+    "P-NM": {
+      "ok": true,
+      "source": "PhotosDrive/IMG-20200625-WA0004.jpg",
+      "image": "public/images/catalog/p-nm-pechera-para-cadenas-y-o-collares.jpg"
+    },
+    "L-DAN": {
+      "ok": true,
+      "source": "PhotosDrive/IMG_20191114_192628.jpg",
+      "image": "public/images/catalog/l-dan-pechera-para-cadenas-y-o-collares.jpg"
+    },
+    "DNS-11": {
+      "ok": true,
+      "source": "PhotosDrive/IMG-20200120-WA0001.jpg",
+      "image": "public/images/catalog/dns-11-pechera-para-cadenas-y-o-collares.jpg"
+    },
+    "K-28": {
+      "ok": true,
+      "source": "PhotosDrive/IMG_20190720_175454.jpg",
+      "image": "public/images/catalog/k-28-pechera-para-cadenas-y-o-collares.jpg"
+    },
+    "K-29": {
+      "ok": true,
+      "source": "PhotosDrive/IMG-20200123-WA0001.jpg",
+      "image": "public/images/catalog/k-29-pechera-para-cadenas-y-o-collares.jpg"
+    },
+    "TUE-CO-001": {
+      "ok": true,
+      "source": "PhotosDrive/-001100-.jpg",
+      "image": "public/images/catalog/tue-co-001-te-exhibidor-de-collares.jpg"
+    },
+    "BX-89": {
+      "ok": true,
+      "source": "PhotosDrive/IMG_20200118_200351.jpg",
+      "image": "public/images/catalog/bx-89-exhibidor-para-8-cadenas-y-o-collares.jpg"
+    },
+    "BX-109": {
+      "ok": true,
+      "source": "PhotosDrive/IMG_20191114_195925.jpg",
+      "image": "public/images/catalog/bx-109-exhibidor-para-10-cadenas-y-o-collares.jpg"
+    },
+    "BX-159": {
+      "ok": true,
+      "source": "PhotosDrive/IMG-20191103-WA0000.jpg",
+      "image": "public/images/catalog/bx-159-exhibidor-para-cadenas-y-o-collares.jpg"
+    },
+    "E-35": {
+      "ok": true,
+      "source": "PhotosDrive/IMG_20200207_114230742.jpg",
+      "image": "public/images/catalog/e-35-cuello-plano-para-cadenas.jpg"
+    },
+    "E-40": {
+      "ok": true,
+      "source": "PhotosDrive/IMG_20190518_114021.jpg",
+      "image": "public/images/catalog/e-40-cuello-plano-para-cadenas-y-aros.jpg"
+    },
+    "E-XNL": {
+      "ok": true,
+      "source": "PhotosDrive/IMG_20191114_192920.jpg",
+      "image": "public/images/catalog/e-xnl-cuello-plano-para-cadenas.jpg"
+    },
+    "TUE-BA-034": {
+      "ok": true,
+      "source": "public/images/catalog/originals/tue-ba-034-exhibidor-plano-para-21-pares-de-aros.jpg",
+      "image": "public/images/catalog/tue-ba-034-exhibidor-plano-para-21-pares-de-aros.jpg"
+    },
+    "TUE-BA-035": {
+      "ok": true,
+      "source": "PhotosDrive/IMG-20190916-WA0003.jpg",
+      "image": "public/images/catalog/tue-ba-035-exhibidor-plano-para-cadenas.jpg"
+    },
+    "TUE-S-035": {
+      "ok": true,
+      "source": "public/images/catalog/originals/tue-s-035-accesorio-para-aros-l-ml.jpg",
+      "image": "public/images/catalog/tue-s-035-accesorio-para-aros-l-ml.jpg"
+    },
+    "TUE-AR-036": {
+      "ok": true,
+      "source": "public/images/catalog/originals/tue-ar-036-accesorio-para-aros-l-md2.jpg",
+      "image": "public/images/catalog/tue-ar-036-accesorio-para-aros-l-md2.jpg"
+    },
+    "TUE-S-037": {
+      "ok": true,
+      "source": "public/images/catalog/originals/tue-s-037-accesorio-para-aros-l-md22.jpg",
+      "image": "public/images/catalog/tue-s-037-accesorio-para-aros-l-md22.jpg"
+    },
+    "TUE-AR-038": {
+      "ok": true,
+      "source": "PhotosDrive/IMG_20200609_085119_596.jpg",
+      "image": "public/images/catalog/tue-ar-038-accesorio-para-aros-l-m7.jpg"
+    },
+    "TUE-AR-039": {
+      "ok": true,
+      "source": "public/images/catalog/originals/tue-ar-039-accesorio-para-aros-l-m6.jpg",
+      "image": "public/images/catalog/tue-ar-039-accesorio-para-aros-l-m6.jpg"
+    },
+    "TUE-AR-040": {
+      "ok": true,
+      "source": "PhotosDrive/IMG_20190720_180640.jpg",
+      "image": "public/images/catalog/tue-ar-040-accesorio-para-aros.jpg"
+    },
+    "TUE-AR-041": {
+      "ok": true,
+      "source": "PhotosDrive/IMG_20190720_180640.jpg",
+      "image": "public/images/catalog/tue-ar-041-accesorio-para-aros.jpg"
+    },
+    "TUE-S-042": {
+      "ok": true,
+      "source": "public/images/catalog/originals/tue-s-042-accesorio-para-set-de-aros-y-anillos.jpg",
+      "image": "public/images/catalog/tue-s-042-accesorio-para-set-de-aros-y-anillos.jpg"
+    },
+    "TUE-DI-043": {
+      "ok": true,
+      "source": "PhotosDrive/IMG-20200625-WA0003.jpg",
+      "image": "public/images/catalog/tue-di-043-accesorio-para-dijes.jpg"
+    },
+    "TUE-DI-015": {
+      "ok": true,
+      "source": "PhotosDrive/IMG_20190720_175534.jpg",
+      "image": "public/images/catalog/tue-di-015-exhibidor-para-dijes.jpg"
+    },
+    "TUE-AR-044": {
+      "ok": true,
+      "source": "PhotosDrive/IMG_20191012_174044.jpg",
+      "image": "public/images/catalog/tue-ar-044-exhibidor-para-12-pares-de-aros-colgantes.jpg"
+    },
+    "TUE-AR-045": {
+      "ok": true,
+      "source": "PhotosDrive/IMG_20190720_181045.jpg",
+      "image": "public/images/catalog/tue-ar-045-exhibidor-para-12-pares-de-aros-colgantes.jpg"
+    },
+    "TUE-STAND-001": {
+      "ok": true,
+      "source": "PhotosDrive/IMG_20191012_173500.jpg",
+      "image": "public/images/catalog/tue-stand-001-set-vitrina-exhibidor-001-piezas-ecocuero.jpg"
+    },
+    "TUE-STAND-002": {
+      "ok": true,
+      "source": "public/images/catalog/originals/tue-stand-002-set-vitrina-exhibidor-002-piezas-ecocuero.jpg",
+      "image": "public/images/catalog/tue-stand-002-set-vitrina-exhibidor-002-piezas-ecocuero.jpg"
+    },
+    "TUE-STAND-003": {
+      "ok": true,
+      "source": "PhotosDrive/IMG_20200118_200751.jpg",
+      "image": "public/images/catalog/tue-stand-003-set-vitrina-exhibidor-003-piezas-ecocuero.jpg"
+    },
+    "TUE-STAND-004": {
+      "ok": true,
+      "source": "PhotosDrive/IMG_20190720_175642.jpg",
+      "image": "public/images/catalog/tue-stand-004-set-vitrina-exhibidor-004-piezas-ecocuero.jpg"
+    },
+    "TUE-STAND-005": {
+      "ok": true,
+      "source": "PhotosDrive/IMG-20200203-WA0023.jpg",
+      "image": "public/images/catalog/tue-stand-005-set-vitrina-exhibidor-005-piezas-ecocuero.jpg"
+    },
+    "TUE-STAND-006": {
+      "ok": true,
+      "source": "PhotosDrive/IMG_20190720_135006.jpg",
+      "image": "public/images/catalog/tue-stand-006-set-vitrina-exhibidor-006-piezas-ecocuero.jpg"
+    },
+    "TUE-STAND-007": {
+      "ok": true,
+      "source": "PhotosDrive/IMG_20190518_115007.jpg",
+      "image": "public/images/catalog/tue-stand-007-set-vitrina-exhibidor-007-piezas-ecocuero.jpg"
+    },
+    "TUE-STAND-008": {
+      "ok": true,
+      "source": "PhotosDrive/IMG_20190925_062613_008.jpg",
+      "image": "public/images/catalog/tue-stand-008-set-vitrina-exhibidor-008-piezas-ecocuero.jpg"
+    },
+    "TUE-STAND-009": {
+      "ok": true,
+      "source": "PhotosDrive/-000991-.jpg",
+      "image": "public/images/catalog/tue-stand-009-set-vitrina-exhibidor-009-piezas-ecocuero.jpg"
+    },
+    "TUE-STAND-010": {
+      "ok": true,
+      "source": "PhotosDrive/IMG_20200207_114227805.jpg",
+      "image": "public/images/catalog/tue-stand-010-set-vitrina-exhibidor-010-piezas-ecocuero.jpg"
+    },
+    "TUE-STAND-011": {
+      "ok": true,
+      "source": "PhotosDrive/-001100-.jpg",
+      "image": "public/images/catalog/tue-stand-011-set-vitrina-exhibidor-011-piezas-ecocuero.jpg"
+    },
+    "TUE-STAND-012": {
+      "ok": true,
+      "source": "PhotosDrive/IMG_20190720_135012.jpg",
+      "image": "public/images/catalog/tue-stand-012-set-vitrina-exhibidor-012-piezas-ecocuero.jpg"
+    },
+    "TUE-STAND-013": {
+      "ok": true,
+      "source": "PhotosDrive/IMG_20190720_140133.jpg",
+      "image": "public/images/catalog/tue-stand-013-set-vitrina-exhibidor-013-piezas-ecocuero.jpg"
+    },
+    "TUE-AN-022": {
+      "ok": true,
+      "source": "PhotosDrive/IMG_20190518_134022.jpg",
+      "image": "public/images/catalog/tue-an-022-exhibidor-para-anillo.jpg"
+    },
+    "TUE-AR-042": {
+      "ok": true,
+      "source": "PhotosDrive/IMG_20191031_113939_042.jpg",
+      "image": "public/images/catalog/tue-ar-042-accesorio-para-aros.jpg"
+    }
+  }
+}

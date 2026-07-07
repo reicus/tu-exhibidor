@@ -1,0 +1,25 @@
+{
+  "project": "tuexhibidor",
+  "use_type": "product-mockup",
+  "keywords": [
+    "exhibidor",
+    "joyeria",
+    "ecocuero",
+    "vitrina",
+    "chile"
+  ],
+  "language": "es",
+  "max_width": 1200,
+  "max_height": 0,
+  "webp_quality": 85,
+  "target_max_kb": 180,
+  "remove_bg": false,
+  "bg_model": "u2net",
+  "enhance": true,
+  "ai_captions": false,
+  "translate_keywords": true,
+  "recursive": false,
+  "skip_existing": true,
+  "workers": 0,
+  "output_dirname": "PROCESSED"
+}

@@ -1,0 +1,200 @@
+{
+  "meta": {
+    "link": "https://canva.link/v74u1w40pocahcs",
+    "designId": "DAGtWc0EeJQ",
+    "page": 13,
+    "note": "Canva bloquea scraping; productos extraídos de PDF catálogo + mapeo competencia"
+  },
+  "pdfExtracts": [
+    {
+      "file": "CATALOGO 2020.pdf",
+      "pages": 23,
+      "textPreview": "13 CÓDIGO: BX-159 DESCRIPCIÓN: EXHIBIDOR PARA CADENAS Y/O COLLARES ALTO: 24 CM ANCHO: 15 CM PRECIO: $9,900 CÓDIGO: E-35 DESCRIPCIÓN: CUELLO PLANO PARA CADENAS ALTO: 26 CM ANCHO: 16 CM PRECIO: $5,850 CÓDIGO: E-40 DESCRIPCIÓN: CUELLO PLANO PARA CADENAS Y AROS ALTO: 26 CM ANCHO: 16 CM PRECIO: $8,850 CÓDIGO: E-XNL DESCRIPCIÓN: CUELLO PLANO PARA CADENAS ALTO: 18 CM ANCHO: 9 CM PRECIO: $4,750"
+    },
+    {
+      "file": "2021-01-09.pdf",
+      "pages": 23,
+      "textPreview": "13 CÓDIGO: BX-159 DESCRIPCIÓN: EXHIBIDOR PARA CADENAS Y/O COLLARES ALTO: 24 CM ANCHO: 15 CM PRECIO: $11,900 CÓDIGO: E-35 DESCRIPCIÓN: CUELLO PLANO PARA CADENAS ALTO: 26 CM ANCHO: 16 CM PRECIO: $7,000 CÓDIGO: E-40 DESCRIPCIÓN: CUELLO PLANO PARA CADENAS Y AROS ALTO: 26 CM ANCHO: 16 CM PRECIO: $10,600 CÓDIGO: E-XNL DESCRIPCIÓN: CUELLO PLANO PARA CADENAS ALTO: 18 CM ANCHO: 9 CM PRECIO: $5,700"
+    },
+    {
+      "file": "jewelry-display-catalog-2018.pdf",
+      "pages": 64,
+      "textPreview": "342-CB2414H 342-CB2415K 342-CB2413 342-CB2458 342-CB2477E 342-CB2414C 342-CB2414D 342-CB2414B 342-CB2414F 342-CB2415D 342-CB2415H 342-CB2415B 342-CB2415J 342-CB2416B 342-CB2449P 342-CB2449E 342-CB2457A 342-CB2457B 342-CB2457 342-CB2455C 342-CB2477B 342-CB2477A C H O C O L A T E B E I G E D I S P L A Y S D I S P L A Y S R O L L S B O X E S P O U C H E S B A G S T O O L S S U P P L I E S 13 W W W . J E W E L R Y D I S P L A Y . C O M"
+    }
+  ],
+  "parsedFromPdf": [],
+  "products": [
+    {
+      "code": "SET22-CB",
+      "title": "SET22 Chocolate/Beige 18 piezas showcase"
+    },
+    {
+      "code": "SET22-W",
+      "title": "SET22 Blanco 18 piezas showcase"
+    },
+    {
+      "code": "SET22-SG",
+      "title": "SET22 Gris plata 18 piezas showcase"
+    },
+    {
+      "code": "SET22-1-W",
+      "title": "SET22-1 Blanco 8 piezas showcase"
+    },
+    {
+      "code": "SET11-W",
+      "title": "SET11 Blanco 20 piezas faux leather"
+    },
+    {
+      "code": "SET20-RW",
+      "title": "SET20 Rosewood 23 piezas display set"
+    },
+    {
+      "code": "SET35-RW",
+      "title": "SET35 Rosewood 35 piezas display set"
+    },
+    {
+      "code": "SET35-CL",
+      "title": "SET35 Champagne bronce 35 piezas"
+    },
+    {
+      "code": "SET42-RW",
+      "title": "SET42 Rosewood 61 piezas jewelry display"
+    },
+    {
+      "code": "SET42-R88",
+      "title": "SET42 Steel blue negro 57 piezas"
+    },
+    {
+      "code": "SET46-SG",
+      "title": "SET46 Gris plata negro 46 piezas"
+    },
+    {
+      "code": "SET46-75L",
+      "title": "SET46 Ante castaño borde marrón 46 piezas"
+    },
+    {
+      "code": "SET54-SG",
+      "title": "SET54 Gris plata negro 54 piezas"
+    },
+    {
+      "code": "SET55-CL",
+      "title": "SET55 Champagne bronce 55 piezas"
+    },
+    {
+      "code": "SET55-GL",
+      "title": "SET55 Lino gris 55 piezas"
+    },
+    {
+      "code": "SET55-RW",
+      "title": "SET55 Rosewood 35 piezas white faux leather"
+    },
+    {
+      "code": "6133-4-CB",
+      "title": "6133-4 Chocolate/Beige 4 pies showcase"
+    },
+    {
+      "code": "6133-4-SV",
+      "title": "6133-4 Gris plata 4 pies showcase"
+    },
+    {
+      "code": "6133-4-NV",
+      "title": "6133-4 Azul marino 4 pies showcase"
+    },
+    {
+      "code": "6133-4-BK",
+      "title": "6133-4 Negro 4 pies showcase"
+    },
+    {
+      "code": "6133-4-WH",
+      "title": "6133-4 Blanco 4 pies showcase"
+    },
+    {
+      "code": "6061-CB",
+      "title": "6061 Chocolate/Beige display set"
+    },
+    {
+      "code": "6061-SV",
+      "title": "6061 Gris plata display set"
+    },
+    {
+      "code": "6145-NV",
+      "title": "6145 Azul marino display set"
+    },
+    {
+      "code": "6147-NV",
+      "title": "6147 Azul marino display set"
+    },
+    {
+      "code": "6002CTS-NV",
+      "title": "6002CTS Azul marino showcase set"
+    },
+    {
+      "code": "6007CST-NV",
+      "title": "6007CST Azul marino showcase set"
+    },
+    {
+      "code": "6007CST-BK",
+      "title": "6007CST Negro showcase set"
+    },
+    {
+      "code": "CJ006-BK",
+      "title": "CJ006 Negro display set"
+    },
+    {
+      "code": "CJ006-CB",
+      "title": "CJ006 Chocolate/Beige display set"
+    },
+    {
+      "code": "SRS2002",
+      "title": "SRS2002 Metallic beige display set"
+    },
+    {
+      "code": "SRS2002-GR",
+      "title": "SRS2002 Verde oscuro microfiber display set"
+    },
+    {
+      "code": "SRS22-1",
+      "title": "SRS22-1 White showcase set"
+    },
+    {
+      "code": "SRS22-SG",
+      "title": "SRS22-SG Steel grey showcase set"
+    },
+    {
+      "code": "SRS35-75L",
+      "title": "SRS35 Chestnut suede dark brown trim"
+    },
+    {
+      "code": "SRS35-CL",
+      "title": "SRS35 Champagne bronze display set"
+    },
+    {
+      "code": "SRS35-N3",
+      "title": "SRS35 Burlap natural wood display set"
+    },
+    {
+      "code": "SRS46-75L",
+      "title": "SRS46 Chestnut suede 46 piezas"
+    },
+    {
+      "code": "SRS46-SG",
+      "title": "SRS46 Steel grey black 46 piezas"
+    },
+    {
+      "code": "SRS54-SG",
+      "title": "SRS54 Steel grey black 54 piezas"
+    },
+    {
+      "code": "SRS55-75L",
+      "title": "SRS55 Chestnut suede 55 piezas"
+    },
+    {
+      "code": "SRS55-CL",
+      "title": "SRS55 Champagne bronze 55 piezas"
+    },
+    {
+      "code": "SRS55-GL",
+      "title": "SRS55 Grey linen display set"
+    }
+  ]
+}

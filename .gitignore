@@ -1,0 +1,30 @@
+# Dependencias
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+
+# Generados / reempaquetables
+PhotosDrive/PROCESSED/
+public/images/catalog/originals/PROCESSED/
+**/log_procesamiento.csv
+**/propuesta_nombres.csv
+
+# Backups pesados (regenerables)
+backup/
+backup-sitio-operativo/
+*.tar.gz
+*.zip
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE / entorno
+.env
+.env.*
+*.log
+
+# Temporales ImgSEO
+*.warm.tmp.jpg

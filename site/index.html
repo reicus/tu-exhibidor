@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tu Exhibidor | Exhibidores de Alta Joyería · Fabricación Chile</title>
+  <meta name="description" content="Exhibidores en ecocuero premium para joyerías selectas en Chile. Bustos, bandejas y sets vitrina. +20 años. Cotiza directo con el taller.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=30">
+  <link rel="preload" as="image" href="../public/images/hero/hero-slide-01-800.jpg" fetchpriority="high">
+  <link rel="icon" type="image/png" sizes="32x32" href="../public/images/brand/favicon-32.png">
+  <link rel="apple-touch-icon" href="../public/images/brand/apple-touch-icon.png">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="logo" href="#inicio">
+        <picture>
+          <source srcset="../public/images/brand/logo-tuexhibidor-ink-96.webp" type="image/webp">
+          <img src="../public/images/brand/logo-tuexhibidor-ink-96.png" alt="Tu Exhibidor — exhibidores de alta joyería" width="52" height="52">
+        </picture>
+      </a>
+      <button class="nav-toggle" aria-label="Menú" type="button">☰</button>
+      <nav class="main-nav">
+        <a href="#inicio">Inicio</a>
+        <a href="#catalogo">Catálogo</a>
+        <a href="#medida">A medida</a>
+        <a href="#nosotros">Nosotros</a>
+        <a href="#galeria">Galería</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <section id="inicio" class="hero">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">Fabricación chilena · +20 años en alta joyería</p>
+        <h1>Exhibidores que realzan cada pieza</h1>
+        <p class="hero-lead">Ecocuero premium para joyerías y casas de alto nivel. Hecho en Chile — cotización directa con quien fabrica, sin intermediarios.</p>
+        <div class="hero-actions">
+          <a class="btn btn-gold" href="#catalogo">Explorar catálogo</a>
+          <a class="btn btn-wa" href="https://wa.me/56937490214?text=Hola%2C%20quiero%20cotizar%20exhibidores" target="_blank" rel="nofollow">WhatsApp</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="carousel hero-carousel" data-autoplay="5000">
+          <div class="carousel-track" id="hero-track"></div>
+          <button type="button" class="carousel-btn prev" aria-label="Anterior">‹</button>
+          <button type="button" class="carousel-btn next" aria-label="Siguiente">›</button>
+          <div class="carousel-dots" id="hero-dots"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="stats-bar">
+    <div class="stat"><strong id="stat-years">20+</strong><span>Años en alta joyería</span></div>
+    <div class="stat"><strong id="stat-products">85+</strong><span>Diseños para vitrina fina</span></div>
+    <div class="stat"><strong>100%</strong><span>Fabricación en Chile</span></div>
+    <div class="stat"><strong>24h</strong><span>Respuesta del taller</span></div>
+  </div>
+
+  <section class="categories-scroll" aria-label="Categorías de producto">
+    <p class="categories-label">Organizados por tipo de pieza — el estándar de las joyerías más selectas de Chile</p>
+    <div class="categories" id="category-cards"></div>
+  </section>
+
+  <section class="value-strip">
+    <div class="value-grid">
+      <article class="value-card">
+        <h3>Cada pieza, protagonista</h3>
+        <p>La vitrina correcta eleva el valor percibido y guía la mirada de quien entra a tu joyería.</p>
+      </article>
+      <article class="value-card">
+        <h3>Fabricación a medida</h3>
+        <p>Medidas, colores y divisiones a tu medida. Sets modulares para vitrinas completas y coherentes.</p>
+      </article>
+      <article class="value-card">
+        <h3>Para joyeros exigentes</h3>
+        <p>Desde boutiques en Santiago hasta casas de joyería fina en todo Chile — relación directa con el taller.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="featured-section">
+    <div class="section-head">
+      <h2>Los más pedidos</h2>
+      <p class="section-lead">Los preferidos por joyeros en Chile — desliza para ver más</p>
+    </div>
+    <div class="carousel featured-carousel peek-carousel" data-autoplay="4500">
+      <div class="carousel-track" id="featured-track"></div>
+      <button type="button" class="carousel-btn prev" aria-label="Anterior">‹</button>
+      <button type="button" class="carousel-btn next" aria-label="Siguiente">›</button>
+    </div>
+  </section>
+
+  <section id="catalogo" class="catalog-section">
+    <div class="section-head">
+      <h2>Catálogo</h2>
+      <p class="section-lead">Explora por categoría o código. Te cotizamos directo con el taller.</p>
+    </div>
+    <div class="catalog-toolbar">
+      <input type="search" id="catalog-search" placeholder="Buscar por código o nombre…" autocomplete="off">
+      <nav class="cat-tabs" id="cat-tabs"></nav>
+    </div>
+    <div id="catalog-panels"></div>
+    <p class="catalog-hint" id="catalog-hint"></p>
+  </section>
+
+  <section id="nosotros" class="about">
+    <div class="about-grid">
+      <div class="about-visual">
+        <div class="carousel about-carousel" data-autoplay="6000">
+          <div class="carousel-track" id="about-track"></div>
+          <button type="button" class="carousel-btn prev" aria-label="Anterior">‹</button>
+          <button type="button" class="carousel-btn next" aria-label="Siguiente">›</button>
+        </div>
+      </div>
+      <div class="about-copy">
+        <h2>Quiénes somos</h2>
+        <p>Más de 20 años equipando joyerías de referencia en Chile y Latinoamérica. Materiales nobles, terminaciones impecables y diseño pensado para piezas de valor.</p>
+        <p>Trabajamos con joyeros que exigen lo mejor: fabricación a medida, despachos ágiles y atención personalizada. Sin intermediarios, directo desde nuestro taller en Chile.</p>
+        <div class="values">
+          <span>Excelencia</span><span>Precisión</span><span>Compromiso</span><span>Trayectoria</span>
+        </div>
+        <a class="btn btn-outline" href="https://tuexhibidor.cl/wp-content/uploads/2026/07/catalogo_tuexhibidor.pdf" target="_blank" rel="noopener">Descargar catálogo completo (85+ modelos)</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="galeria" class="gallery">
+    <div class="section-head">
+      <h2>Exhibidores en acción</h2>
+      <p class="section-lead">Vitrinas reales de nuestros clientes y trabajo desde el taller</p>
+    </div>
+    <div class="gallery-stage">
+      <div class="carousel gallery-carousel" data-autoplay="4000">
+        <div class="carousel-track" id="gallery-track"></div>
+        <button type="button" class="carousel-btn prev" aria-label="Anterior">‹</button>
+        <button type="button" class="carousel-btn next" aria-label="Siguiente">›</button>
+      </div>
+      <div class="gallery-thumbs" id="gallery-thumbs"></div>
+    </div>
+  </section>
+
+  <section class="custom-section" id="medida">
+    <div class="custom-inner">
+      <div class="custom-copy">
+        <h2>Exhibición a la medida</h2>
+        <p>Diseñamos sets completos para tu vitrina: bandejas, bustos y accesorios coordinados en ecocuero, con las divisiones que tu colección requiere.</p>
+        <p>Para joyeros que buscan una presentación impecable y uniforme — la misma exigencia que distinguimos en las vitrinas más exclusivas de Chile.</p>
+        <a class="btn btn-gold" href="https://wa.me/56937490214?text=Hola%2C%20quiero%20cotizar%20exhibidores%20a%20medida" target="_blank" rel="nofollow">Cotizar proyecto a medida</a>
+      </div>
+      <div class="custom-visual">
+        <img id="medida-img" src="" alt="Set vitrina modular Tu Exhibidor" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto" class="contact">
+    <div class="contact-inner">
+      <h2>Contáctanos</h2>
+      <p>Atención directa del taller — cotización el mismo día.</p>
+      <div class="contact-buttons">
+        <a class="btn btn-wa" href="https://wa.me/56937490214?text=Hola%2C%20quiero%20cotizar%20exhibidores" target="_blank" rel="nofollow">Alfonso Orozco</a>
+        <a class="btn btn-wa" href="https://wa.me/56991327813?text=Hola%2C%20quiero%20cotizar%20exhibidores" target="_blank" rel="nofollow">Leder Mejia</a>
+      </div>
+      <p class="contact-email"><a href="mailto:info@tuexhibidor.cl">info@tuexhibidor.cl</a></p>
+      <div class="social-links" aria-label="Síguenos en redes sociales">
+        <a class="social-link" href="https://facebook.com/tuexhibidor.cl" target="_blank" rel="noopener noreferrer" aria-label="Facebook Tu Exhibidor">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+        </a>
+        <a class="social-link" href="https://www.instagram.com/tuexhibidor/" target="_blank" rel="noopener noreferrer" aria-label="Instagram Tu Exhibidor">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <img class="footer-logo" src="../public/images/brand/logo-tuexhibidor-gold-96.webp" alt="" width="40" height="40" loading="lazy">
+    <div class="social-links social-links--footer" aria-label="Síguenos en redes sociales">
+      <a class="social-link" href="https://facebook.com/tuexhibidor.cl" target="_blank" rel="noopener noreferrer" aria-label="Facebook Tu Exhibidor">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+      </a>
+      <a class="social-link" href="https://www.instagram.com/tuexhibidor/" target="_blank" rel="noopener noreferrer" aria-label="Instagram Tu Exhibidor">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+      </a>
+    </div>
+    <p>Comercializadora Tu Exhibidor SPA · RUT 77.036.189-3</p>
+    <p>info@tuexhibidor.cl · WhatsApp +56 9 3749 0214 / +56 9 9132 7813</p>
+    <p class="footer-credit">Made by <a href="https://tecnotix.cl" target="_blank" rel="noopener noreferrer">Tecnotix Solutions</a></p>
+  </footer>
+
+  <div class="wa-widget" id="wa-widget">
+    <div class="wa-menu" id="wa-menu" hidden>
+      <p class="wa-menu-title">Cotizar por WhatsApp</p>
+      <p class="wa-menu-sub">¿Con quién quieres hablar?</p>
+      <a class="wa-menu-item" href="https://wa.me/56937490214?text=Hola%2C%20quiero%20cotizar%20exhibidores" target="_blank" rel="nofollow">
+        <span class="wa-menu-name">Alfonso Orozco</span>
+        <span class="wa-menu-num">+56 9 3749 0214</span>
+      </a>
+      <a class="wa-menu-item" href="https://wa.me/56991327813?text=Hola%2C%20quiero%20cotizar%20exhibidores" target="_blank" rel="nofollow">
+        <span class="wa-menu-name">Leder Mejia</span>
+        <span class="wa-menu-num">+56 9 9132 7813</span>
+      </a>
+    </div>
+    <button type="button" class="wa-float" id="wa-float" aria-label="Abrir WhatsApp" aria-expanded="false">
+      <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M16 3C9.4 3 4 8.4 4 15c0 2.1.5 4.1 1.5 5.9L4 29l8.3-1.5c1.7.9 3.6 1.4 5.7 1.4 6.6 0 12-5.4 12-12S22.6 3 16 3zm0 22c-1.8 0-3.5-.5-5-1.3l-.4-.2-4.9 1 1-4.8-.2-.4A8.9 8.9 0 0 1 7 15c0-5 4-9 9-9s9 4 9 9-4 9-9 9zm4.9-6.7c-.3-.1-1.6-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-1 .9-.2 0-.4 0-.7-.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.5-1.7-1.7-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.1-.3 0-.4 0-.1-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 2s.8 2.3.9 2.5c.1.2 1.6 2.5 3.9 3.4.5.2.9.3 1.2.4.5.2 1 .1 1.4-.1.4-.2 1.2-.5 1.4-1 .2-.5.2-.9.1-1-.1-.1-.3-.2-.6-.3z"/></svg>
+    </button>
+  </div>
+
+  <div class="lightbox" id="lightbox" hidden>
+    <button type="button" class="lightbox-close" aria-label="Cerrar">×</button>
+    <button type="button" class="lightbox-nav prev" aria-label="Anterior">‹</button>
+    <img id="lightbox-img" alt="">
+    <button type="button" class="lightbox-nav next" aria-label="Siguiente">›</button>
+  </div>
+
+  <script src="site-data.js?v=30"></script>
+  <script src="catalog-data.js?v=30"></script>
+  <script src="app.js?v=30"></script>
+</body>
+</html>

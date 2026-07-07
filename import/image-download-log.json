@@ -1,0 +1,18 @@
+{
+  "matched": 5,
+  "total": 85,
+  "log": {
+    "TUE-BA-001": {
+      "source": "live",
+      "url": "https://tuexhibidor.cl/wp-content/uploads/2026/07/te-set-colgante.jpg"
+    },
+    "P-NM": {
+      "source": "local",
+      "path": "C:\\Users\\Lenovo\\Downloads\\Tu Exhibidor\\backup\\homedir\\public_html\\wp-content\\uploads\\2014\\11\\PNM-001.jpg"
+    },
+    "E-XNL": {
+      "source": "local",
+      "path": "C:\\Users\\Lenovo\\Downloads\\Tu Exhibidor\\backup\\homedir\\public_html\\wp-content\\uploads\\2014\\11\\7XNL-01.jpg"
+    }
+  }
+}

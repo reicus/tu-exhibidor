@@ -1,0 +1,13 @@
+# ============================================================
+# Dependencias OPCIONALES: descripciones automáticas (BLIP)
+# y traducción de keywords al español.
+#   pip install -r requirements-vision.txt
+#
+# OJO: torch + transformers pesan bastante (~1 GB de modelo BLIP
+# la primera vez). En Linux instala torch CPU así para evitar
+# el paquete CUDA gigante:
+#   pip install torch --index-url https://download.pytorch.org/whl/cpu
+# ============================================================
+torch>=2.1
+transformers>=4.38
+deep-translator>=1.11   # traducción EN->ES de captions (usa internet)

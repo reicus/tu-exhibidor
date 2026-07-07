@@ -1,0 +1,15 @@
+{
+  "generatedAt": "2026-07-05T23:07:45.078Z",
+  "ink": "public/images/brand/logo-tuexhibidor-ink",
+  "gold": "public/images/brand/logo-tuexhibidor-gold",
+  "mark": "public/images/brand/logo-mark.svg",
+  "favicon": "public/images/brand/favicon-32.png",
+  "appleTouch": "public/images/brand/apple-touch-icon.png",
+  "header": {
+    "src": "public/images/brand/logo-tuexhibidor-ink-96.webp",
+    "srcFallback": "public/images/brand/logo-tuexhibidor-ink-96.png",
+    "alt": "Tu Exhibidor — fábrica de exhibidores para joyería",
+    "width": 48,
+    "height": 48
+  }
+}

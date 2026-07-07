@@ -1,0 +1,11 @@
+<wpml-config>
+	<admin-texts>
+		<key name="theme_mods_aurum-child">
+			<key name="logo_text" />
+			<key name="header_top_left_text" />
+			<key name="header_top_right_text" />
+			<key name="footer_text" />
+			<key name="footer_text_right" />
+		</key>
+	</admin-texts>
+</wpml-config>

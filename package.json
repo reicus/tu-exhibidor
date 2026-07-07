@@ -1,0 +1,23 @@
+{
+  "name": "tu-exhibidor",
+  "private": true,
+  "scripts": {
+    "build:assets": "node scripts/build_site_assets.mjs",
+    "curate:gallery": "node scripts/curate_premium_gallery.mjs",
+    "build:hero": "node scripts/build_hero_slider.mjs",
+    "brand:logo": "node scripts/process_brand_logo.mjs",
+    "rebuild:catalog": "node scripts/rebuild_catalog_images.mjs",
+    "refresh:catalog": "node scripts/refresh_catalog_from_photos.mjs",
+    "build:site": "node scripts/build_site_data.mjs",
+    "build:site:full": "node scripts/curate_premium_gallery.mjs && node scripts/build_site_data.mjs",
+    "match:photos": "node scripts/match_real_photos_similarity.mjs",
+    "retouch": "node scripts/retouch_catalog_images.mjs",
+    "deploy:pack": "node scripts/prepare_deploy.mjs",
+    "warm:images": "node scripts/warm_image_backgrounds.mjs",
+    "pack:operativo": "node scripts/pack_operativo_backup.mjs",
+    "imgseo:drive": "node scripts/run_imgseo_drive.mjs",
+    "replace:from-imgseo": "node scripts/replace_site_from_imgseo.mjs",
+    "imgseo:full": "node scripts/run_imgseo_drive.mjs && node scripts/replace_site_from_imgseo.mjs",
+    "preview": "npx serve ."
+  }
+}

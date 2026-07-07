@@ -1,0 +1,9 @@
+# ============================================================
+# Dependencias BASE (GUI + pipeline completo sin IA de captions)
+#   pip install -r requirements.txt
+# ============================================================
+pillow>=10.0          # procesamiento de imagen
+customtkinter>=5.2    # interfaz gráfica moderna
+rembg>=2.0.50         # eliminación de fondo (descarga su modelo ~170 MB al primer uso)
+onnxruntime>=1.16     # runtime que usa rembg
+pillow-heif>=0.13     # fotos .heic/.heif de iPhone (opcional pero recomendado)

@@ -1,0 +1,1258 @@
+[
+  {
+    "code": "TUE-BA-001",
+    "slug": "tue-ba-001-bandeja-para-cadenas-o-pulseras-con-canales-y-gancho",
+    "name": "Bandeja para cadenas o pulseras con canales y gancho (tue-ba-001)",
+    "page": 1,
+    "hints": [
+      "TUE-BA-001",
+      "BA-001",
+      "TUEBA001",
+      "te-set-colgante",
+      "LHP13"
+    ],
+    "method": "existing",
+    "source": "public/images/catalog/tue-ba-001-bandeja-para-cadenas-o-pulseras-con-canales-y-gancho.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-BA-002",
+    "slug": "tue-ba-002-bandeja-a-cuadros-para-joyas-varias",
+    "name": "Bandeja a cuadros para joyas varias (tue-ba-002)",
+    "page": 1,
+    "hints": [
+      "TUE-BA-002",
+      "BA-002",
+      "TUEBA002"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-BA-003",
+    "slug": "tue-ba-003-bandeja-con-ranuras-acolchada-para-anillos",
+    "name": "Bandeja con ranuras acolchada para anillos (tue-ba-003)",
+    "page": 1,
+    "hints": [
+      "TUE-BA-003",
+      "BA-003",
+      "TUEBA003"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-BA-009",
+    "slug": "tue-ba-009-bandeja-plana-para-joyas-varias",
+    "name": "Bandeja plana para joyas varias (tue-ba-009)",
+    "page": 1,
+    "hints": [
+      "TUE-BA-009",
+      "BA-009",
+      "TUEBA009"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-BA-004",
+    "slug": "tue-ba-004-bandeja-para-set-de-aros-colgantes-con-ranura-cadenas",
+    "name": "Bandeja para set de aros colgantes con ranura cadenas (tue-ba-004)",
+    "page": 2,
+    "hints": [
+      "TUE-BA-004",
+      "BA-004",
+      "TUEBA004"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-BA-010",
+    "slug": "tue-ba-010-bandeja-para-dos-set-de-aros-colgantes",
+    "name": "Bandeja para dos set de aros colgantes (tue-ba-010)",
+    "page": 2,
+    "hints": [
+      "TUE-BA-010",
+      "BA-010",
+      "TUEBA010"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-BA-011",
+    "slug": "tue-ba-011-bandeja-para-dos-set-de-aros-colgantes",
+    "name": "Bandeja para dos set de aros colgantes (tue-ba-011)",
+    "page": 2,
+    "hints": [
+      "TUE-BA-011",
+      "BA-011",
+      "TUEBA011"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-BA-005",
+    "slug": "tue-ba-005-bandeja-con-gancho-para-cadenas",
+    "name": "Bandeja con gancho para cadenas (tue-ba-005)",
+    "page": 2,
+    "hints": [
+      "TUE-BA-005",
+      "BA-005",
+      "TUEBA005"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-BA-012",
+    "slug": "tue-ba-012-bandeja-con-gancho-para-cadenas",
+    "name": "Bandeja con gancho para cadenas (tue-ba-012)",
+    "page": 2,
+    "hints": [
+      "TUE-BA-012",
+      "BA-012",
+      "TUEBA012"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-BA-013",
+    "slug": "tue-ba-013-bandeja-con-ganchos-para-anillos",
+    "name": "Bandeja con ganchos para anillos (tue-ba-013)",
+    "page": 3,
+    "hints": [
+      "TUE-BA-013",
+      "BA-013",
+      "TUEBA013",
+      "ENCANTOS"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-BA-006",
+    "slug": "tue-ba-006-bandeja-con-ganchos-para-anillos",
+    "name": "Bandeja con ganchos para anillos (tue-ba-006)",
+    "page": 3,
+    "hints": [
+      "TUE-BA-006",
+      "BA-006",
+      "TUEBA006"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-BC-001",
+    "slug": "tue-bc-001-bandeja-para-charms-encantos-cuadros-5-cm-x-5-cm-35-cuadros",
+    "name": "Bandeja para charms (encantos) cuadros : 5 cm x 5 cm (35 cuadros) (tue-bc-001)",
+    "page": 3,
+    "hints": [
+      "TUE-BC-001",
+      "BC-001",
+      "TUEBC001"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-BC-002",
+    "slug": "tue-bc-002-bandeja-para-charms-encantos-cuadros-5-cm-x-5-cm-35-cuadros",
+    "name": "Bandeja para charms (encantos) cuadros : 5 cm x 5 cm (35 cuadros) (tue-bc-002)",
+    "page": 3,
+    "hints": [
+      "TUE-BC-002",
+      "BC-002",
+      "TUEBC002",
+      "ENCANTOS"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-BC-003",
+    "slug": "tue-bc-003-bandeja-para-charms-encantos-con-tapa-removible-cuadros-5-cm-",
+    "name": "Bandeja para charms (encantos) con tapa removible cuadros : 5 cm x 5 cm (35 cuadros o a convenir) (tue-bc-003)",
+    "page": 3,
+    "hints": [
+      "TUE-BC-003",
+      "BC-003",
+      "TUEBC003",
+      "ENCANTOS"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-BC-004",
+    "slug": "tue-bc-004-bandeja-para-charms-encantos-y-anillos-cuadros-5-cm-x-5-cm",
+    "name": "Bandeja para charms (encantos) y anillos cuadros : 5 cm x 5 cm (tue-bc-004)",
+    "page": 4,
+    "hints": [
+      "TUE-BC-004",
+      "BC-004",
+      "TUEBC004",
+      "342-CB2414B",
+      "342CB",
+      "ENCANTOS"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-S-009",
+    "slug": "tue-s-009-accesorio-set-anillo-y-aros",
+    "name": "Accesorio set anillo y aros (tue-s-009)",
+    "page": 4,
+    "hints": [
+      "TUE-S-009",
+      "S-009",
+      "TUES009",
+      "L-ME3",
+      "LME3"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/L-ME3-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-AN-010",
+    "slug": "tue-an-010-exhibidor-set-para-anillos",
+    "name": "Exhibidor set para anillos (tue-an-010)",
+    "page": 4,
+    "hints": [
+      "TUE-AN-010",
+      "AN-010",
+      "TUEAN010",
+      "L-HE12",
+      "LHE12"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/L-HE12-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-AN-021",
+    "slug": "tue-an-021-exhibidor-para-anillo-individual",
+    "name": "Exhibidor para anillo individual (tue-an-021)",
+    "page": 4,
+    "hints": [
+      "TUE-AN-021",
+      "AN-021",
+      "TUEAN021",
+      "P-M1H",
+      "PM1H"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/P-M1H-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-AN-019",
+    "slug": "tue-an-019-set-de-cilindros-para-anillos",
+    "name": "Set de cilindros para anillos (tue-an-019)",
+    "page": 4,
+    "hints": [
+      "TUE-AN-019",
+      "AN-019",
+      "TUEAN019",
+      "P-SC25",
+      "PSC25"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/P-SC25-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-AN-011",
+    "slug": "tue-an-011-set-de-cilindros-para-anillos",
+    "name": "Set de cilindros para anillos (tue-an-011)",
+    "page": 5,
+    "hints": [
+      "TUE-AN-011",
+      "AN-011",
+      "TUEAN011",
+      "251-T2B",
+      "251T2B"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/251-T2B-02.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-AN-012",
+    "slug": "tue-an-012-cilindro-para-anillo",
+    "name": "Cilindro para anillo (tue-an-012)",
+    "page": 5,
+    "hints": [
+      "TUE-AN-012",
+      "AN-012",
+      "TUEAN012",
+      "P-M1H",
+      "PM1H"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/P-M1H-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-AN-020",
+    "slug": "tue-an-020-set-de-cilindros-para-anillos",
+    "name": "Set de cilindros para anillos (tue-an-020)",
+    "page": 5,
+    "hints": [
+      "TUE-AN-020",
+      "AN-020",
+      "TUEAN020",
+      "251-T2B"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/251-T2B-02.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-AN-013",
+    "slug": "tue-an-013-set-exhibidor-para-5-anillos",
+    "name": "Set exhibidor para 5 anillos (tue-an-013)",
+    "page": 5,
+    "hints": [
+      "TUE-AN-013",
+      "AN-013",
+      "TUEAN013",
+      "P-SC25",
+      "PSC25",
+      "251-T2B"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/P-SC25-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-AN-014",
+    "slug": "tue-an-014-exhibidor-para-anillos",
+    "name": "Exhibidor para anillos (tue-an-014)",
+    "page": 6,
+    "hints": [
+      "TUE-AN-014",
+      "AN-014",
+      "TUEAN014"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-AN-015",
+    "slug": "tue-an-015-exhibidor-para-anillos",
+    "name": "Exhibidor para anillos (tue-an-015)",
+    "page": 6,
+    "hints": [
+      "TUE-AN-015",
+      "AN-015",
+      "TUEAN015"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-AN-016",
+    "slug": "tue-an-016-exhibidor-hexagonal-para-14-anillos",
+    "name": "Exhibidor hexagonal para 14 anillos (tue-an-016)",
+    "page": 6,
+    "hints": [
+      "TUE-AN-016",
+      "AN-016",
+      "TUEAN016",
+      "HE14",
+      "HE-14"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/HE14-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-AN-017",
+    "slug": "tue-an-017-bandeja-exhibidor-para-12-anillos",
+    "name": "Bandeja exhibidor para 12 anillos (tue-an-017)",
+    "page": 6,
+    "hints": [
+      "TUE-AN-017",
+      "AN-017",
+      "TUEAN017",
+      "L-H234",
+      "LH234"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/L-H234-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-AN-018",
+    "slug": "tue-an-018-bandeja-exhibidor-para-7-anillos",
+    "name": "Bandeja exhibidor para 7 anillos (tue-an-018)",
+    "page": 7,
+    "hints": [
+      "TUE-AN-018",
+      "AN-018",
+      "TUEAN018",
+      "L-H234"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/L-H234-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-019",
+    "slug": "tue-019-set-hexagonales-3-tamanos-altura-hexagonos-10-cm-8-cm-6-cm",
+    "name": "Set hexagonales 3 tamaños altura hexágonos : 10 cm, 8 cm, 6 cm (tue-019)",
+    "page": 7,
+    "hints": [
+      "TUE-019",
+      "019",
+      "TUE019",
+      "LHP12",
+      "LHP13"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/LHP12-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-CI-001",
+    "slug": "tue-ci-001-te-exhibidor-cintillos-o-diademas-altura-19-cm",
+    "name": "Te exhibidor cintillos o diademas altura : 19 cm (tue-ci-001)",
+    "page": 7,
+    "hints": [
+      "TUE-CI-001",
+      "CI-001",
+      "TUECI001"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-CI-002",
+    "slug": "tue-ci-002-te-exhibidor-cintillos-o-diademas-altura-19-cm-y-27-cm",
+    "name": "Te exhibidor cintillos o diademas altura : 19 cm y 27 cm (tue-ci-002)",
+    "page": 7,
+    "hints": [
+      "TUE-CI-002",
+      "CI-002",
+      "TUECI002"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-CI-003",
+    "slug": "tue-ci-003-exhibidor-cintillos-o-diademas-altura-25-cm",
+    "name": "Exhibidor cintillos o diademas altura : 25 cm (tue-ci-003)",
+    "page": 7,
+    "hints": [
+      "TUE-CI-003",
+      "CI-003",
+      "TUECI003"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-PU-022",
+    "slug": "tue-pu-022-exhibidor-para-pulseras-rigidas-altura-3-cm",
+    "name": "Exhibidor para pulseras rigidas altura : 3 cm (tue-pu-022)",
+    "page": 8,
+    "hints": [
+      "TUE-PU-022",
+      "PU-022",
+      "TUEPU022",
+      "L-BS5",
+      "LBS5"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/L-BS5-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-PU-023",
+    "slug": "tue-pu-023-media-luna-individual-para-pulsera-altura-4-5-cm",
+    "name": "Media luna individual para pulsera altura : 4,5 cm (tue-pu-023)",
+    "page": 8,
+    "hints": [
+      "TUE-PU-023",
+      "PU-023",
+      "TUEPU023"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-PU-024",
+    "slug": "tue-pu-024-exhibidor-media-luna-para-pulseras-altura-10-cm",
+    "name": "Exhibidor media luna para pulseras altura : 10 cm (tue-pu-024)",
+    "page": 8,
+    "hints": [
+      "TUE-PU-024",
+      "PU-024",
+      "TUEPU024"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-PU-025",
+    "slug": "tue-pu-025-cilindro-diagonal-sencillo-para-pulseras",
+    "name": "Cilindro diagonal sencillo para pulseras (tue-pu-025)",
+    "page": 8,
+    "hints": [
+      "TUE-PU-025",
+      "PU-025",
+      "TUEPU025"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-PU-026",
+    "slug": "tue-pu-026-cilindro-vertical-sencillo-para-pulseras",
+    "name": "Cilindro vertical sencillo para pulseras (tue-pu-026)",
+    "page": 9,
+    "hints": [
+      "TUE-PU-026",
+      "PU-026",
+      "TUEPU026",
+      "L-F13A",
+      "LF13A"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/L-F13A-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-PU-027",
+    "slug": "tue-pu-027-exhibidor-de-pulseras-con-doble-soporte-horizontal-sencillo",
+    "name": "Exhibidor de pulseras con doble soporte horizontal sencillo (tue-pu-027)",
+    "page": 9,
+    "hints": [
+      "TUE-PU-027",
+      "PU-027",
+      "TUEPU027",
+      "L-F13B"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/L-F13B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-PU-028",
+    "slug": "tue-pu-028-exhibidor-de-pulseras-con-doble-soporte-horizontal-triple",
+    "name": "Exhibidor de pulseras con doble soporte horizontal triple (tue-pu-028)",
+    "page": 9,
+    "hints": [
+      "TUE-PU-028",
+      "PU-028",
+      "TUEPU028"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-PU-029",
+    "slug": "tue-pu-029-te-exhibidor-de-pulseras-sencillo",
+    "name": "Te exhibidor de pulseras sencillo (tue-pu-029)",
+    "page": 9,
+    "hints": [
+      "TUE-PU-029",
+      "PU-029",
+      "TUEPU029"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-PU-030",
+    "slug": "tue-pu-030-te-exhibidor-de-pulseras-doble",
+    "name": "Te exhibidor de pulseras doble (tue-pu-030)",
+    "page": 10,
+    "hints": [
+      "TUE-PU-030",
+      "PU-030",
+      "TUEPU030"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-PU-031",
+    "slug": "tue-pu-031-te-exhibidor-de-pulseras-triple",
+    "name": "Te exhibidor de pulseras triple (tue-pu-031)",
+    "page": 10,
+    "hints": [
+      "TUE-PU-031",
+      "PU-031",
+      "TUEPU031"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-RE-032",
+    "slug": "tue-re-032-accesorio-para-pulseras-reloj-horizontal",
+    "name": "Accesorio para pulseras/reloj horizontal (tue-re-032)",
+    "page": 10,
+    "hints": [
+      "TUE-RE-032",
+      "RE-032",
+      "TUERE032",
+      "L-CR6",
+      "LCR6",
+      "L-BS5"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/L-CR6-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-RE-033",
+    "slug": "tue-re-033-accesorio-para-pulseras-reloj-vertical",
+    "name": "Accesorio para pulseras/reloj vertical (tue-re-033)",
+    "page": 10,
+    "hints": [
+      "TUE-RE-033",
+      "RE-033",
+      "TUERE033",
+      "L-MD2",
+      "L-F13"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/L-F13A-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "P-NM",
+    "slug": "p-nm-pechera-para-cadenas-y-o-collares",
+    "name": "Pechera para cadenas y/o collares (p-nm)",
+    "page": 11,
+    "hints": [
+      "P-NM",
+      "PNM"
+    ],
+    "method": "existing",
+    "source": "public/images/catalog/p-nm-pechera-para-cadenas-y-o-collares.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "L-DAN",
+    "slug": "l-dan-pechera-para-cadenas-y-o-collares",
+    "name": "Pechera para cadenas y/o collares (l-dan)",
+    "page": 11,
+    "hints": [
+      "L-DAN",
+      "LDAN"
+    ],
+    "method": "existing",
+    "source": "public/images/catalog/l-dan-pechera-para-cadenas-y-o-collares.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "DNS-11",
+    "slug": "dns-11-pechera-para-cadenas-y-o-collares",
+    "name": "Pechera para cadenas y/o collares (dns-11)",
+    "page": 11,
+    "hints": [
+      "DNS-11",
+      "DNS11"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "K-28",
+    "slug": "k-28-pechera-para-cadenas-y-o-collares",
+    "name": "Pechera para cadenas y/o collares (k-28)",
+    "page": 11,
+    "hints": [
+      "K-28",
+      "K28"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "K-29",
+    "slug": "k-29-pechera-para-cadenas-y-o-collares",
+    "name": "Pechera para cadenas y/o collares (k-29)",
+    "page": 12,
+    "hints": [
+      "K-29",
+      "K29"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-CO-001",
+    "slug": "tue-co-001-te-exhibidor-de-collares",
+    "name": "Te exhibidor de collares (tue-co-001)",
+    "page": 12,
+    "hints": [
+      "TUE-CO-001",
+      "CO-001",
+      "TUECO001"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "BX-89",
+    "slug": "bx-89-exhibidor-para-8-cadenas-y-o-collares",
+    "name": "Exhibidor para 8 cadenas y/o collares (bx-89)",
+    "page": 12,
+    "hints": [
+      "BX-89",
+      "BX89"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "BX-109",
+    "slug": "bx-109-exhibidor-para-10-cadenas-y-o-collares",
+    "name": "Exhibidor para 10 cadenas y/o collares (bx-109)",
+    "page": 12,
+    "hints": [
+      "BX-109",
+      "BX109"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "BX-159",
+    "slug": "bx-159-exhibidor-para-cadenas-y-o-collares",
+    "name": "Exhibidor para cadenas y/o collares (bx-159)",
+    "page": 13,
+    "hints": [
+      "BX-159",
+      "BX159"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "E-35",
+    "slug": "e-35-cuello-plano-para-cadenas",
+    "name": "Cuello plano para cadenas (e-35)",
+    "page": 13,
+    "hints": [
+      "E-35",
+      "E35"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "E-40",
+    "slug": "e-40-cuello-plano-para-cadenas-y-aros",
+    "name": "Cuello plano para cadenas y aros (e-40)",
+    "page": 13,
+    "hints": [
+      "E-40",
+      "E40"
+    ],
+    "method": "existing",
+    "source": "public/images/catalog/e-40-cuello-plano-para-cadenas-y-aros.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "E-XNL",
+    "slug": "e-xnl-cuello-plano-para-cadenas",
+    "name": "Cuello plano para cadenas (e-xnl)",
+    "page": 13,
+    "hints": [
+      "E-XNL",
+      "EXNL"
+    ],
+    "method": "existing",
+    "source": "public/images/catalog/e-xnl-cuello-plano-para-cadenas.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-BA-034",
+    "slug": "tue-ba-034-exhibidor-plano-para-21-pares-de-aros",
+    "name": "Exhibidor plano para 21 pares de aros (tue-ba-034)",
+    "page": 14,
+    "hints": [
+      "TUE-BA-034",
+      "BA-034",
+      "TUEBA034",
+      "L-ML"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/L-ML-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-BA-035",
+    "slug": "tue-ba-035-exhibidor-plano-para-cadenas",
+    "name": "Exhibidor plano para cadenas (tue-ba-035)",
+    "page": 14,
+    "hints": [
+      "TUE-BA-035",
+      "BA-035",
+      "TUEBA035"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-S-035",
+    "slug": "tue-s-035-accesorio-para-aros-l-ml",
+    "name": "Accesorio para aros (l-ml) (tue-s-035)",
+    "page": 14,
+    "hints": [
+      "TUE-S-035",
+      "S-035",
+      "TUES035",
+      "L-ML",
+      "LML"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/L-ML-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-AR-036",
+    "slug": "tue-ar-036-accesorio-para-aros-l-md2",
+    "name": "Accesorio para aros (l-md2) (tue-ar-036)",
+    "page": 14,
+    "hints": [
+      "TUE-AR-036",
+      "AR-036",
+      "TUEAR036",
+      "L-MD2",
+      "LMD2"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/L-MD2-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-S-037",
+    "slug": "tue-s-037-accesorio-para-aros-l-md22",
+    "name": "Accesorio para aros (l-md22) (tue-s-037)",
+    "page": 15,
+    "hints": [
+      "TUE-S-037",
+      "S-037",
+      "TUES037",
+      "L-MD2",
+      "L-ME4",
+      "L-MD22"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/L-MD2-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-AR-038",
+    "slug": "tue-ar-038-accesorio-para-aros-l-m7",
+    "name": "Accesorio para aros (l-m7) (tue-ar-038)",
+    "page": 15,
+    "hints": [
+      "TUE-AR-038",
+      "AR-038",
+      "TUEAR038",
+      "L-M7",
+      "LM7"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-AR-039",
+    "slug": "tue-ar-039-accesorio-para-aros-l-m6",
+    "name": "Accesorio para aros (l-m6) (tue-ar-039)",
+    "page": 15,
+    "hints": [
+      "TUE-AR-039",
+      "AR-039",
+      "TUEAR039",
+      "L-M6",
+      "LM6"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/L-M6-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-AR-040",
+    "slug": "tue-ar-040-accesorio-para-aros",
+    "name": "Accesorio para aros (tue-ar-040)",
+    "page": 15,
+    "hints": [
+      "TUE-AR-040",
+      "AR-040",
+      "TUEAR040"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-AR-041",
+    "slug": "tue-ar-041-accesorio-para-aros",
+    "name": "Accesorio para aros (tue-ar-041)",
+    "page": 16,
+    "hints": [
+      "TUE-AR-041",
+      "AR-041",
+      "TUEAR041"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-S-042",
+    "slug": "tue-s-042-accesorio-para-set-de-aros-y-anillos",
+    "name": "Accesorio para set de aros y anillos (tue-s-042)",
+    "page": 16,
+    "hints": [
+      "TUE-S-042",
+      "S-042",
+      "TUES042"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-DI-043",
+    "slug": "tue-di-043-accesorio-para-dijes",
+    "name": "Accesorio para dijes (tue-di-043)",
+    "page": 16,
+    "hints": [
+      "TUE-DI-043",
+      "DI-043",
+      "TUEDI043"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-DI-015",
+    "slug": "tue-di-015-exhibidor-para-dijes",
+    "name": "Exhibidor para dijes (tue-di-015)",
+    "page": 16,
+    "hints": [
+      "TUE-DI-015",
+      "DI-015",
+      "TUEDI015"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-AR-044",
+    "slug": "tue-ar-044-exhibidor-para-12-pares-de-aros-colgantes",
+    "name": "Exhibidor para 12 pares de aros colgantes (tue-ar-044)",
+    "page": 17,
+    "hints": [
+      "TUE-AR-044",
+      "AR-044",
+      "TUEAR044"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-AR-045",
+    "slug": "tue-ar-045-exhibidor-para-12-pares-de-aros-colgantes",
+    "name": "Exhibidor para 12 pares de aros colgantes (tue-ar-045)",
+    "page": 17,
+    "hints": [
+      "TUE-AR-045",
+      "AR-045",
+      "TUEAR045"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-STAND-001",
+    "slug": "tue-stand-001-set-vitrina-exhibidor-001-piezas-ecocuero",
+    "name": "Set vitrina exhibidor 001 piezas ecocuero (tue-stand-001)",
+    "page": 18,
+    "hints": [
+      "TUE-STAND-001",
+      "STAND-001",
+      "TUESTAND001",
+      "prod_01",
+      "prod_1"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2026/07/prod_14.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-STAND-002",
+    "slug": "tue-stand-002-set-vitrina-exhibidor-002-piezas-ecocuero",
+    "name": "Set vitrina exhibidor 002 piezas ecocuero (tue-stand-002)",
+    "page": 18,
+    "hints": [
+      "TUE-STAND-002",
+      "STAND-002",
+      "TUESTAND002",
+      "prod_02",
+      "prod_2"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2026/07/prod_20.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-STAND-003",
+    "slug": "tue-stand-003-set-vitrina-exhibidor-003-piezas-ecocuero",
+    "name": "Set vitrina exhibidor 003 piezas ecocuero (tue-stand-003)",
+    "page": 18,
+    "hints": [
+      "TUE-STAND-003",
+      "STAND-003",
+      "TUESTAND003",
+      "prod_03",
+      "prod_3"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2026/07/prod_03.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-STAND-004",
+    "slug": "tue-stand-004-set-vitrina-exhibidor-004-piezas-ecocuero",
+    "name": "Set vitrina exhibidor 004 piezas ecocuero (tue-stand-004)",
+    "page": 19,
+    "hints": [
+      "TUE-STAND-004",
+      "STAND-004",
+      "TUESTAND004",
+      "prod_04",
+      "prod_4"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2026/07/prod_04.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-STAND-005",
+    "slug": "tue-stand-005-set-vitrina-exhibidor-005-piezas-ecocuero",
+    "name": "Set vitrina exhibidor 005 piezas ecocuero (tue-stand-005)",
+    "page": 19,
+    "hints": [
+      "TUE-STAND-005",
+      "STAND-005",
+      "TUESTAND005",
+      "prod_05",
+      "prod_5"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-STAND-006",
+    "slug": "tue-stand-006-set-vitrina-exhibidor-006-piezas-ecocuero",
+    "name": "Set vitrina exhibidor 006 piezas ecocuero (tue-stand-006)",
+    "page": 19,
+    "hints": [
+      "TUE-STAND-006",
+      "STAND-006",
+      "TUESTAND006",
+      "prod_06",
+      "prod_6"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-STAND-007",
+    "slug": "tue-stand-007-set-vitrina-exhibidor-007-piezas-ecocuero",
+    "name": "Set vitrina exhibidor 007 piezas ecocuero (tue-stand-007)",
+    "page": 20,
+    "hints": [
+      "TUE-STAND-007",
+      "STAND-007",
+      "TUESTAND007",
+      "prod_07",
+      "prod_7"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2026/07/prod_07.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-STAND-008",
+    "slug": "tue-stand-008-set-vitrina-exhibidor-008-piezas-ecocuero",
+    "name": "Set vitrina exhibidor 008 piezas ecocuero (tue-stand-008)",
+    "page": 20,
+    "hints": [
+      "TUE-STAND-008",
+      "STAND-008",
+      "TUESTAND008",
+      "prod_08",
+      "prod_8"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2026/07/prod_08.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-STAND-009",
+    "slug": "tue-stand-009-set-vitrina-exhibidor-009-piezas-ecocuero",
+    "name": "Set vitrina exhibidor 009 piezas ecocuero (tue-stand-009)",
+    "page": 21,
+    "hints": [
+      "TUE-STAND-009",
+      "STAND-009",
+      "TUESTAND009",
+      "prod_09",
+      "prod_9"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2026/07/prod_09.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-STAND-010",
+    "slug": "tue-stand-010-set-vitrina-exhibidor-010-piezas-ecocuero",
+    "name": "Set vitrina exhibidor 010 piezas ecocuero (tue-stand-010)",
+    "page": 21,
+    "hints": [
+      "TUE-STAND-010",
+      "STAND-010",
+      "TUESTAND010",
+      "prod_10"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2026/07/prod_10.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-STAND-011",
+    "slug": "tue-stand-011-set-vitrina-exhibidor-011-piezas-ecocuero",
+    "name": "Set vitrina exhibidor 011 piezas ecocuero (tue-stand-011)",
+    "page": 21,
+    "hints": [
+      "TUE-STAND-011",
+      "STAND-011",
+      "TUESTAND011",
+      "prod_11"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-STAND-012",
+    "slug": "tue-stand-012-set-vitrina-exhibidor-012-piezas-ecocuero",
+    "name": "Set vitrina exhibidor 012 piezas ecocuero (tue-stand-012)",
+    "page": 22,
+    "hints": [
+      "TUE-STAND-012",
+      "STAND-012",
+      "TUESTAND012",
+      "prod_12"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-STAND-013",
+    "slug": "tue-stand-013-set-vitrina-exhibidor-013-piezas-ecocuero",
+    "name": "Set vitrina exhibidor 013 piezas ecocuero (tue-stand-013)",
+    "page": 22,
+    "hints": [
+      "TUE-STAND-013",
+      "STAND-013",
+      "TUESTAND013",
+      "prod_13"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2026/07/prod_13.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-AN-022",
+    "slug": "tue-an-022-exhibidor-para-anillo",
+    "name": "Exhibidor para anillo (tue-an-022)",
+    "page": 5,
+    "hints": [
+      "TUE-AN-022",
+      "AN-022",
+      "TUEAN022",
+      "P-M1H",
+      "PM1H"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/P-M1H-01.jpg",
+    "hasImage": true
+  },
+  {
+    "code": "TUE-AR-042",
+    "slug": "tue-ar-042-accesorio-para-aros",
+    "name": "Accesorio para aros (tue-ar-042)",
+    "page": 16,
+    "hints": [
+      "TUE-AR-042",
+      "AR-042",
+      "TUEAR042"
+    ],
+    "method": "local-file",
+    "source": "backup/homedir/public_html/wp-content/uploads/2019/05/342-CB2414B-01.jpg",
+    "hasImage": true
+  }
+]

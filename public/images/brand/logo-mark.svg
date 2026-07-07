@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <circle cx="60" cy="60" r="58" stroke="#2b2926" stroke-width="2"/>
+  <path fill="#2b2926" d="M60 28c-8 0-14 6-14 14v4c0 6 4 11 9 13v22c0 4 3 7 7 7h-4c-3 0-5 2-5 5v2h26v-2c0-3-2-5-5-5h-4c4 0 7-3 7-7V59c5-2 9-7 9-13v-4c0-8-6-14-14-14z"/>
+  <path stroke="#2b2926" stroke-width="1.5" fill="none" d="M46 52c4 6 10 9 14 9s10-3 14-9"/>
+  <circle cx="60" cy="58" r="3" fill="#faf7f2" stroke="#2b2926" stroke-width="1"/>
+  <text x="60" y="98" text-anchor="middle" font-family="Georgia,serif" font-size="11" font-style="italic" fill="#2b2926">Tu Exhibidor</text>
+</svg>
