@@ -25,6 +25,7 @@ desktop.ini
 .env
 .env.*
 *.log
+docs/CREDENCIALES-TU-EXHIBIDOR.md
 docs/CREDENCIALES-TU-EXHIBIDOR.pdf
 
 # Temporales ImgSEO
