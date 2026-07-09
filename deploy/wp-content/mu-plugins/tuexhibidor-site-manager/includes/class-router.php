@@ -39,10 +39,12 @@ final class Tuexhibidor_Site_Manager_Router {
 
 	public static function handle_redirects(): void {
 		if ( get_query_var( 'tuex_imagenes' ) ) {
-			self::redirect_authenticated(
-				admin_url( 'admin.php?page=tuexhibidor-site-manager' ),
-				'manage_options'
-			);
+			$target = admin_url( 'admin.php?page=tuexhibidor-site-manager' );
+			$tab    = isset( $_GET['tab'] ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : '';
+			if ( $tab ) {
+				$target = add_query_arg( 'tab', $tab, $target );
+			}
+			self::redirect_authenticated( $target, 'manage_options' );
 		}
 		if ( get_query_var( 'tuex_medios' ) ) {
 			self::redirect_authenticated(

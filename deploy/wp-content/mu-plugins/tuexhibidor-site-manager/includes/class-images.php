@@ -21,6 +21,19 @@ final class Tuexhibidor_Site_Manager_Images {
 		return wp_mkdir_p( $dir );
 	}
 
+	/** Guarda JPG único (galería «Exhibidores en acción»). */
+	public static function save_gallery_jpg( int $attachment_id, string $relative ): bool {
+		$source = self::attachment_path( $attachment_id );
+		if ( ! $source || ! $relative ) {
+			return false;
+		}
+		$dest = Tuexhibidor_Site_Manager_Paths::abs_from_public( $relative );
+		if ( ! self::ensure_dir( $dest ) ) {
+			return false;
+		}
+		return self::save_resized_jpg( $source, $dest, 1600 );
+	}
+
 	/** Guarda JPG único (catálogo). */
 	public static function save_catalog_jpg( int $attachment_id, string $slug ): bool {
 		$source = self::attachment_path( $attachment_id );
@@ -33,6 +46,30 @@ final class Tuexhibidor_Site_Manager_Images {
 			return false;
 		}
 		return self::save_resized_jpg( $source, $dest, 1200 );
+	}
+
+	/** Copia un set responsive JPG entre bases (seed inicial). */
+	public static function copy_responsive_set_files( string $from_base, string $to_base ): bool {
+		if ( ! $from_base || ! $to_base || $from_base === $to_base ) {
+			return false;
+		}
+		$ok = true;
+		foreach ( self::WIDTHS as $width ) {
+			$src  = Tuexhibidor_Site_Manager_Paths::abs_from_public( $from_base . '-' . $width . '.jpg' );
+			$dest = Tuexhibidor_Site_Manager_Paths::abs_from_public( $to_base . '-' . $width . '.jpg' );
+			if ( ! is_readable( $src ) ) {
+				$ok = false;
+				continue;
+			}
+			if ( ! self::ensure_dir( $dest ) ) {
+				$ok = false;
+				continue;
+			}
+			if ( ! copy( $src, $dest ) ) {
+				$ok = false;
+			}
+		}
+		return $ok;
 	}
 
 	/** Genera tamaños JPG para assets con base responsive. */
@@ -116,14 +153,92 @@ final class Tuexhibidor_Site_Manager_Images {
 		return ! is_wp_error( $saved );
 	}
 
+	/** @var bool */
+	private static $pushing_to_wc = false;
+
+	public static function is_pushing_to_wc(): bool {
+		return self::$pushing_to_wc;
+	}
+
+	public static function begin_push_to_wc(): void {
+		self::$pushing_to_wc = true;
+	}
+
+	public static function end_push_to_wc(): void {
+		self::$pushing_to_wc = false;
+	}
+
 	public static function sync_woocommerce_thumbnail( string $sku, int $attachment_id ): void {
 		if ( ! function_exists( 'wc_get_product_id_by_sku' ) ) {
 			return;
 		}
 		$product_id = wc_get_product_id_by_sku( $sku );
 		if ( $product_id ) {
-			set_post_thumbnail( $product_id, $attachment_id );
+			self::begin_push_to_wc();
+			try {
+				set_post_thumbnail( $product_id, $attachment_id );
+			} finally {
+				self::end_push_to_wc();
+			}
 		}
+	}
+
+	/**
+	 * Import a local catalog JPG (or public URL) as a WP attachment and set it as product featured image.
+	 */
+	public static function push_catalog_file_to_product( int $product_id, string $filepath, string $alt = '' ): int {
+		if ( $product_id <= 0 || ! is_readable( $filepath ) ) {
+			return 0;
+		}
+
+		require_once ABSPATH . 'wp-admin/includes/file.php';
+		require_once ABSPATH . 'wp-admin/includes/media.php';
+		require_once ABSPATH . 'wp-admin/includes/image.php';
+
+		$filename = basename( $filepath );
+		$contents = (string) file_get_contents( $filepath );
+		if ( '' === $contents ) {
+			return 0;
+		}
+
+		$upload = wp_upload_bits( $filename, null, $contents );
+		if ( ! empty( $upload['error'] ) ) {
+			return 0;
+		}
+
+		$filetype      = wp_check_filetype( $filename );
+		$attachment    = array(
+			'post_mime_type' => $filetype['type'] ?? 'image/jpeg',
+			'post_title'     => sanitize_file_name( pathinfo( $filename, PATHINFO_FILENAME ) ),
+			'post_content'   => '',
+			'post_status'    => 'inherit',
+		);
+		$attachment_id = wp_insert_attachment( $attachment, $upload['file'], $product_id );
+		if ( is_wp_error( $attachment_id ) || ! $attachment_id ) {
+			return 0;
+		}
+
+		$meta = wp_generate_attachment_metadata( (int) $attachment_id, $upload['file'] );
+		wp_update_attachment_metadata( (int) $attachment_id, $meta );
+		if ( $alt ) {
+			update_post_meta( (int) $attachment_id, '_wp_attachment_image_alt', $alt );
+		}
+
+		self::begin_push_to_wc();
+		try {
+			set_post_thumbnail( $product_id, (int) $attachment_id );
+			if ( function_exists( 'wc_get_product' ) ) {
+				$product = wc_get_product( $product_id );
+				if ( $product ) {
+					$product->set_image_id( (int) $attachment_id );
+					$product->save();
+				}
+			}
+		} finally {
+			self::end_push_to_wc();
+		}
+
+		return (int) $attachment_id;
 	}
 
 	public static function build_sources_map( string $base ): array {

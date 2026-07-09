@@ -59,4 +59,16 @@ final class Tuexhibidor_Site_Manager_Paths {
 			'apple-touch'    => 'public/images/brand/apple-touch-icon.png',
 		);
 	}
+
+	/** Imágenes fijas del home (no carrusel). @return array<string, array{base:string,label:string,section:string,default_alt:string}> */
+	public static function home_static_slots(): array {
+		return array(
+			'medida' => array(
+				'base'        => 'public/images/home/medida',
+				'label'       => 'Exhibición a la medida',
+				'section'     => '#medida',
+				'default_alt' => 'Set vitrina modular Tu Exhibidor',
+			),
+		);
+	}
 }

@@ -45,6 +45,47 @@ function te_social_links_html( string $wrap_class = 'social-links', string $link
 	return $html;
 }
 
+function te_header_social_networks_html(): string {
+	$urls = te_social_urls();
+	$wa   = 'https://wa.me/56937490214?text=' . rawurlencode( 'Hola, quiero cotizar exhibidores' );
+	$html = '<ul class="social-networks">';
+	$html .= '<li><a class="te-header-social" href="' . esc_url( $urls['facebook'] ) . '" target="_blank" rel="noopener noreferrer" title="Facebook" aria-label="Facebook">' . te_social_icon_svg( 'facebook', 16 ) . '</a></li>';
+	$html .= '<li><a class="te-header-social" href="' . esc_url( $urls['instagram'] ) . '" target="_blank" rel="noopener noreferrer" title="Instagram" aria-label="Instagram">' . te_social_icon_svg( 'instagram', 16 ) . '</a></li>';
+	$html .= '<li><a class="te-header-social te-header-social--wa" href="' . esc_url( $wa ) . '" target="_blank" rel="noopener noreferrer" title="Contactar por WhatsApp" aria-label="Contactar por WhatsApp">' . te_social_icon_svg( 'whatsapp', 16 ) . '</a></li>';
+	$html .= '</ul>';
+	return $html;
+}
+
+add_filter( 'widget_display_callback', 'te_override_header_social_widget', 10, 3 );
+function te_override_header_social_widget( $instance, $widget, $args ) {
+	$widget_classes = $args['before_widget'] ?? '';
+	if ( strpos( $widget_classes, 'social-networks' ) === false && strpos( $widget_classes, 'widget-social' ) === false ) {
+		return $instance;
+	}
+	echo $args['before_widget']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	echo te_header_social_networks_html();
+	echo $args['after_widget']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	return false;
+}
+
+add_action( 'template_redirect', 'te_buffer_clean_header_socials', 0 );
+function te_buffer_clean_header_socials() {
+	if ( is_admin() || wp_doing_ajax() || wp_is_json_request() ) {
+		return;
+	}
+	ob_start( 'te_filter_header_socials_html' );
+}
+
+function te_filter_header_socials_html( string $html ): string {
+	$replacement = te_header_social_networks_html();
+	$html        = preg_replace(
+		'#<div class="top-menu--widget top-menu--widget-social-networks">\s*<ul class="social-networks">.*?</ul>#s',
+		'<div class="top-menu--widget top-menu--widget-social-networks">' . $replacement,
+		$html
+	);
+	return is_string( $html ) ? $html : '';
+}
+
 add_action( 'woocommerce_init', 'te_replace_product_share', 100 );
 function te_replace_product_share() {
 	remove_action( 'woocommerce_share', 'aurum_woocommerce_share' );
@@ -112,8 +153,7 @@ function te_upgrade_header_socials() {
 		document.querySelectorAll('.top-menu .social-networks, .header-top-socials ul').forEach(function(ul){
 			if (!ul || ul.dataset.teSocialReady) return;
 			ul.dataset.teSocialReady = '1';
-			ul.innerHTML = '<li><a class="te-header-social" href="<?php echo $fb; ?>" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><?php echo $icon_fb; ?></a></li>'
-				+ '<li><a class="te-header-social" href="<?php echo $ig; ?>" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><?php echo $icon_ig; ?></a></li>';
+			ul.innerHTML = <?php echo wp_json_encode( preg_replace( '#^<ul class="social-networks">|</ul>$#', '', te_header_social_networks_html() ) ); ?>;
 		});
 
 		var searchSvg = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.2-3.2"></path></svg><span class="sr-only">Buscar</span>';
@@ -360,7 +400,6 @@ function tuexhibidor_landing_css(){
 	}
 	.top-menu--dark .social-networks a,
 	.top-menu--dark .social-networks i{ color:var(--gold-dark) !important; }
-	.top-menu--dark a[href*="vimeo"]{ display:none !important; }
 	.top-menu .row{ justify-content:flex-end !important; }
 	.top-menu .social-networks,
 	.header-top-socials ul{ justify-content:flex-end !important; }
@@ -483,12 +522,6 @@ function tuexhibidor_landing_css(){
 }
 
 
-add_action('wp_head', 'tuexhibidor_hide_demo_footer');
-function tuexhibidor_hide_demo_footer(){
-	echo '<style>.footer-widgets{ display:none !important; }</style>';
-}
-
-
 // ==== Tu Exhibidor: galeria de fotos reales + limpieza de botones + fuentes ====
 add_action('wp_footer', 'tuexhibidor_real_gallery');
 function tuexhibidor_real_gallery(){
@@ -598,8 +631,12 @@ function tuexhibidor_round2_css(){
 	.tuexhibidor-ig-btn{ display:inline-block; padding:12px 30px; border-radius:30px; text-decoration:none; font-weight:600; letter-spacing:.5px; color:#fff !important; background:linear-gradient(135deg,#f58529,#dd2a7b,#8134af,#515bd4); box-shadow:0 6px 18px rgba(221,42,123,.3); transition:transform .3s ease; }
 	.tuexhibidor-ig-btn:hover{ transform:translateY(-2px); }
 
-	/* Tamano uniforme de imagenes de producto en todo el sitio */
-	li.product img, li.shop-item img, .woocommerce ul.products img, .related img{ aspect-ratio:1/1 !important; object-fit:contain !important; width:100% !important; height:auto !important; background:var(--surface,#ddd3c8) !important; padding:10px !important; box-sizing:border-box !important; }
+	/* Tamano uniforme de imagenes en landing (WooCommerce lo maneja te_unified_premium_skin) */
+	body:not(.woocommerce):not(.woocommerce-page) li.product img,
+	body:not(.woocommerce):not(.woocommerce-page) li.shop-item img{
+		aspect-ratio:1/1 !important; object-fit:contain !important; width:100% !important; height:auto !important;
+		background:var(--surface,#ddd3c8) !important; padding:10px !important; box-sizing:border-box !important;
+	}
 
 	/* Transiciones suaves al hacer scroll, en todo el sitio */
 	.tuexhibidor-reveal{ opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease; }
@@ -661,54 +698,241 @@ function tuexhibidor_final_css(){
 	</style>';
 }
 
-// SEO: titulo, meta description, Open Graph y datos estructurados
-add_filter('pre_get_document_title', function($title){
-	if(is_front_page()){
-		return 'Tu Exhibidor | Fabrica de Exhibidores para Joyeria y Bisuteria en Chile';
+// SEO: títulos, meta description, Open Graph, schema y sitemap
+add_filter( 'pre_get_document_title', 'te_seo_document_title', 5 );
+function te_seo_document_title( $title ) {
+	if ( function_exists( 'is_product' ) && is_product() ) {
+		global $post;
+		$name = $post ? te_sentence( get_the_title( $post ) ) : $title;
+		return $name . ' | Exhibidores joyería | Tu Exhibidor';
 	}
 	if ( function_exists( 'is_shop' ) && is_shop() ) {
-		return 'Catálogo – Tu Exhibidor';
+		return 'Tienda de exhibidores para joyería en Chile | Tu Exhibidor';
 	}
-	return $title;
-});
-add_filter('woocommerce_page_title', function($title) {
-	if ( is_shop() ) {
-		return 'Catálogo';
-	}
-	return $title;
-});
-
-add_action('wp_head', 'tuexhibidor_seo_tags', 1);
-function tuexhibidor_seo_tags(){
-	$desc = 'Fabricamos exhibidores y displays para joyerias y tiendas de bisuteria: bustos para collares, bandejas para anillos y aretes, soportes para pulseras y relojes. Cotiza por WhatsApp.';
-	$url = 'https://tuexhibidor.cl/';
-	$img = 'https://tuexhibidor.cl/wp-content/uploads/2026/07/prod_14.jpg';
-	if(is_front_page()){
-		echo '<meta name="description" content="'.esc_attr($desc).'">'."\n";
-		echo '<meta name="keywords" content="exhibidores para joyeria, displays para bisuteria, exhibidores de joyas Chile, fabricante de exhibidores, busto para collares, bandeja para anillos, exhibidor para relojes">'."\n";
-	}
-	echo '<meta property="og:site_name" content="Tu Exhibidor">'."\n";
-	echo '<meta property="og:type" content="business.business">'."\n";
-	echo '<meta property="og:title" content="Tu Exhibidor | Exhibidores para Joyeria y Bisuteria">'."\n";
-	echo '<meta property="og:description" content="'.esc_attr($desc).'">'."\n";
-	echo '<meta property="og:url" content="'.esc_url($url).'">'."\n";
-	echo '<meta property="og:image" content="'.esc_url($img).'">'."\n";
-	echo '<meta name="twitter:card" content="summary_large_image">'."\n";
-	if(is_front_page()){
-		echo '<script type="application/ld+json">
-		{
-		"@context": "https://schema.org",
-		"@type": "Store",
-		"name": "Tu Exhibidor",
-		"description": "'.esc_js($desc).'",
-		"url": "https://tuexhibidor.cl/",
-		"image": "'.esc_js($img).'",
-		"address": { "@type": "PostalAddress", "addressCountry": "CL" },
-		"areaServed": "CL",
-		"sameAs": ["https://www.instagram.com/tuexhibidor/", "https://www.facebook.com/TUEXHIBIDOR.CL"]
+	if ( function_exists( 'is_product_taxonomy' ) && is_product_taxonomy() ) {
+		$term = get_queried_object();
+		if ( $term && isset( $term->slug ) ) {
+			$map = te_seo_category_meta();
+			if ( isset( $map[ $term->slug ]['title'] ) ) {
+				return $map[ $term->slug ]['title'] . ' | Tu Exhibidor';
+			}
+			return te_sentence( $term->name ) . ' | Exhibidores para joyería | Tu Exhibidor';
 		}
-		</script>';
 	}
+	return $title;
+}
+
+add_filter( 'woocommerce_page_title', function ( $title ) {
+	if ( is_shop() ) {
+		return 'Exhibidores para joyería';
+	}
+	return $title;
+} );
+
+function te_seo_default_description(): string {
+	return 'Exhibidores en ecocuero premium para joyerías en Chile. Bustos, bandejas, sets vitrina y fabricación a medida. +20 años. Cotiza directo con el taller.';
+}
+
+function te_seo_category_meta(): array {
+	return array(
+		'anillos'            => array(
+			'title' => 'Exhibidores para anillos',
+			'desc'  => 'Bandejas, cilindros y sets exhibidores para anillos en ecocuero. Diseños para vitrinas de joyería en Chile.',
+		),
+		'collares-cadenas'   => array(
+			'title' => 'Exhibidores para collares y cadenas',
+			'desc'  => 'Bustos, pecheras y soportes para collares y cadenas. Fabricación chilena para joyerías y boutiques.',
+		),
+		'aros-zarcillos'     => array(
+			'title' => 'Exhibidores para aros y zarcillos',
+			'desc'  => 'Soportes y bandejas para aros colgantes y zarcillos. Exhibidores en ecocuero hechos en Chile.',
+		),
+		'pulseras-relojes'   => array(
+			'title' => 'Exhibidores para pulseras y relojes',
+			'desc'  => 'Soportes, medias lunas y exhibidores para pulseras y relojes. Soluciones para vitrinas de joyería.',
+		),
+		'bandejas-bases'     => array(
+			'title' => 'Bandejas y bases para joyería',
+			'desc'  => 'Bandejas planas, con ranuras y ganchos para joyas varias. Exhibidores en ecocuero premium.',
+		),
+		'dijes-charms'       => array(
+			'title' => 'Exhibidores para dijes y charms',
+			'desc'  => 'Bandejas y soportes para dijes, charms y piezas pequeñas. Fabricación chilena Tu Exhibidor.',
+		),
+		'sets-vitrina'       => array(
+			'title' => 'Sets vitrina para joyería',
+			'desc'  => 'Sets modulares en ecocuero para equipar vitrinas completas. Exhibidores coordinados hechos en Chile.',
+		),
+	);
+}
+
+function te_seo_current_description(): string {
+	if ( function_exists( 'is_product' ) && is_product() ) {
+		global $post;
+		$product = function_exists( 'wc_get_product' ) ? wc_get_product( $post ) : null;
+		if ( $product ) {
+			$short = trim( wp_strip_all_tags( $product->get_short_description() ) );
+			if ( $short ) {
+				return wp_trim_words( $short, 28, '…' );
+			}
+			$name = te_sentence( $product->get_name() );
+			return $name . '. Exhibidor para joyería en ecocuero. Fabricación chilena — cotiza en Tu Exhibidor.';
+		}
+	}
+	if ( function_exists( 'is_shop' ) && is_shop() ) {
+		return 'Catálogo de exhibidores para joyería en Chile: anillos, collares, aros, pulseras, bandejas y sets vitrina en ecocuero. Cotiza por WhatsApp.';
+	}
+	if ( function_exists( 'is_product_taxonomy' ) && is_product_taxonomy() ) {
+		$term = get_queried_object();
+		if ( $term && isset( $term->slug ) ) {
+			$map = te_seo_category_meta();
+			if ( isset( $map[ $term->slug ]['desc'] ) ) {
+				return $map[ $term->slug ]['desc'];
+			}
+		}
+	}
+	return te_seo_default_description();
+}
+
+function te_seo_canonical_url() {
+	if ( is_singular() ) {
+		return get_permalink();
+	}
+	if ( function_exists( 'is_shop' ) && is_shop() ) {
+		return wc_get_page_permalink( 'shop' );
+	}
+	if ( is_tax() ) {
+		$term = get_queried_object();
+		return $term ? get_term_link( $term ) : home_url( '/' );
+	}
+	return home_url( '/' );
+}
+
+function te_seo_og_image(): string {
+	if ( function_exists( 'is_product' ) && is_product() ) {
+		global $post;
+		$product = function_exists( 'wc_get_product' ) ? wc_get_product( $post ) : null;
+		if ( $product ) {
+			$id = $product->get_image_id();
+			if ( $id ) {
+				$url = wp_get_attachment_image_url( $id, 'large' );
+				if ( $url ) {
+					return $url;
+				}
+			}
+		}
+	}
+	return 'https://tuexhibidor.cl/public/images/hero/hero-slide-01-1200.jpg';
+}
+
+add_action( 'wp_head', 'te_seo_head_tags', 1 );
+function te_seo_head_tags() {
+	if ( is_admin() ) {
+		return;
+	}
+	$desc      = te_seo_current_description();
+	$canonical = te_seo_canonical_url();
+	$og_image  = te_seo_og_image();
+	$title     = wp_get_document_title();
+	$url       = ( is_string( $canonical ) && ! is_wp_error( $canonical ) ) ? $canonical : home_url( '/' );
+
+	echo '<link rel="canonical" href="' . esc_url( $url ) . '">' . "\n";
+	echo '<meta name="description" content="' . esc_attr( $desc ) . '">' . "\n";
+	echo '<meta property="og:locale" content="es_CL">' . "\n";
+	echo '<meta property="og:site_name" content="Tu Exhibidor">' . "\n";
+	echo '<meta property="og:type" content="' . ( function_exists( 'is_product' ) && is_product() ? 'product' : 'website' ) . '">' . "\n";
+	echo '<meta property="og:title" content="' . esc_attr( $title ) . '">' . "\n";
+	echo '<meta property="og:description" content="' . esc_attr( $desc ) . '">' . "\n";
+	echo '<meta property="og:url" content="' . esc_url( $url ) . '">' . "\n";
+	echo '<meta property="og:image" content="' . esc_url( $og_image ) . '">' . "\n";
+	echo '<meta name="twitter:card" content="summary_large_image">' . "\n";
+	echo '<meta name="twitter:title" content="' . esc_attr( $title ) . '">' . "\n";
+	echo '<meta name="twitter:description" content="' . esc_attr( $desc ) . '">' . "\n";
+	echo '<meta name="twitter:image" content="' . esc_url( $og_image ) . '">' . "\n";
+	te_seo_json_ld( $desc, $url, $og_image );
+}
+
+function te_seo_json_ld( string $desc, string $url, string $image ): void {
+	$graph = array(
+		array(
+			'@type'       => 'Organization',
+			'@id'         => 'https://tuexhibidor.cl/#organization',
+			'name'        => 'Tu Exhibidor',
+			'url'         => 'https://tuexhibidor.cl/',
+			'logo'        => 'https://tuexhibidor.cl/public/images/brand/logo-tuexhibidor-ink-96.png',
+			'description' => te_seo_default_description(),
+			'email'       => 'info@tuexhibidor.cl',
+			'areaServed'  => array( '@type' => 'Country', 'name' => 'Chile' ),
+			'sameAs'      => array(
+				'https://www.instagram.com/tuexhibidor/',
+				'https://www.facebook.com/tuexhibidor.cl/',
+			),
+		),
+		array(
+			'@type'              => 'Store',
+			'@id'                => 'https://tuexhibidor.cl/#store',
+			'name'               => 'Tu Exhibidor',
+			'url'                => 'https://tuexhibidor.cl/',
+			'image'              => $image,
+			'description'        => $desc,
+			'priceRange'         => '$$',
+			'address'            => array(
+				'@type'          => 'PostalAddress',
+				'addressCountry' => 'CL',
+			),
+			'parentOrganization' => array( '@id' => 'https://tuexhibidor.cl/#organization' ),
+		),
+	);
+	if ( function_exists( 'is_shop' ) && is_shop() ) {
+		$graph[] = array(
+			'@type'           => 'WebSite',
+			'@id'             => 'https://tuexhibidor.cl/#website',
+			'url'             => 'https://tuexhibidor.cl/',
+			'name'            => 'Tu Exhibidor',
+			'inLanguage'      => 'es-CL',
+			'publisher'       => array( '@id' => 'https://tuexhibidor.cl/#organization' ),
+			'potentialAction' => array(
+				'@type'       => 'SearchAction',
+				'target'      => array(
+					'@type'       => 'EntryPoint',
+					'urlTemplate' => 'https://tuexhibidor.cl/shop/?s={search_term_string}',
+				),
+				'query-input' => 'required name=search_term_string',
+			),
+		);
+	}
+	$payload = array(
+		'@context' => 'https://schema.org',
+		'@graph'   => $graph,
+	);
+	echo '<script type="application/ld+json">' . wp_json_encode( $payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
+}
+
+add_filter( 'get_the_archive_description', 'te_seo_term_archive_description' );
+function te_seo_term_archive_description( $desc ) {
+	if ( ! function_exists( 'is_product_taxonomy' ) || ! is_product_taxonomy() ) {
+		return $desc;
+	}
+	if ( $desc ) {
+		return $desc;
+	}
+	$term = get_queried_object();
+	if ( ! $term || ! isset( $term->slug ) ) {
+		return $desc;
+	}
+	$map = te_seo_category_meta();
+	if ( isset( $map[ $term->slug ]['desc'] ) ) {
+		return '<p>' . esc_html( $map[ $term->slug ]['desc'] ) . '</p>';
+	}
+	return $desc;
+}
+
+add_filter( 'robots_txt', 'te_seo_robots_txt', 20 );
+function te_seo_robots_txt( $output ) {
+	if ( strpos( $output, 'sitemap-site.xml' ) === false ) {
+		$output .= "\nSitemap: https://tuexhibidor.cl/sitemap-site.xml\n";
+	}
+	return $output;
 }
 
 
@@ -811,11 +1035,7 @@ add_action('wp_head', function(){
     .tuexhibidor-valor-num{ font-family:'Poppins',sans-serif; color:var(--gold); font-size:1.1rem; font-weight:600; }
     .tuexhibidor-valor-txt{ font-family:'Poppins',sans-serif; letter-spacing:0.08em; text-transform:uppercase; font-size:0.8rem; color:var(--ink); }
 
-    li.product img, li.shop-item img, .woocommerce ul.products img, .related img,
-    .up-sells img, .cross-sells img, .woocommerce-product-gallery img, .flex-control-thumbs img{
-        aspect-ratio:1/1 !important; object-fit:cover !important; object-position:center !important;
-        width:100% !important; height:auto !important; min-width:0 !important;
-    }
+    /* Imagenes de producto WooCommerce: ver te_unified_premium_skin + te_single_product_layout_css */
 
     .cart-contents, .site-header .cart, a.cart-icon, .header-cart, .woocommerce-mini-cart, .mini-cart, .cart-count{ display:none !important; }
 
@@ -1358,20 +1578,10 @@ function te_menu_titles($items,$args){ $caps=array('CATÁLOGO','CATALOGO','GALER
 /* == fin TE-CASE-PHP == */
 
 
-/* == TE-FOOTER-CONTACT: footer premium unificado == */
-add_action('wp_footer','te_premium_footer',216);
-function te_premium_footer(){
-    $logo = esc_url( home_url( '/public/images/brand/logo-tuexhibidor-gold-96.webp' ) );
-    $pdf  = esc_url( home_url( '/wp-content/uploads/2026/07/catalogo_tuexhibidor.pdf' ) );
+add_action('wp_head', 'te_premium_footer_styles', 216);
+function te_premium_footer_styles(){
     ?>
-    <style>
-    .site-footer .footer-widgets,
-    .site-footer .copyright,
-    .site-footer .footer-bottom,
-    .site-footer > .container,
-    .site-footer .widget,
-    .site-footer .row,
-    .te-footer-contact{ display:none !important; }
+    <style id="te-premium-footer-styles">
     .site-footer{ padding:0 !important; text-align:center !important; }
     .te-premium-footer{
         padding:28px 24px 32px;
@@ -1412,24 +1622,20 @@ function te_premium_footer(){
         color:#fff; transform:translateY(-1px);
     }
     </style>
-    <script>
-    document.addEventListener('DOMContentLoaded',function(){
-      var f=document.querySelector('.site-footer');
-      if(!f || document.querySelector('.te-premium-footer')) return;
-      var box=document.createElement('div');
-      box.className='te-premium-footer';
-      box.innerHTML=<?php echo wp_json_encode(
-          '<img class="footer-logo" src="' . $logo . '" alt="Tu Exhibidor" width="40" height="40" loading="lazy">'
-          . te_social_links_html( 'social-links', 'social-link', 20 )
-          . '<p class="footer-catalog"><a class="footer-catalog-btn" href="' . $pdf . '" target="_blank" rel="noopener">Catálogo completo (PDF)</a></p>'
-          . '<p>Comercializadora Tu Exhibidor SPA · RUT 77.036.189-3</p>'
-          . '<p><a href="mailto:info@tuexhibidor.cl">info@tuexhibidor.cl</a> · WhatsApp +56 9 3749 0214 / +56 9 9132 7813</p>'
-          . '<p class="footer-credit">Desarrollado por <a href="https://tecnotix.cl" target="_blank" rel="noopener noreferrer">Tecnotix Solutions</a></p>'
-      ); ?>;
-      f.appendChild(box);
-    });
-    </script>
     <?php
+}
+
+function te_render_premium_footer_markup(): void {
+	$logo = esc_url( home_url( '/public/images/brand/logo-tuexhibidor-gold-96.webp' ) );
+	$pdf  = esc_url( home_url( '/wp-content/uploads/2026/07/catalogo_tuexhibidor.pdf' ) );
+	echo '<div class="te-premium-footer">';
+	echo '<img class="footer-logo" src="' . $logo . '" alt="Tu Exhibidor" width="40" height="40" loading="lazy">';
+	echo te_social_links_html( 'social-links', 'social-link', 20 );
+	echo '<p class="footer-catalog"><a class="footer-catalog-btn" href="' . $pdf . '" target="_blank" rel="noopener">Catálogo completo (PDF)</a></p>';
+	echo '<p>Comercializadora Tu Exhibidor SPA · RUT 77.036.189-3</p>';
+	echo '<p><a href="mailto:info@tuexhibidor.cl">info@tuexhibidor.cl</a> · WhatsApp +56 9 3749 0214 / +56 9 9132 7813</p>';
+	echo '<p class="footer-credit">Desarrollado por <a href="https://tecnotix.cl" target="_blank" rel="noopener noreferrer">Tecnotix Solutions</a></p>';
+	echo '</div>';
 }
 /* == fin TE-FOOTER-CONTACT == */
 
@@ -1482,23 +1688,38 @@ add_filter('the_content','te_quita_iva',20);
 function te_quita_iva($c){ return str_ireplace(array('Precio incluye IVA.','Precio incluye IVA'), '', $c); }
 
 
-/* == TE-FOOTER-DEMO: eliminar widgets demo Aurum (Suiza/Europa/Américas) == */
-add_action('widgets_init', function(){
-	unregister_sidebar('footer_sidebar_left');
-	unregister_sidebar('footer_sidebar_right');
-}, 20);
-add_action('wp_footer', function(){
+/* == TE-FOOTER-DEMO: footer limpio sin widgets demo Aurum == */
+add_action( 'widgets_init', function () {
+	unregister_sidebar( 'footer_sidebar_left' );
+	unregister_sidebar( 'footer_sidebar_right' );
+}, 20 );
+
+add_filter( 'sidebars_widgets', 'te_strip_footer_demo_widgets', 20 );
+function te_strip_footer_demo_widgets( $sidebars ) {
+	if ( ! is_array( $sidebars ) ) {
+		return $sidebars;
+	}
+	foreach ( $sidebars as $id => $widgets ) {
+		if ( ! is_array( $widgets ) ) {
+			continue;
+		}
+		if ( preg_match( '/footer/i', (string) $id ) ) {
+			$sidebars[ $id ] = array();
+		}
+	}
+	return $sidebars;
+}
+
+add_action( 'wp_head', 'te_strip_demo_footer_assets', 10002 );
+function te_strip_demo_footer_assets() {
+	echo '<style id="te-footer-clean">footer.site-footer{background-image:none!important;background-position:initial!important;}</style>';
+}
+
+add_action( 'wp_footer', 'te_pagination_spanish_labels', 5 );
+function te_pagination_spanish_labels() {
 	?>
 	<script>
 	document.addEventListener('DOMContentLoaded', function(){
-		var footerContainer = document.querySelector('.site-footer > .container');
-		if (footerContainer) footerContainer.remove();
-		document.querySelectorAll('.site-footer .widget, .site-footer .col, .site-footer .footer-widgets').forEach(function(el){
-			var t = (el.textContent || '');
-			if (/Switzerland|Europe|Americas|Zurich|Moscow|New York|Basel|Bern|Geneva|London|Paris|Monte Carlo|Buenos Aires/i.test(t)) {
-				el.remove();
-			}
-		});
 		document.querySelectorAll('.woocommerce-pagination a, .page-numbers a').forEach(function(a){
 			if (a.textContent.trim() === 'Next »' || a.textContent.trim() === 'Next') a.textContent = 'Siguiente »';
 			if (a.textContent.trim() === '« Previous' || a.textContent.trim() === 'Previous') a.textContent = '« Anterior';
@@ -1506,7 +1727,7 @@ add_action('wp_footer', function(){
 	});
 	</script>
 	<?php
-}, 5);
+}
 /* == fin TE-FOOTER-DEMO == */
 
 
@@ -1752,49 +1973,7 @@ function te_unified_premium_skin() {
 		opacity:0 !important;
 		visibility:hidden !important;
 	}
-	li.shop-item .item-image,
-	li.product .item-image,
-	li.product .product-item-image{
-		position:relative !important;
-		aspect-ratio:1/1 !important;
-		background:var(--img-well) !important;
-		overflow:hidden !important;
-		flex-shrink:0 !important;
-	}
-	li.shop-item .item-image .image-placeholder:not(.shop-image),
-	li.product .item-image .image-placeholder{
-		padding-bottom:0 !important;
-		height:100% !important;
-		width:100% !important;
-		position:relative !important;
-		display:flex !important;
-		align-items:center !important;
-		justify-content:center !important;
-		opacity:1 !important;
-		visibility:visible !important;
-	}
-	li.shop-item:hover .item-image .image-placeholder:not(.shop-image),
-	li.product:hover .item-image .image-placeholder{
-		opacity:1 !important;
-		visibility:visible !important;
-	}
-	li.shop-item .bounce-loader,
-	li.product .bounce-loader{ display:none !important; }
-	li.product a img, li.shop-item a img,
-	.woocommerce ul.products li.product img{
-		background:var(--img-well) !important;
-		object-fit:contain !important;
-		padding:12px !important;
-		box-sizing:border-box !important;
-		border-radius:0 !important;
-		position:static !important;
-		width:100% !important;
-		height:100% !important;
-		max-width:100% !important;
-		opacity:1 !important;
-		visibility:visible !important;
-		transform:none !important;
-	}
+	/* Pozos de imagen en loops: ver te_product_loop_image_css (prioridad 10006) */
 	li.product .price, li.shop-item .price{ display:none !important; }
 	.woocommerce-pagination,
 	.woocommerce nav.woocommerce-pagination{
@@ -1929,8 +2108,6 @@ function te_unified_premium_skin() {
 	}
 	.top-menu--dark .container,
 	.top-menu--light .container{ padding-top:6px; padding-bottom:6px; }
-	.top-menu--dark a[href*="vimeo"],
-	.top-menu--dark a[title="Vimeo"]{ display:none !important; }
 	.page-container, .container.main-container{ max-width:1180px; }
 	li.product .product-item-image,
 	li.product .thumb,
@@ -2183,12 +2360,158 @@ add_filter( 'woocommerce_output_related_products_args', function ( $args ) {
 	return $args;
 } );
 
-add_action( 'wp_head', 'te_single_product_layout_css', 10001 );
+/**
+ * Ocultar productos agotados en carruseles/listas de productos (relacionados, upsells, cross-sells).
+ */
+function te_filter_in_stock_product_ids( array $ids ): array {
+	return array_values( array_filter( $ids, static function ( $id ) {
+		$product = wc_get_product( $id );
+		return $product && $product->is_in_stock();
+	} ) );
+}
+
+add_filter( 'woocommerce_related_products', 'te_filter_in_stock_product_ids', 20 );
+add_filter( 'woocommerce_upsell_ids', 'te_filter_in_stock_product_ids', 20 );
+add_filter( 'woocommerce_cross_sell_ids', 'te_filter_in_stock_product_ids', 20 );
+
+add_filter( 'woocommerce_shortcode_products_query', function ( $query_args ) {
+	$query_args['meta_query']   = $query_args['meta_query'] ?? array();
+	$query_args['meta_query'][] = te_in_stock_meta_clause();
+	return $query_args;
+}, 20 );
+
+/**
+ * Ocultar agotados en tienda, categorías, etiquetas y búsqueda de productos.
+ */
+function te_in_stock_meta_clause(): array {
+	return array(
+		'key'     => '_stock_status',
+		'value'   => 'instock',
+		'compare' => '=',
+	);
+}
+
+add_filter( 'woocommerce_product_query_meta_query', function ( $meta_query ) {
+	if ( ! is_array( $meta_query ) ) {
+		$meta_query = array();
+	}
+	$meta_query[] = te_in_stock_meta_clause();
+	return $meta_query;
+}, 20 );
+
+add_filter( 'pre_option_woocommerce_hide_out_of_stock_items', static function () {
+	return 'yes';
+} );
+
+/**
+ * Ocultar agotados en cualquier consulta de productos (búsqueda, widgets, etc.).
+ */
+add_action( 'pre_get_posts', 'te_hide_out_of_stock_products_query', 25 );
+function te_hide_out_of_stock_products_query( $query ) {
+	if ( is_admin() || ! $query instanceof WP_Query || ! $query->is_main_query() ) {
+		return;
+	}
+
+	$is_product_context = $query->is_search()
+		|| $query->is_post_type_archive( 'product' )
+		|| $query->is_tax( get_object_taxonomies( 'product' ) );
+
+	if ( ! $is_product_context ) {
+		return;
+	}
+
+	if ( $query->is_search() ) {
+		$post_type = $query->get( 'post_type' );
+		if ( $post_type && 'product' !== $post_type ) {
+			return;
+		}
+		if ( ! $post_type ) {
+			$query->set( 'post_type', 'product' );
+		}
+	}
+
+	$meta_query = $query->get( 'meta_query' );
+	if ( ! is_array( $meta_query ) ) {
+		$meta_query = array();
+	}
+	$meta_query[] = te_in_stock_meta_clause();
+	$query->set( 'meta_query', $meta_query );
+}
+
+add_filter( 'woocommerce_product_is_visible', 'te_hide_out_of_stock_product_visibility', 20, 2 );
+function te_hide_out_of_stock_product_visibility( $visible, $product_id ) {
+	if ( ! $visible ) {
+		return false;
+	}
+	$product = wc_get_product( $product_id );
+	return $product && $product->is_in_stock();
+}
+
+add_filter( 'woocommerce_products_widget_query_args', 'te_hide_out_of_stock_widget_args', 20 );
+add_filter( 'woocommerce_recent_products_widget_query_args', 'te_hide_out_of_stock_widget_args', 20 );
+add_filter( 'woocommerce_top_rated_products_widget_query_args', 'te_hide_out_of_stock_widget_args', 20 );
+function te_hide_out_of_stock_widget_args( $args ) {
+	$args['meta_query']   = $args['meta_query'] ?? array();
+	$args['meta_query'][] = te_in_stock_meta_clause();
+	return $args;
+}
+
+add_filter( 'woocommerce_rest_product_object_query', 'te_hide_out_of_stock_rest_query', 20 );
+function te_hide_out_of_stock_rest_query( $args ) {
+	$args['meta_query']   = $args['meta_query'] ?? array();
+	$args['meta_query'][] = te_in_stock_meta_clause();
+	return $args;
+}
+
+add_action( 'template_redirect', 'te_redirect_out_of_stock_product', 15 );
+function te_redirect_out_of_stock_product() {
+	if ( ! function_exists( 'is_product' ) || ! is_product() ) {
+		return;
+	}
+
+	$product = wc_get_product( get_queried_object_id() );
+	if ( $product && ! $product->is_in_stock() ) {
+		$shop = function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 'shop' ) : '';
+		wp_safe_redirect( $shop ? $shop : home_url( '/shop/' ), 302 );
+		exit;
+	}
+}
+
+add_action( 'wp_head', 'te_single_product_layout_css', 10050 );
 function te_single_product_layout_css() {
 	if ( ! function_exists( 'is_product' ) || ! is_product() ) {
 		return;
 	}
-	echo '<style>
+	echo '<style id="te-single-product-layout">
+	/* Aurum float 50/50 layout overrides — must beat .woocommerce div.single-product--product-details>.product .summary */
+	.woocommerce div.single-product{
+		display:block !important;
+		margin-left:0 !important;
+		margin-right:0 !important;
+		min-width:0 !important;
+	}
+	.woocommerce div.single-product--product-details{
+		width:100% !important;
+		max-width:100% !important;
+		padding-left:0 !important;
+		padding-right:0 !important;
+	}
+	.woocommerce div.single-product--product-details > .product{
+		margin-left:0 !important;
+		margin-right:0 !important;
+	}
+	.woocommerce div.single-product--product-details > .product > div,
+	.woocommerce div.single-product--product-details > .product > section,
+	.woocommerce div.single-product--product-details > .product .product-images-container,
+	.woocommerce div.single-product--product-details > .product .summary{
+		float:none !important;
+		width:100% !important;
+		max-width:100% !important;
+		padding-left:0 !important;
+		padding-right:0 !important;
+		margin-left:0 !important;
+		margin-right:0 !important;
+	}
 	.single-product .woocommerce-breadcrumb.te-breadcrumb{
 		max-width:1140px;
 		margin:0 auto 8px;
@@ -2198,14 +2521,17 @@ function te_single_product_layout_css() {
 	.single-product div.product{
 		display:grid !important;
 		grid-template-columns:minmax(0, 1fr) minmax(0, 1fr) !important;
-		grid-template-areas:"gallery summary" "related related" !important;
+		grid-template-areas:"gallery side" "related related" !important;
+		grid-template-rows:auto auto !important;
 		gap:20px 24px !important;
-		max-width:1140px !important;
+		max-width:1180px !important;
 		margin:0 auto 24px !important;
-		padding:0 20px !important;
+		padding:0 16px !important;
 		align-items:start !important;
+		align-content:start !important;
 		float:none !important;
 		width:100% !important;
+		box-sizing:border-box !important;
 	}
 	.single-product div.product::after{ display:none !important; }
 	.single-product div.product > div.images,
@@ -2217,16 +2543,53 @@ function te_single_product_layout_css() {
 		min-width:0 !important;
 		max-width:100% !important;
 		overflow:hidden !important;
+		align-self:start !important;
+		height:auto !important;
+		max-height:none !important;
+	}
+	.single-product div.product > .te-product-side{
+		grid-area:side !important;
+		display:flex !important;
+		flex-direction:column !important;
+		gap:20px !important;
+		align-self:start !important;
+		justify-self:stretch !important;
+		width:100% !important;
+		min-width:0 !important;
+		max-width:100% !important;
+		height:auto !important;
+		min-height:0 !important;
+	}
+	.single-product div.product > .te-product-side > .summary.entry-summary,
+	.single-product div.product > .te-product-side > div.summary{
+		grid-area:unset !important;
+		width:100% !important;
+		flex:0 0 auto !important;
+	}
+	.single-product div.product > .te-product-side > .tabs,
+	.single-product div.product > .te-product-side > .woocommerce-tabs{
+		grid-area:unset !important;
+		grid-column:unset !important;
+		grid-row:unset !important;
+		width:100% !important;
+		flex:0 0 auto !important;
+		margin:0 !important;
 	}
 	.single-product div.product > .summary.entry-summary,
 	.single-product div.product > div.summary{
 		grid-area:summary !important;
+		align-self:start !important;
+		justify-self:stretch !important;
+		height:auto !important;
+		min-height:0 !important;
+		max-height:none !important;
+		flex:none !important;
 		width:100% !important;
 		float:none !important;
 		margin:0 !important;
 		min-width:0 !important;
 		max-width:100% !important;
-		overflow:hidden !important;
+		overflow:visible !important;
 	}
 	.single-product div.product > .related.products{
 		grid-area:related !important;
@@ -2245,76 +2608,194 @@ function te_single_product_layout_css() {
 		max-width:100% !important;
 		overflow:hidden !important;
 	}
-	.single-product .product-images-container,
-	.single-product .product-images-container.thumbnails-vertical{
-		display:flex !important;
-		flex-direction:column !important;
-		align-items:stretch !important;
-		gap:12px !important;
-		width:100% !important;
-		max-width:100% !important;
-		background:var(--img-well,#ddd3c8) !important;
-		border-radius:16px !important;
-		padding:16px !important;
-		border:1px solid rgba(184,147,95,.15) !important;
+	.woocommerce div.single-product--product-details > .product > .summary.entry-summary,
+	.single-product div.product div.summary{
+		align-self:start !important;
+		height:auto !important;
+		min-height:0 !important;
+		max-height:none !important;
+		flex:none !important;
+		flex-grow:0 !important;
 	}
+	/* Force stacked gallery (main + horizontal thumbs). Beat Aurum vertical side-rail. */
+	.woocommerce .product-images-container.thumbnails-vertical .product-images,
+	.single-product .product-images-container,
+	.single-product .product-images-container.thumbnails-vertical,
 	.single-product .product-images-container .product-images,
 	.single-product .product-images-container.thumbnails-vertical .product-images{
 		display:flex !important;
 		flex-direction:column !important;
 		align-items:stretch !important;
-		width:100% !important;
-		max-width:100% !important;
 		gap:12px !important;
-	}
-	.single-product .product-images-container .product-images--main,
-	.single-product .product-images-container.thumbnails-vertical .product-images--main{
-		order:1 !important;
 		width:100% !important;
 		max-width:100% !important;
 		min-width:0 !important;
-		flex:1 1 auto !important;
-		align-self:stretch !important;
 	}
+	.single-product .product-images-container,
+	.single-product .product-images-container.thumbnails-vertical{
+		background:var(--img-well,#ddd3c8) !important;
+		border-radius:16px !important;
+		padding:16px !important;
+		border:1px solid rgba(184,147,95,.15) !important;
+		box-sizing:border-box !important;
+	}
+	.woocommerce .product-images-container.thumbnails-vertical .product-images .product-images--main,
+	.single-product .product-images-container .product-images--main,
+	.single-product .product-images-container.thumbnails-vertical .product-images--main,
 	.single-product .product-images--main{
-		flex:1 1 auto !important;
-		min-width:0 !important;
-		width:100% !important;
 		order:1 !important;
-	}
-	.single-product .product-images--main .woocommerce-product-gallery__image{
-		display:none !important;
-	}
-	.single-product .product-images--main .woocommerce-product-gallery__image:first-child,
-	.single-product .product-images--main .woocommerce-product-gallery__image.slick-active{
-		display:block !important;
-	}
-	.single-product .product-images--thumbnails,
-	.single-product .product-images--thumbnails.thumbnails-vertical{
 		flex:0 0 auto !important;
 		width:100% !important;
 		max-width:100% !important;
+		min-width:0 !important;
+		align-self:stretch !important;
+		aspect-ratio:auto !important;
+		min-height:0 !important;
+		max-height:none !important;
+		height:auto !important;
+		display:block !important;
+		align-items:unset !important;
+		justify-content:unset !important;
+		overflow:visible !important;
+		position:relative !important;
+		background:var(--img-well,#ddd3c8) !important;
+		border-radius:12px !important;
+		padding:8px !important;
+		box-sizing:border-box !important;
+	}
+	.single-product .product-images--main .woocommerce-product-gallery,
+	.single-product .product-images--main .slick-slider,
+	.single-product .product-images--main .slick-list,
+	.single-product .product-images--main .slick-track,
+	.single-product .product-images--main .woocommerce-product-gallery__wrapper{
+		width:100% !important;
+		max-width:100% !important;
+		height:auto !important;
+		min-height:0 !important;
+		max-height:none !important;
+	}
+	.single-product .product-images--main .slick-track{
+		transform:none !important;
+		display:block !important;
+		align-items:unset !important;
+		justify-content:unset !important;
+	}
+	.single-product .product-images--main .slick-slide{
+		width:100% !important;
+		height:auto !important;
+		float:none !important;
+	}
+	.single-product .product-images--main .woocommerce-product-gallery__image{
+		display:none !important;
+		width:100% !important;
+		height:auto !important;
+		margin:0 !important;
+	}
+	.single-product .product-images--main .woocommerce-product-gallery__image:first-child,
+	.single-product .product-images--main .woocommerce-product-gallery__image.slick-active,
+	.single-product .product-images--main .woocommerce-product-gallery__image.slick-current{
+		display:block !important;
+	}
+	/* Kill Aurum/Customizer padding-bottom crop wells + object-fit:cover. */
+	.single-product .product-images--main .woocommerce-product-gallery__image .image-placeholder,
+	.single-product .product-images--main .image-placeholder,
+	.single-product .product-images--main .image-placeholder[style],
+	.product-images--main .woocommerce-product-gallery__image .image-placeholder,
+	.product-images--main .image-placeholder{
+		padding:0 !important;
+		padding-bottom:0 !important;
+		height:auto !important;
+		max-height:none !important;
+		width:100% !important;
+		min-height:0 !important;
+		display:block !important;
+		align-items:unset !important;
+		justify-content:unset !important;
+		position:relative !important;
+		overflow:visible !important;
+		background:transparent !important;
+	}
+	.single-product .product-images--main .image-placeholder > a,
+	.single-product .product-images--main .woocommerce-product-gallery__image > a{
+		display:block !important;
+		width:100% !important;
+		height:auto !important;
+		position:relative !important;
+		text-align:center !important;
+	}
+	.woocommerce .product-images-container.thumbnails-vertical .product-images .product-images--thumbnails,
+	.single-product .product-images--thumbnails,
+	.single-product .product-images--thumbnails.thumbnails-vertical,
+	.single-product .product-images--thumbnails.slick-vertical,
+	.product-images--thumbnails.slick-vertical{
 		order:2 !important;
+		flex:0 0 auto !important;
+		width:100% !important;
+		max-width:100% !important;
+		min-width:0 !important;
+		height:auto !important;
+		max-height:110px !important;
+		min-height:0 !important;
+		margin:0 !important;
+		padding:0 !important;
 		display:flex !important;
 		flex-direction:row !important;
 		flex-wrap:wrap !important;
+		align-items:flex-start !important;
+		align-content:flex-start !important;
 		justify-content:flex-start !important;
 		gap:8px !important;
 		position:static !important;
+		float:none !important;
+		overflow:hidden !important;
+	}
+	.single-product .product-images-container,
+	.single-product .product-images,
+	.single-product .product-images-container.thumbnails-vertical{
+		height:auto !important;
+		min-height:0 !important;
+		align-self:start !important;
 	}
 	.single-product .product-images--thumbnails .slick-list,
-	.single-product .product-images--thumbnails .slick-track{
+	.single-product .product-images--thumbnails .slick-track,
+	.product-images--thumbnails.slick-vertical .slick-list,
+	.product-images--thumbnails.slick-vertical .slick-track{
 		transform:none !important;
-		width:100% !important;
+		width:auto !important;
+		max-width:100% !important;
 		height:auto !important;
+		min-height:0 !important;
+		max-height:none !important;
 		display:flex !important;
+		flex-direction:row !important;
 		flex-wrap:wrap !important;
+		align-items:flex-start !important;
 		gap:8px !important;
 	}
-	.single-product .product-images--thumbnails .slick-slide{
-		width:72px !important;
-		height:auto !important;
+	.single-product .product-images--thumbnails .slick-slide,
+	.product-images--thumbnails.slick-vertical .slick-slide,
+	.single-product .product-images--thumbnails .woocommerce-product-gallery__image{
+		width:88px !important;
+		min-width:88px !important;
+		max-width:88px !important;
+		height:88px !important;
 		float:none !important;
+		padding:0 !important;
+		margin:0 !important;
+		box-sizing:border-box !important;
+		overflow:hidden !important;
+		border-radius:8px !important;
+		background:rgba(255,255,255,.35) !important;
+	}
+	.single-product .product-images--thumbnails .image-placeholder,
+	.single-product .product-images--thumbnails .image-placeholder[style]{
+		padding:0 !important;
+		padding-bottom:0 !important;
+		width:100% !important;
+		height:100% !important;
+		position:relative !important;
+		display:block !important;
+		overflow:hidden !important;
 	}
 	.single-product .product-images-container .slick-arrow{ display:none !important; }
 	.single-product .image-placeholder{
@@ -2323,17 +2804,41 @@ function te_single_product_layout_css() {
 		position:relative !important;
 		display:block !important;
 	}
+	/* Beat theme-custom-css cover rules: absolute fill + object-fit:cover. */
+	.single-product .product-images--main .image-placeholder img,
+	.product-images--main .image-placeholder img,
 	.single-product .woocommerce-product-gallery__image img,
-	.single-product div.product div.images img{
+	.single-product div.product div.images img,
+	.single-product .product-images--main img{
 		position:static !important;
-		max-height:380px !important;
-		width:100% !important;
+		top:auto !important;
+		left:auto !important;
+		right:auto !important;
+		bottom:auto !important;
+		max-height:min(560px, 70vh) !important;
+		max-width:100% !important;
+		width:auto !important;
 		height:auto !important;
 		margin:0 auto !important;
+		padding:8px !important;
+		box-sizing:border-box !important;
 		display:block !important;
+		aspect-ratio:unset !important;
 		object-fit:contain !important;
+		object-position:center center !important;
 		opacity:1 !important;
 		visibility:visible !important;
+	}
+	.single-product .product-images--thumbnails img{
+		position:static !important;
+		width:100% !important;
+		height:100% !important;
+		max-width:100% !important;
+		max-height:100% !important;
+		padding:4px !important;
+		box-sizing:border-box !important;
+		object-fit:contain !important;
+		object-position:center center !important;
 	}
 	.single-product div.summary{
 		background:var(--surface,#ddd3c8) !important;
@@ -2423,15 +2928,6 @@ function te_single_product_layout_css() {
 		box-shadow:0 4px 18px rgba(43,41,38,.06) !important;
 		overflow:hidden !important;
 	}
-	.related.products .shop-item .item-image,
-	.related.products li.product .item-image,
-	.related.products li.product .product-item-image{
-		width:100% !important;
-		aspect-ratio:1/1 !important;
-		background:var(--img-well,#ddd3c8) !important;
-		overflow:hidden !important;
-		flex-shrink:0 !important;
-	}
 	.related.products .shop-item .item-info,
 	.related.products li.product .product-item-details,
 	.related.products li.product .item-info{
@@ -2471,32 +2967,11 @@ function te_single_product_layout_css() {
 		opacity:0 !important;
 		visibility:hidden !important;
 	}
-	.related.products .shop-item .image-placeholder,
-	.related.products li.product .image-placeholder{
-		padding-bottom:0 !important;
-		height:100% !important;
-		width:100% !important;
-		position:relative !important;
-		display:flex !important;
-		align-items:center !important;
-		justify-content:center !important;
-	}
-	.related.products .shop-item .image-placeholder img,
-	.related.products li.product img{
-		position:static !important;
-		width:100% !important;
-		height:100% !important;
-		max-height:none !important;
-		aspect-ratio:1/1 !important;
-		object-fit:contain !important;
-		padding:10px !important;
-		box-sizing:border-box !important;
-		background:var(--img-well,#ddd3c8) !important;
-	}
 	@media (max-width: 960px){
 		.single-product div.product{
 			grid-template-columns:1fr !important;
-			grid-template-areas:"gallery" "summary" "related" !important;
+			grid-template-areas:"gallery" "side" "related" !important;
+			grid-template-rows:auto auto auto !important;
 			gap:20px !important;
 			padding:0 16px !important;
 		}
@@ -2513,6 +2988,120 @@ function te_single_product_layout_css() {
 		.related.products ul.products{
 			grid-template-columns:1fr !important;
 		}
+	}
+	</style>';
+}
+
+/**
+ * Una sola fuente de verdad: pozo cuadrado 1:1 + object-fit contain en TODOS los loops de producto.
+ * Shop, categorías, búsqueda, relacionados, up-sells, cross-sells — incluye sets-vitrina y dijes-charms.
+ */
+add_action( 'wp_head', 'te_product_loop_image_css', 10006 );
+function te_product_loop_image_css() {
+	if ( ! function_exists( 'is_woocommerce' ) ) {
+		return;
+	}
+	echo '<style id="te-product-loop-images">
+	.woocommerce ul.products li.shop-item .item-image,
+	.woocommerce ul.products li.product .item-image,
+	.woocommerce ul.products li.product .product-item-image,
+	.woocommerce ul.products li.product .thumb,
+	.related.products li.shop-item .item-image,
+	.related.products li.product .item-image,
+	.related.products li.product .product-item-image,
+	.up-sells li.shop-item .item-image,
+	.up-sells li.product .item-image,
+	.cross-sells li.shop-item .item-image,
+	.cross-sells li.product .item-image{
+		position:relative !important;
+		width:100% !important;
+		aspect-ratio:1/1 !important;
+		background:var(--img-well,#ddd3c8) !important;
+		overflow:hidden !important;
+		flex-shrink:0 !important;
+	}
+	.woocommerce ul.products .image-placeholder:not(.shop-image),
+	.related.products ul.products .image-placeholder:not(.shop-image),
+	.related.products ul.products li.shop-item .item-image .image-placeholder:not(.shop-image),
+	.related.products ul.products li.product .item-image .image-placeholder:not(.shop-image),
+	.up-sells .image-placeholder:not(.shop-image),
+	.cross-sells .image-placeholder:not(.shop-image){
+		padding:0 !important;
+		padding-bottom:0 !important;
+		margin:0 !important;
+		height:100% !important;
+		width:100% !important;
+		min-height:0 !important;
+		position:absolute !important;
+		inset:0 !important;
+		display:block !important;
+		opacity:1 !important;
+		visibility:visible !important;
+	}
+	.woocommerce ul.products .image-placeholder[style],
+	.related.products ul.products .image-placeholder[style],
+	.related.products ul.products li.shop-item .item-image .image-placeholder[style],
+	.related.products ul.products li.product .item-image .image-placeholder[style],
+	.up-sells .image-placeholder[style],
+	.cross-sells .image-placeholder[style]{
+		padding-bottom:0 !important;
+	}
+	.woocommerce ul.products .item-image > a,
+	.woocommerce ul.products .image-placeholder > a,
+	.related.products .item-image > a,
+	.related.products .image-placeholder > a,
+	.up-sells .item-image > a,
+	.cross-sells .item-image > a{
+		display:block !important;
+		position:absolute !important;
+		inset:0 !important;
+		width:100% !important;
+		height:100% !important;
+	}
+	.woocommerce ul.products li.shop-item .item-image img,
+	.woocommerce ul.products li.product .item-image img,
+	.woocommerce ul.products li.product a img,
+	.related.products ul.products li.shop-item .item-image img,
+	.related.products ul.products li.product .item-image img,
+	.related.products ul.products li.shop-item a img,
+	.related.products ul.products li.product a img,
+	.related.products li.shop-item .item-image img,
+	.related.products li.product .item-image img,
+	.related.products li.product a img,
+	.up-sells li.product img,
+	.cross-sells li.product img{
+		position:absolute !important;
+		top:0 !important;
+		left:0 !important;
+		right:0 !important;
+		bottom:0 !important;
+		width:100% !important;
+		height:100% !important;
+		max-width:100% !important;
+		max-height:100% !important;
+		margin:0 !important;
+		padding:10px !important;
+		box-sizing:border-box !important;
+		object-fit:contain !important;
+		object-position:center !important;
+		background:var(--img-well,#ddd3c8) !important;
+		border-radius:0 !important;
+		aspect-ratio:unset !important;
+		opacity:1 !important;
+		visibility:visible !important;
+		transform:none !important;
+	}
+	.woocommerce ul.products .shop-image,
+	.related.products .shop-image,
+	.up-sells .shop-image,
+	.cross-sells .shop-image{
+		display:none !important;
+		opacity:0 !important;
+		visibility:hidden !important;
+	}
+	.woocommerce ul.products .bounce-loader,
+	.related.products .bounce-loader{
+		display:none !important;
 	}
 	</style>';
 }
@@ -2735,8 +3324,10 @@ function te_shop_ui_polish() {
 		.single-product .product-images--main .slick-slide.slick-current,
 		.single-product .product-images--main .slick-slide.slick-active,
 		.single-product .product-images--main .slick-slide:first-child{
-			display:block !important;
-			height:auto !important;
+			display:flex !important;
+			align-items:center !important;
+			justify-content:center !important;
+			height:100% !important;
 		}
 		.single-product .product-images--main .woocommerce-product-gallery__image{
 			display:none !important;
@@ -2752,27 +3343,47 @@ function te_shop_ui_polish() {
 		.single-product .product-images--main .woocommerce-product-gallery__image:first-child,
 		.single-product .product-images--main .woocommerce-product-gallery__image.slick-current,
 		.single-product .product-images--main .woocommerce-product-gallery__image.slick-active{
-			display:block !important;
-			height:auto !important;
+			display:flex !important;
+			align-items:center !important;
+			justify-content:center !important;
+			height:100% !important;
 			opacity:1 !important;
 			visibility:visible !important;
 			pointer-events:auto !important;
 		}
+		.single-product .product-images--main .image-placeholder,
+		.single-product .product-images--main .image-placeholder[style]{
+			padding-bottom:0 !important;
+			height:100% !important;
+			width:100% !important;
+		}
+		.single-product .product-images--main img{
+			object-fit:contain !important;
+			position:static !important;
+			width:auto !important;
+			height:auto !important;
+			max-width:100% !important;
+			max-height:100% !important;
+		}
 		.single-product .product-images--thumbnails,
-		.single-product .product-images--thumbnails.thumbnails-vertical{
+		.single-product .product-images--thumbnails.thumbnails-vertical,
+		.single-product .product-images--thumbnails.slick-vertical{
 			display:flex !important;
 			flex-direction:row !important;
 			flex-wrap:nowrap !important;
 			overflow-x:auto !important;
 			gap:8px !important;
 			max-height:88px !important;
+			height:auto !important;
 			width:100% !important;
 			position:static !important;
 		}
-		.single-product .product-images--thumbnails .woocommerce-product-gallery__image{
+		.single-product .product-images--thumbnails .woocommerce-product-gallery__image,
+		.single-product .product-images--thumbnails .slick-slide{
 			flex:0 0 64px !important;
 			width:64px !important;
 			min-width:64px !important;
+			max-width:64px !important;
 			height:64px !important;
 			display:block !important;
 			opacity:1 !important;
@@ -2805,6 +3416,30 @@ function te_shop_ui_polish() {
 	</style>';
 }
 
+add_action( 'wp_footer', 'te_wrap_product_side_column', 44 );
+function te_wrap_product_side_column() {
+	if ( ! function_exists( 'is_product' ) || ! is_product() ) {
+		return;
+	}
+	echo '<script>
+	(function(){
+		function wrapSide(){
+			var product = document.querySelector(".single-product div.product");
+			if(!product || product.querySelector(".te-product-side")) return;
+			var summary = product.querySelector(":scope > .summary.entry-summary, :scope > div.summary");
+			var tabs = product.querySelector(":scope > .tabs, :scope > .woocommerce-tabs");
+			if(!summary) return;
+			var side = document.createElement("div");
+			side.className = "te-product-side";
+			summary.parentNode.insertBefore(side, summary);
+			side.appendChild(summary);
+			if(tabs) side.appendChild(tabs);
+		}
+		document.addEventListener("DOMContentLoaded", wrapSide);
+	})();
+	</script>';
+}
+
 add_action( 'wp_footer', 'te_fix_mobile_product_gallery', 45 );
 function te_fix_mobile_product_gallery() {
 	if ( ! function_exists( 'is_product' ) || ! is_product() ) {
@@ -2812,30 +3447,162 @@ function te_fix_mobile_product_gallery() {
 	}
 	echo '<script>
 	(function(){
-		function fixMobileGallery(){
-			if(window.innerWidth > 768) return;
-			var product = document.querySelector(".single-product div.product");
-			if(product){
-				product.style.display = "flex";
-				product.style.flexDirection = "column";
-				product.style.width = "100%";
-				product.style.maxWidth = "100%";
+		function upgradeThumbSrc(img){
+			if(!img) return;
+			var href = "";
+			var link = img.closest("a");
+			if(link) href = link.getAttribute("href") || "";
+			var candidates = [];
+			if(href) candidates.push(href);
+			var srcset = img.getAttribute("srcset") || "";
+			srcset.split(",").forEach(function(part){
+				var u = part.trim().split(" ")[0];
+				if(u) candidates.push(u);
+			});
+			var ds = img.getAttribute("data-src");
+			if(ds) candidates.push(ds);
+			var current = img.getAttribute("src") || "";
+			if(current) candidates.push(current);
+			var best = "";
+			candidates.forEach(function(u){
+				if(!u) return;
+				// Prefer full/scaled over hard-cropped 100x100 thumbs.
+				if(/-\d+x\d+\.(jpe?g|png|webp|gif)$/i.test(u) && /-\d{2,3}x\d{2,3}\./.test(u) && !/-\d{3,}x\d{3,}\./.test(u)){
+					return;
+				}
+				if(!best) best = u;
+				if(/-scaled\./i.test(u) || !/-\d+x\d+\./.test(u)) best = u;
+			});
+			if(!best && href) best = href;
+			if(best && best !== current){
+				img.setAttribute("src", best);
+				img.removeAttribute("srcset");
+				img.removeAttribute("sizes");
 			}
-			var images = document.querySelector(".single-product div.product div.images");
-			if(images){
-				images.style.width = "100%";
-				images.style.maxWidth = "100%";
-				images.style.minWidth = "0";
-				images.style.overflow = "hidden";
+		}
+		function normalizePlaceholders(root){
+			if(!root) return;
+			root.querySelectorAll(".image-placeholder").forEach(function(ph){
+				ph.style.paddingBottom = "0";
+				ph.style.height = "100%";
+				ph.style.position = "relative";
+				ph.style.overflow = "hidden";
+				ph.style.display = "flex";
+				ph.style.alignItems = "center";
+				ph.style.justifyContent = "center";
+			});
+			root.querySelectorAll("img").forEach(function(img){
+				if(img.closest(".product-images--thumbnails")){
+					upgradeThumbSrc(img);
+				}
+				img.style.position = "static";
+				img.style.objectFit = "contain";
+				img.style.objectPosition = "center center";
+				img.style.maxWidth = "100%";
+				if(img.closest(".product-images--thumbnails")){
+					img.style.maxHeight = "100%";
+					img.style.width = "100%";
+					img.style.height = "100%";
+				} else {
+					img.style.maxHeight = "min(560px, 70vh)";
+					img.style.width = "auto";
+					img.style.height = "auto";
+				}
+				img.style.opacity = "1";
+				img.style.visibility = "visible";
+				var ds = img.getAttribute("data-src");
+				if(ds && (!img.getAttribute("src") || String(img.getAttribute("src")).indexOf("data:") === 0)){
+					img.setAttribute("src", ds);
+				}
+				img.classList.remove("lazyload");
+			});
+		}
+		function fixThumbStrip(){
+			var thumbs = document.querySelector(".single-product .product-images--thumbnails");
+			if(!thumbs) return;
+			try{
+				if(window.jQuery && jQuery.fn && jQuery.fn.slick && jQuery(thumbs).hasClass("slick-initialized")){
+					jQuery(thumbs).slick("unslick");
+				}
+			}catch(err){}
+			thumbs.classList.remove("slick-initialized","slick-slider","slick-vertical","slick-dotted","slick-swipe-sample");
+			thumbs.querySelectorAll(".slick-cloned").forEach(function(el){ el.remove(); });
+			var track = thumbs.querySelector(".slick-track");
+			if(track){
+				while(track.firstChild){ thumbs.appendChild(track.firstChild); }
 			}
+			thumbs.querySelectorAll(".slick-list, .slick-track, .slick-arrow").forEach(function(el){ el.remove(); });
+			thumbs.style.setProperty("display", "flex", "important");
+			thumbs.style.setProperty("flex-direction", "row", "important");
+			thumbs.style.setProperty("flex-wrap", "wrap", "important");
+			thumbs.style.setProperty("align-items", "flex-start", "important");
+			thumbs.style.setProperty("justify-content", "flex-start", "important");
+			thumbs.style.setProperty("gap", "8px", "important");
+			thumbs.style.setProperty("width", "100%", "important");
+			thumbs.style.setProperty("max-width", "100%", "important");
+			thumbs.style.setProperty("min-width", "0", "important");
+			thumbs.style.setProperty("height", "auto", "important");
+			thumbs.style.setProperty("max-height", "110px", "important");
+			thumbs.style.setProperty("min-height", "0", "important");
+			thumbs.style.setProperty("margin", "0", "important");
+			thumbs.style.setProperty("padding", "0", "important");
+			thumbs.style.setProperty("float", "none", "important");
+			thumbs.style.setProperty("position", "static", "important");
+			thumbs.style.setProperty("overflow", "hidden", "important");
+			thumbs.querySelectorAll(".woocommerce-product-gallery__image").forEach(function(slide){
+				slide.classList.remove("slick-slide","slick-current","slick-active","slick-cloned");
+				slide.removeAttribute("data-slick-index");
+				slide.removeAttribute("aria-hidden");
+				slide.removeAttribute("tabindex");
+				slide.style.setProperty("flex", "0 0 88px", "important");
+				slide.style.setProperty("width", "88px", "important");
+				slide.style.setProperty("min-width", "88px", "important");
+				slide.style.setProperty("max-width", "88px", "important");
+				slide.style.setProperty("height", "88px", "important");
+				slide.style.setProperty("float", "none", "important");
+				slide.style.setProperty("padding", "0", "important");
+				slide.style.setProperty("margin", "0", "important");
+				slide.style.setProperty("display", "block", "important");
+				slide.style.setProperty("overflow", "hidden", "important");
+				slide.style.setProperty("border-radius", "8px", "important");
+			});
+			normalizePlaceholders(thumbs);
+			if(!thumbs.getAttribute("data-te-thumbs-bound")){
+				thumbs.setAttribute("data-te-thumbs-bound", "1");
+				thumbs.querySelectorAll("a").forEach(function(a, idx){
+					a.addEventListener("click", function(ev){
+						ev.preventDefault();
+						var main = document.querySelector(".single-product .product-images--main");
+						if(!main) return;
+						try{
+							if(window.jQuery && jQuery(main).hasClass("slick-initialized")){
+								jQuery(main).slick("slickGoTo", idx);
+								return;
+							}
+						}catch(err2){}
+						main.querySelectorAll(".woocommerce-product-gallery__image").forEach(function(s, i){
+							var show = i === idx;
+							s.style.display = show ? "flex" : "none";
+						});
+					});
+				});
+			}
+		}
+		function fixMainGallery(){
 			var main = document.querySelector(".single-product .product-images--main");
 			if(!main) return;
+			main.style.width = "100%";
+			main.style.maxWidth = "100%";
+			main.style.minWidth = "0";
+			main.style.overflow = "hidden";
 			[".slick-slider",".slick-list",".slick-track",".woocommerce-product-gallery__wrapper"].forEach(function(sel){
 				var el = main.querySelector(sel);
 				if(el){
 					el.style.width = "100%";
 					el.style.maxWidth = "100%";
 					el.style.minWidth = "0";
+					el.style.height = "auto";
+					el.style.maxHeight = "min(560px, 70vh)";
 				}
 			});
 			var track = main.querySelector(".slick-track");
@@ -2843,8 +3610,17 @@ function te_fix_mobile_product_gallery() {
 				track.style.transform = "translate3d(0,0,0)";
 				track.style.display = "block";
 				track.style.height = "auto";
+				track.style.width = "100%";
 			}
-			main.querySelectorAll(".slick-slide").forEach(function(slide, i){
+			var list = main.querySelector(".slick-list");
+			if(list){
+				list.style.height = "auto";
+				list.style.maxHeight = "min(560px, 70vh)";
+			}
+			main.style.removeProperty("height");
+			main.style.setProperty("height", "auto", "important");
+			main.style.setProperty("aspect-ratio", "auto", "important");
+			main.querySelectorAll(".slick-slide, .woocommerce-product-gallery__image").forEach(function(slide, i){
 				if(slide.classList.contains("slick-cloned")){
 					slide.style.display = "none";
 					slide.style.height = "0";
@@ -2852,17 +3628,57 @@ function te_fix_mobile_product_gallery() {
 				}
 				var show = slide.classList.contains("slick-current") || slide.classList.contains("slick-active") || i === 0;
 				slide.style.display = show ? "block" : "none";
-				slide.style.height = show ? "auto" : "0";
+				slide.style.height = "auto";
 				slide.style.width = "100%";
-				slide.style.overflow = show ? "visible" : "hidden";
+				slide.style.overflow = "visible";
+			});
+			normalizePlaceholders(main);
+		}
+		function fixProductGallery(){
+			var product = document.querySelector(".single-product div.product");
+			if(product && window.innerWidth <= 768){
+				product.style.display = "flex";
+				product.style.flexDirection = "column";
+				product.style.width = "100%";
+				product.style.maxWidth = "100%";
+			}
+			var images = document.querySelector(".single-product div.product div.images, .single-product .product-images-container");
+			if(images){
+				images.style.width = "100%";
+				images.style.maxWidth = "100%";
+				images.style.minWidth = "0";
+				images.style.overflow = "hidden";
+				images.style.display = "flex";
+				images.style.flexDirection = "column";
+			}
+			var wrap = document.querySelector(".single-product .product-images");
+			if(wrap){
+				wrap.style.display = "flex";
+				wrap.style.flexDirection = "column";
+				wrap.style.width = "100%";
+			}
+			fixMainGallery();
+			fixThumbStrip();
+		}
+		function boot(){
+			fixProductGallery();
+			setTimeout(fixProductGallery, 200);
+			setTimeout(fixProductGallery, 600);
+			setTimeout(fixProductGallery, 1400);
+			setTimeout(fixProductGallery, 2500);
+		}
+		if(document.readyState === "loading"){
+			document.addEventListener("DOMContentLoaded", boot);
+		} else {
+			boot();
+		}
+		window.addEventListener("load", function(){ setTimeout(fixProductGallery, 100); });
+		window.addEventListener("resize", fixProductGallery);
+		if(window.jQuery){
+			jQuery(document).on("init reInit setPosition afterChange", ".product-images--main, .product-images--thumbnails", function(){
+				setTimeout(fixProductGallery, 30);
 			});
 		}
-		document.addEventListener("DOMContentLoaded", function(){
-			fixMobileGallery();
-			setTimeout(fixMobileGallery, 400);
-			setTimeout(fixMobileGallery, 1200);
-		});
-		window.addEventListener("resize", fixMobileGallery);
 	})();
 	</script>';
 }
@@ -2885,6 +3701,81 @@ function te_fix_lazy_product_images() {
 		});
 	});
 	</script>';
+}
+
+add_filter( 'wp_get_attachment_image_attributes', 'te_wc_product_image_alt', 15, 3 );
+function te_wc_product_image_alt( $attr, $attachment, $size ) {
+	if ( ! function_exists( 'is_woocommerce' ) || ! ( is_woocommerce() || is_shop() || is_product_taxonomy() || is_product() ) ) {
+		return $attr;
+	}
+	if ( ! empty( $attr['alt'] ) ) {
+		return $attr;
+	}
+	$attachment_id = is_object( $attachment ) ? (int) $attachment->ID : (int) $attachment;
+	$alt           = trim( (string) get_post_meta( $attachment_id, '_wp_attachment_image_alt', true ) );
+	if ( $alt !== '' ) {
+		$attr['alt'] = $alt;
+		return $attr;
+	}
+	$product = null;
+	if ( isset( $GLOBALS['product'] ) && $GLOBALS['product'] instanceof WC_Product ) {
+		$product = $GLOBALS['product'];
+	} elseif ( is_product() ) {
+		$product = wc_get_product( get_the_ID() );
+	} else {
+		$parent_id = (int) wp_get_post_parent_id( $attachment_id );
+		if ( $parent_id && get_post_type( $parent_id ) === 'product' ) {
+			$product = wc_get_product( $parent_id );
+		}
+	}
+	if ( $product ) {
+		$attr['alt'] = te_product_image_alt_text( $product );
+	}
+	return $attr;
+}
+
+function te_product_image_alt_text( WC_Product $product ): string {
+	$image_id = (int) $product->get_image_id();
+	if ( $image_id ) {
+		$alt = trim( (string) get_post_meta( $image_id, '_wp_attachment_image_alt', true ) );
+		if ( $alt !== '' ) {
+			return $alt;
+		}
+	}
+	return wp_strip_all_tags( $product->get_name() );
+}
+
+add_filter( 'woocommerce_gallery_image_html_attachment_image_params', 'te_wc_gallery_image_alt', 10, 4 );
+function te_wc_gallery_image_alt( $params, $attachment_id, $image_size, $main_image ) {
+	if ( ! empty( $params['alt'] ) ) {
+		return $params;
+	}
+	$alt = trim( (string) get_post_meta( (int) $attachment_id, '_wp_attachment_image_alt', true ) );
+	if ( $alt === '' && isset( $GLOBALS['product'] ) && $GLOBALS['product'] instanceof WC_Product ) {
+		$alt = te_product_image_alt_text( $GLOBALS['product'] );
+	}
+	if ( $alt !== '' ) {
+		$params['alt'] = $alt;
+	}
+	return $params;
+}
+
+add_filter( 'woocommerce_product_get_image', 'te_wc_product_get_image_alt', 20, 6 );
+function te_wc_product_get_image_alt( $image, $product, $size, $attr, $placeholder, $image_attr ) {
+	if ( ! $image || ! $product instanceof WC_Product ) {
+		return $image;
+	}
+	$alt = te_product_image_alt_text( $product );
+	if ( $alt === '' ) {
+		return $image;
+	}
+	if ( preg_match( '/alt=(["\'])\s*\1/', $image ) ) {
+		return preg_replace( '/alt=(["\'])\s*\1/', 'alt="' . esc_attr( $alt ) . '"', $image, 1 );
+	}
+	if ( ! preg_match( '/alt=/', $image ) ) {
+		return preg_replace( '/<img\s/', '<img alt="' . esc_attr( $alt ) . '" ', $image, 1 );
+	}
+	return $image;
 }
 
 add_filter( 'wp_get_attachment_image_attributes', 'te_wc_image_no_lazy', 99 );

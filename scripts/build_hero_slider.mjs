@@ -1,11 +1,12 @@
 /**
- * Curación manual de 7 slides hero → public/images/hero/
- * Run: node scripts/build_hero_slider.mjs
+ * Genera 7 slides hero 4:3 desde fuentes curadas (galería legacy + premium).
+ * Evita PhotosDrive con letterboxing negro. Run: node scripts/build_hero_slider.mjs
  */
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import sharp from 'sharp';
+import { DISPLAY_LABELS } from './category-mapping.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
@@ -15,131 +16,96 @@ const SIZES = [400, 800, 1200, 1600];
 const CREAM = '#ddd3c8';
 const HERO_ASPECT = 4 / 3;
 
-/** Las 7 mejores fotos reales (estilo vitrina premium, sin competidores) */
-const HERO_PICKS = [
-  {
-    id: 'hero-slide-01',
-    source: 'public/images/premium/collares/exhibidor-collares-cadenas-horizontal-09-1600.jpg',
-    alt: 'Línea de bustos para collares en ecocuero — vitrina fina Tu Exhibidor Chile',
-    category: 'collares',
-  },
-  {
-    id: 'hero-slide-02',
-    source: 'public/images/premium/sets-vitrina/set-vitrina-modular-horizontal-01-1600.jpg',
-    alt: 'Exhibidor de anillos estilo maniquí con joyas — fabricación chilena',
-    category: 'anillos',
-  },
-  {
-    id: 'hero-slide-03',
-    source: 'public/images/premium/premium/exhibidor-joyeria-premium-horizontal-11-1600.jpg',
-    alt: 'Set modular de pedestales para vitrina de joyería — Tu Exhibidor',
-    category: 'sets-vitrina',
-  },
-  {
-    id: 'hero-slide-04',
-    source: 'public/images/premium/collares/exhibidor-collares-cadenas-horizontal-10-1600.jpg',
-    alt: 'Busto premium para collares con cadena dorada — vitrina selecta',
-    category: 'collares',
-    trimPct: { left: 0.15, top: 0, right: 0.15, bottom: 0.05 },
-  },
-  {
-    id: 'hero-slide-05',
-    source: 'public/images/premium/sets-vitrina/set-vitrina-modular-horizontal-02-1600.jpg',
-    alt: 'Exhibidor de aros en ecocuero con perlas y piedras — vitrina selecta',
-    category: 'aros',
-  },
-  {
-    id: 'hero-slide-06',
-    source: 'public/images/premium/aros/exhibidor-aros-zarcillos-horizontal-01-1600.jpg',
-    alt: 'Bandeja exhibidora premium en ecocuero crema para anillos y dijes',
-    category: 'dijes',
-  },
-  {
-    id: 'hero-slide-07',
-    source: 'public/images/premium/pulseras/exhibidor-pulseras-relojes-horizontal-10-1600.jpg',
-    alt: 'Exhibidor de pulseras en ecocuero con pulsera dorada — vitrina fina',
-    category: 'pulseras',
-    trimPct: { left: 0, top: 0, right: 0.06, bottom: 0.12 },
-  },
+const HERO_ALTS = {
+  collares: 'Línea de bustos para collares en ecocuero — vitrina fina Tu Exhibidor Chile',
+  anillos: 'Exhibidor de anillos estilo maniquí con joyas — fabricación chilena',
+  'sets-vitrina': 'Set modular de pedestales para vitrina de joyería — Tu Exhibidor',
+  aros: 'Exhibidor de aros en ecocuero con perlas y piedras — vitrina selecta',
+  dijes: 'Bandeja exhibidora premium en ecocuero crema para anillos y dijes',
+  pulseras: 'Exhibidor T-bar para pulseras en ecocuero — vitrina fina Tu Exhibidor',
+  bandejas: 'Bandeja exhibidora en ecocuero para vitrina de joyería — Tu Exhibidor',
+};
+
+/** Fuentes curadas: galería WP legacy + premium horizontales sin letterboxing negro. */
+const HERO_CURATED = [
+  { category: 'collares', src: 'public/images/gallery/te-bustos-collares.jpg' },
+  { category: 'pulseras', src: 'public/images/gallery/te-tbar-triple.jpg' },
+  { category: 'anillos', src: 'public/images/premium/premium/exhibidor-joyeria-premium-horizontal-11-1600.jpg' },
+  { category: 'aros', src: 'public/images/gallery/te-aretes-tstand.jpg' },
+  { category: 'bandejas', src: 'public/images/premium/premium/exhibidor-joyeria-premium-horizontal-12-1600.jpg' },
+  { category: 'dijes', src: 'public/images/gallery/te-collar-busto.jpg' },
+  { category: 'sets-vitrina', src: 'public/images/premium/sets-vitrina/set-vitrina-modular-horizontal-01-1600.jpg' },
 ];
 
 function rel(p) {
   return path.relative(ROOT, p).replace(/\\/g, '/');
 }
 
-async function processHero(pick) {
-  const srcPath = path.join(ROOT, pick.source);
-  if (!fs.existsSync(srcPath)) throw new Error(`No existe: ${pick.source}`);
+async function processHero(pick, index) {
+  const id = `hero-slide-${String(index + 1).padStart(2, '0')}`;
+  const srcPath = path.join(ROOT, pick.src);
+  if (!fs.existsSync(srcPath)) throw new Error(`No existe fuente para ${id}: ${pick.src}`);
 
-  const basePath = path.join(OUT, pick.id);
+  const basePath = path.join(OUT, id);
   fs.mkdirSync(OUT, { recursive: true });
-
-  let pipeline = sharp(srcPath, { failOn: 'none' })
-    .rotate()
-    .normalize()
-    .modulate({ brightness: 1.03, saturation: 1.05 })
-    .sharpen({ sigma: 0.5, m1: 0.4, m2: 0.35 });
-
-  if (pick.trimPct) {
-    const meta = await pipeline.clone().metadata();
-    const { width, height } = meta;
-    const t = pick.trimPct;
-    const left = Math.round(width * (t.left || 0));
-    const top = Math.round(height * (t.top || 0));
-    const right = Math.round(width * (1 - (t.right || 0)));
-    const bottom = Math.round(height * (1 - (t.bottom || 0)));
-    pipeline = pipeline.extract({
-      left,
-      top,
-      width: Math.max(1, right - left),
-      height: Math.max(1, bottom - top),
-    });
-  }
 
   const sources = {};
   for (const w of SIZES) {
     const h = Math.round(w / HERO_ASPECT);
-    const resized = pipeline.clone().resize(w, h, {
-      fit: 'cover',
-      position: sharp.strategy.attention,
-      background: CREAM,
-    });
+    const make = () => sharp(srcPath, { failOn: 'none' })
+      .rotate()
+      .trim({ threshold: 18 })
+      .normalize()
+      .modulate({ brightness: 1.03, saturation: 1.05 })
+      .sharpen({ sigma: 0.5, m1: 0.4, m2: 0.35 })
+      .resize(w, h, { fit: 'cover', position: 'centre', background: CREAM });
 
     const jpgPath = `${basePath}-${w}.jpg`;
     const webpPath = `${basePath}-${w}.webp`;
     const avifPath = `${basePath}-${w}.avif`;
 
-    await resized.clone().jpeg({ quality: 82, mozjpeg: true }).toFile(jpgPath);
-    await resized.clone().webp({ quality: 84, effort: 4 }).toFile(webpPath);
-    await resized.clone().avif({ quality: 62, effort: 4 }).toFile(avifPath);
+    await make().jpeg({ quality: 82, mozjpeg: true }).toFile(jpgPath);
+    await make().webp({ quality: 84, effort: 4 }).toFile(webpPath);
+    try {
+      await make().avif({ quality: 62, effort: 4 }).toFile(avifPath);
+    } catch (err) {
+      console.warn(`  avif omitido ${path.basename(avifPath)}: ${err.message}`);
+    }
 
     sources[w] = { jpg: rel(jpgPath), webp: rel(webpPath), avif: rel(avifPath) };
   }
 
+  const cat = pick.category;
   return {
-    slug: pick.id,
-    alt: pick.alt,
-    category: pick.category,
+    slug: id,
+    alt: HERO_ALTS[cat] || `${DISPLAY_LABELS[cat] || 'Exhibidor'} — Tu Exhibidor Chile`,
+    category: cat,
     hero: true,
     aspect: 'landscape',
-    score: 120,
-    source: pick.source,
+    score: 100,
+    source: pick.src,
     base: rel(basePath),
     sources,
   };
 }
 
 async function main() {
-  console.log('Generando 7 slides hero…');
-  const hero = [];
-  for (const pick of HERO_PICKS) {
-    console.log(`  → ${pick.id}`);
-    hero.push(await processHero(pick));
+  const missing = HERO_CURATED.filter((p) => !fs.existsSync(path.join(ROOT, p.src)));
+  if (missing.length) {
+    throw new Error(`Faltan fuentes hero: ${missing.map((m) => m.src).join(', ')}`);
   }
 
   const manifest = fs.existsSync(MANIFEST_PATH)
     ? JSON.parse(fs.readFileSync(MANIFEST_PATH, 'utf8'))
-    : { categories: {}, gallery: [] };
+    : {};
+
+  console.log(`Generando ${HERO_CURATED.length} slides hero (fuentes curadas)…`);
+  const hero = [];
+  for (let i = 0; i < HERO_CURATED.length; i++) {
+    const pick = HERO_CURATED[i];
+    console.log(`  → hero-slide-${String(i + 1).padStart(2, '0')} (${pick.category}) ← ${pick.src}`);
+    hero.push(await processHero(pick, i));
+  }
 
   manifest.hero = hero;
   manifest.heroCount = hero.length;

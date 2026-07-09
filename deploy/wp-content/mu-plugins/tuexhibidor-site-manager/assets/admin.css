@@ -65,3 +65,90 @@
   z-index: 100001;
   box-shadow: 0 4px 12px rgba(0,0,0,.2);
 }
+
+/* Más pedidos editor */
+.tuex-sm-featured-editor { max-width: 720px; margin-top: 12px; }
+.tuex-sm-featured-add { position: relative; margin-bottom: 16px; }
+.tuex-sm-featured-add input[type="search"] { width: 100%; max-width: 480px; }
+.tuex-sm-featured-suggestions {
+  position: absolute;
+  z-index: 10;
+  top: 100%;
+  left: 0;
+  right: 0;
+  max-width: 480px;
+  max-height: 280px;
+  overflow-y: auto;
+  background: #fff;
+  border: 1px solid #c3c4c7;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.08);
+  margin-top: 4px;
+}
+.tuex-sm-suggest-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 8px 12px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1.4;
+}
+.tuex-sm-suggest-item:hover { background: #f0f0f1; }
+.tuex-sm-suggest-empty { margin: 8px 12px; color: #646970; font-size: 12px; }
+.tuex-sm-featured-list {
+  list-style: none;
+  margin: 0 0 16px;
+  padding: 0;
+  border: 1px solid #c3c4c7;
+  border-radius: 4px;
+  background: #fff;
+}
+.tuex-sm-featured-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-bottom: 1px solid #e0e0e0;
+}
+.tuex-sm-featured-item:last-child { border-bottom: none; }
+.tuex-sm-featured-order {
+  flex: 0 0 24px;
+  text-align: center;
+  color: #646970;
+  font-weight: 600;
+  font-size: 13px;
+}
+.tuex-sm-featured-thumb {
+  flex: 0 0 56px;
+  width: 56px;
+  height: 56px;
+  background: #f0ebe3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 2px;
+}
+.tuex-sm-featured-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.tuex-sm-featured-meta {
+  flex: 1;
+  font-size: 13px;
+  line-height: 1.35;
+  min-width: 0;
+}
+.tuex-sm-featured-meta strong { display: block; }
+.tuex-sm-featured-actions {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 4px;
+}
+.tuex-sm-featured-actions .button { min-width: 32px; padding: 0 8px; }
+.tuex-sm-featured-footer { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.tuex-sm-featured-footer .tuex-sm-count { margin-left: auto; }

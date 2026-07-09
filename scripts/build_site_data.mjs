@@ -22,6 +22,10 @@ const premiumPath = path.join(ROOT, 'import/premium-gallery-manifest.json');
 const premium = fs.existsSync(premiumPath)
   ? JSON.parse(fs.readFileSync(premiumPath, 'utf8'))
   : null;
+const legacyPath = path.join(ROOT, 'import/legacy-gallery.json');
+const legacy = fs.existsSync(legacyPath)
+  ? JSON.parse(fs.readFileSync(legacyPath, 'utf8'))
+  : null;
 
 const scores = {};
 for (const m of summary.matches || []) {
@@ -76,22 +80,35 @@ DISPLAY_CATEGORIES.forEach((key) => {
 });
 
 const siteData = {
+  featuredSkus: featured.map((p) => p.code),
   hero: premium?.hero?.length
     ? premium.hero.map(assetRef)
     : media.hero?.length
       ? media.hero
       : featured.slice(0, 5).map((p) => p.image),
-  gallery: premium?.gallery?.length
-    ? premium.gallery.map(assetRef)
-    : media.gallery?.length
-      ? media.gallery
-      : featured.map((p) => p.image),
+  gallery: legacy?.images?.length
+    ? legacy.images.filter((p) => fs.existsSync(path.join(ROOT, p)))
+    : premium?.gallery?.length
+      ? premium.gallery.map(assetRef)
+      : media.gallery?.length
+        ? media.gallery
+        : featured.map((p) => p.image),
   categoryImages,
   displayCategories: DISPLAY_CATEGORIES,
   displayLabels: DISPLAY_LABELS,
   displayIntros: DISPLAY_INTROS,
-  stats: { years: 20, products: products.length, country: 'Chile' },
-  premium: !!premium,
+  stats: { years: 20, products: Math.max(100, products.length), country: 'Chile' },
+  homeStatic: categoryImages['sets-vitrina']
+    ? {
+        base: 'public/images/home/medida',
+        alt:
+          typeof categoryImages['sets-vitrina'] === 'object'
+            ? categoryImages['sets-vitrina'].alt
+            : 'Set vitrina modular Tu Exhibidor',
+      }
+    : {},
+  premium: !!premium && !legacy?.images?.length,
+  assetVersion: String(Math.floor(Date.now() / 1000)),
 };
 
 const catalogJs = `window.CATALOG_DATA=${JSON.stringify({ products })};\nwindow.CATALOG_SCORES=${JSON.stringify(scores)};\n`;

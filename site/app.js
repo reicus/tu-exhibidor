@@ -1,4 +1,14 @@
-const IMG = (p) => `/${p}`;
+function assetCacheVer() {
+  return window.SITE_DATA?.assetVersion || '';
+}
+
+function withVer(url) {
+  const v = assetCacheVer();
+  if (!v || url.includes('?')) return url;
+  return `${url}?v=${v}`;
+}
+
+const IMG = (p) => withVer(`/${p}`);
 
 const TE_CAROUSEL_PREV = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>';
 const TE_CAROUSEL_NEXT = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>';
@@ -23,7 +33,7 @@ function assetAlt(asset, fallback = 'Tu Exhibidor') {
 }
 
 function mediaPath(base, width, format) {
-  return `/${base}-${width}.${format}`;
+  return withVer(`/${base}-${width}.${format}`);
 }
 
 function pictureHtml(asset, { sizes = '100vw', className = '', loading = 'lazy' } = {}) {
@@ -55,6 +65,36 @@ function waUrl(code, name) {
 
 function cleanName(name) {
   return name.replace(/\s*\([^)]*\)\s*$/, '');
+}
+
+/** Producto disponible (inStock desde sync WC; sin campo = disponible). */
+function isInStock(p) {
+  return p.inStock !== false;
+}
+
+function availableProducts(products) {
+  return products.filter(isInStock);
+}
+
+function carouselProducts(products) {
+  return availableProducts(products);
+}
+
+/** «Los más pedidos»: orden manual en SITE_DATA.featuredSkus o auto por score. */
+function resolveFeaturedProducts(products, site) {
+  const skus = site.featuredSkus;
+  if (Array.isArray(skus) && skus.length) {
+    const byCode = new Map(products.map((p) => [p.code, p]));
+    const picked = skus
+      .map((code) => byCode.get(code))
+      .filter((p) => p && p.imageOk !== false);
+    if (picked.length) return carouselProducts(picked);
+  }
+  const auto = products
+    .filter((p) => (p.score ?? 1) >= 0.78 && p.imageOk !== false)
+    .sort((a, b) => (b.score ?? 0) - (a.score ?? 0))
+    .slice(0, 12);
+  return carouselProducts(auto.length ? auto : products.slice(0, 8));
 }
 
 function productCard(p, compact = false) {
@@ -296,7 +336,8 @@ function renderCatalog(products, site) {
   let active = order[0] || 'collares';
 
   order.forEach((key, i) => {
-    if (!byCat[key]?.length) return;
+    const catProducts = carouselProducts(byCat[key] || []);
+    if (!catProducts.length) return;
 
     const btn = document.createElement('button');
     btn.type = 'button';
@@ -311,27 +352,27 @@ function renderCatalog(products, site) {
     panel.id = `panel-${key}`;
     panel.innerHTML = `
       <p class="panel-intro">${intros[key] || ''}</p>
-      <p class="panel-count">${byCat[key].length} modelos · consulta con el código al taller</p>
+      <p class="panel-count">${catProducts.length} modelos · consulta con el código al taller</p>
       <div class="carousel catalog-carousel peek-carousel" data-autoplay="5000">
         <div class="carousel-track catalog-track"></div>
         <button type="button" class="carousel-btn prev" aria-label="Anterior">${TE_CAROUSEL_PREV}</button>
         <button type="button" class="carousel-btn next" aria-label="Siguiente">${TE_CAROUSEL_NEXT}</button>
       </div>
       <div class="catalog-grid hidden"></div>
-      <button type="button" class="btn btn-outline toggle-grid">Ver todos (${byCat[key].length})</button>`;
+      <button type="button" class="btn btn-outline toggle-grid">Ver todos (${catProducts.length})</button>`;
     panels.appendChild(panel);
 
     const track = panel.querySelector('.catalog-track');
-    byCat[key].forEach((p) => {
+    catProducts.forEach((p) => {
       track.insertAdjacentHTML('beforeend', `<div class="carousel-slide catalog-slide">${productCard(p)}</div>`);
     });
-    panel.querySelector('.catalog-grid').innerHTML = byCat[key].map((p) => productCard(p)).join('');
+    panel.querySelector('.catalog-grid').innerHTML = catProducts.map((p) => productCard(p)).join('');
     setupCarousel(panel.querySelector('.catalog-carousel'));
 
     panel.querySelector('.toggle-grid').addEventListener('click', () => {
       const expanded = panel.querySelector('.catalog-grid').classList.toggle('hidden') === false;
       panel.querySelector('.catalog-carousel').classList.toggle('hidden', expanded);
-      panel.querySelector('.toggle-grid').textContent = expanded ? 'Ver carrusel' : `Ver todos (${byCat[key].length})`;
+      panel.querySelector('.toggle-grid').textContent = expanded ? 'Ver carrusel' : `Ver todos (${catProducts.length})`;
     });
   });
 
@@ -367,7 +408,7 @@ function renderCatalog(products, site) {
     }
 
     const hits = products.filter((p) =>
-      p.code.toLowerCase().includes(q) || cleanName(p.name).toLowerCase().includes(q),
+      isInStock(p) && (p.code.toLowerCase().includes(q) || cleanName(p.name).toLowerCase().includes(q)),
     );
     tabs.querySelectorAll('.cat-tab').forEach((t) => t.classList.remove('active'));
     panels.querySelectorAll('.catalog-panel').forEach((p) => p.classList.remove('active'));
@@ -455,18 +496,23 @@ function initWaWidget() {
 }
 
 function initSite() {
-  const products = window.CATALOG_DATA?.products || [];
+  const allProducts = window.CATALOG_DATA?.products || [];
+  const products = availableProducts(allProducts);
   const site = window.SITE_DATA || {};
-  const featured = products
+  const featured = resolveFeaturedProducts(products, site);
+  const featuredForHero = products
     .filter((p) => (p.score ?? 1) >= 0.78 && p.imageOk !== false)
     .sort((a, b) => (b.score ?? 0) - (a.score ?? 0))
     .slice(0, 12);
 
-  document.getElementById('stat-products').textContent = `${products.length}+`;
+  const productStat = Math.max(100, site.stats?.products ?? products.length);
+  document.getElementById('stat-products').textContent = `${productStat}+`;
 
-  const heroImgs = site.hero?.length ? site.hero : featured.slice(0, 5).map((p) => p.image);
+  const heroImgs = site.hero?.length ? site.hero : featuredForHero.slice(0, 5).map((p) => p.image);
   const aboutImgs = site.gallery?.slice(0, 6) || heroImgs;
-  const galleryImgs = site.gallery?.length ? site.gallery : products.slice(0, 16).map((p) => p.image);
+  const galleryImgs = site.gallery?.length
+    ? site.gallery
+    : products.slice(0, 16).map((p) => p.image);
 
   fillSlides('hero-track', heroImgs);
   setupCarousel(document.querySelector('.hero-carousel'));
@@ -475,13 +521,15 @@ function initSite() {
   setupCarousel(document.querySelector('.about-carousel'));
 
   renderCategoryCards(site);
-  renderFeatured(featured.length ? featured : products.slice(0, 8));
+  renderFeatured(featured);
   renderCatalog(products, site);
   renderGallery(galleryImgs);
 
   const medidaImg = document.getElementById('medida-img');
-  if (medidaImg && site.categoryImages?.['sets-vitrina']) {
-    medidaImg.src = resolveImgSrc(site.categoryImages['sets-vitrina'], 1200);
+  const medidaAsset = site.homeStatic?.medida || site.categoryImages?.['sets-vitrina'];
+  if (medidaImg && medidaAsset) {
+    medidaImg.src = resolveImgSrc(medidaAsset, 1200);
+    if (medidaAsset.alt) medidaImg.alt = medidaAsset.alt;
   }
 
   initWaWidget();
