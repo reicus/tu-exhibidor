@@ -25,7 +25,7 @@ function ftpUpload(local, remoteRel) {
 
 function ftpDelete(remoteRel) {
   const remote = remoteRel.replace(/^\/+/, '').replace(/^public_html\//, '');
-  execFileSync('curl.exe', ['-sS', '--user', FTP_USER, '-Q', `DELE public_html/${remote}`], 'ftp://rooster.hostingplus.cl/'], {
+  execFileSync('curl.exe', ['-sS', '--user', FTP_USER, '-Q', `DELE public_html/${remote}`, 'ftp://rooster.hostingplus.cl/'], {
     stdio: 'pipe',
   });
 }
