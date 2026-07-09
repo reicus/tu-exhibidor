@@ -137,6 +137,12 @@ function te_upgrade_header_socials() {
 				if (wrap) wrap.style.display = 'none';
 			}
 		});
+		document.querySelectorAll('.logo.text-logo a').forEach(function(a){
+			if (a.querySelector('img')) return;
+			a.innerHTML = '<img src="'+inkLogo+'" class="logo-dimensions normal-logo" id="site-logo" alt="Tu Exhibidor" width="52" height="52" style="height:52px;width:auto">';
+			var wrap = a.closest('.logo');
+			if (wrap) { wrap.classList.remove('text-logo'); wrap.classList.add('image-logo','te-brand-logo'); }
+		});
 		document.querySelectorAll('.site-header style').forEach(function(node){
 			if (node.textContent && node.textContent.indexOf('logo-dimensions') !== -1) {
 				node.textContent = '.logo-dimensions{min-width:0!important;width:auto!important;height:52px!important;}';
@@ -4011,3 +4017,92 @@ function te_friendly_404_css() {
 	</style>';
 }
 /* == fin TE-404 == */
+
+/* == TE-PICSART-CLEAN: quitar metadata de captions y descripciones == */
+function te_is_picsart_metadata( string $text ): bool {
+	if ( $text === '' ) {
+		return false;
+	}
+	if ( preg_match( '/"remix_data"|"fte_image_ids"|"total_effects_time"|"total_editor_time"|"tools_used"|"effects_applied"|"photos_added"|"edited_since_last_sticker_save"/i', $text ) ) {
+		return true;
+	}
+	return (bool) ( preg_match( '/picsart/i', $text ) && preg_match( '/"uid"\s*:/', $text ) );
+}
+
+function te_clean_picsart_text( string $text ): string {
+	if ( ! te_is_picsart_metadata( $text ) ) {
+		return $text;
+	}
+	$trim = trim( $text );
+	if ( preg_match( '/^[\{\[]/', $trim ) ) {
+		return '';
+	}
+	$clean = preg_replace( '/\{[^{}]*"remix_data"[^{}]*\}/s', '', $text );
+	$clean = preg_replace( '/\{[^{}]*"fte_image_ids"[^{}]*\}/s', '', (string) $clean );
+	return trim( (string) $clean );
+}
+
+add_filter( 'wp_get_attachment_caption', 'te_strip_picsart_attachment_caption', 20, 2 );
+function te_strip_picsart_attachment_caption( $caption, $post_id ) {
+	$caption = (string) $caption;
+	return te_clean_picsart_text( $caption );
+}
+
+add_filter( 'the_content', 'te_strip_picsart_product_content', 5 );
+function te_strip_picsart_product_content( $content ) {
+	if ( ! is_singular( 'product' ) ) {
+		return $content;
+	}
+	return te_clean_picsart_text( (string) $content );
+}
+/* == fin TE-PICSART-CLEAN == */
+
+/* == TE-BRAND-LOGO: imagen original en header (reemplaza texto TU EXHIBIDOR) == */
+function te_brand_logo_img_markup(): string {
+	$home = esc_url( home_url( '/' ) );
+	$webp = esc_url( home_url( '/public/images/brand/logo-tuexhibidor-ink-96.webp' ) );
+	$png  = esc_url( home_url( '/public/images/brand/logo-tuexhibidor-ink-96.png' ) );
+	return '<a href="' . $home . '" class="te-brand-logo-link" rel="home">'
+		. '<picture><source srcset="' . $webp . '" type="image/webp">'
+		. '<img src="' . $png . '" class="logo-dimensions normal-logo" id="site-logo" alt="Tu Exhibidor — exhibidores de alta joyería" width="52" height="52" decoding="async">'
+		. '</picture></a>';
+}
+
+add_action( 'template_redirect', 'te_buffer_fix_text_logo', 1 );
+function te_buffer_fix_text_logo() {
+	if ( is_admin() || wp_doing_ajax() || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) {
+		return;
+	}
+	ob_start( 'te_replace_text_logo_html' );
+}
+
+function te_replace_text_logo_html( string $html ): string {
+	if ( strpos( $html, 'text-logo' ) === false ) {
+		return $html;
+	}
+	$logo = te_brand_logo_img_markup();
+	return (string) preg_replace(
+		'#<div class="logo text-logo">\s*<a[^>]*>.*?</a>\s*</div>#s',
+		'<div class="logo image-logo te-brand-logo">' . $logo . '</div>',
+		$html
+	);
+}
+
+add_action( 'wp_head', 'te_brand_logo_styles', 4 );
+function te_brand_logo_styles() {
+	echo '<style>
+	.logo.te-brand-logo,
+	.logo.image-logo.te-brand-logo{ display:flex; align-items:center; justify-content:center; }
+	.logo.te-brand-logo a,
+	.logo.te-brand-logo .te-brand-logo-link{ display:inline-flex; align-items:center; padding:4px 0; line-height:0; text-decoration:none !important; }
+	.logo.te-brand-logo img,
+	.site-header .logo.te-brand-logo #site-logo{
+		height:52px !important;
+		width:auto !important;
+		max-height:52px !important;
+		display:block;
+	}
+	.logo.text-logo{ font-size:0 !important; letter-spacing:0 !important; }
+	</style>';
+}
+/* == fin TE-BRAND-LOGO == */
