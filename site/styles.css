@@ -726,6 +726,12 @@ img { display: block; max-width: 100%; }
   .custom-copy { text-align: center; }
   .custom-copy .btn { margin-left: auto; margin-right: auto; }
   .hero-copy .eyebrow { margin-left: auto; margin-right: auto; }
+  .catalog-toolbar { text-align: center; }
+  #catalog-search { display: block; width: 100%; max-width: 340px; margin: 0 auto 16px; }
+  .cat-tabs { justify-content: center; }
+  .contact-inner { text-align: center; }
+  .panel-intro, .panel-count { text-align: center; }
+  .catalog-panel .toggle-grid { margin-left: auto; margin-right: auto; display: flex; }
 }
 
 @media (max-width: 768px) {

@@ -13,8 +13,15 @@ public/images/catalog/originals/PROCESSED/
 # Backups pesados (regenerables)
 backup/
 backup-sitio-operativo/
+backup-produccion-*/
 *.tar.gz
 *.zip
+
+# Temporales de desarrollo / verificación
+tmp-*
+tmp-shots/
+sync_wc_log.txt
+te-verify-*.png
 
 # Archivos del sistema
 .DS_Store
