@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'TUEX_SM_VERSION', '1.3.2' );
+define( 'TUEX_SM_VERSION', '1.3.3' );
 define( 'TUEX_SM_DIR', __DIR__ );
 define( 'TUEX_SM_URL', content_url( 'mu-plugins/tuexhibidor-site-manager' ) );
 

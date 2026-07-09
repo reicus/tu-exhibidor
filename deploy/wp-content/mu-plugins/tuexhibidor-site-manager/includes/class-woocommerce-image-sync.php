@@ -23,6 +23,7 @@ final class Tuexhibidor_Site_Manager_WooCommerce_Image_Sync {
 	public static function init(): void {
 		add_action( 'woocommerce_product_set_image_id', array( __CLASS__, 'on_product_image' ), 30, 2 );
 		add_action( 'set_post_thumbnail', array( __CLASS__, 'on_set_thumbnail' ), 30, 3 );
+		add_action( 'added_post_meta', array( __CLASS__, 'on_thumbnail_meta' ), 30, 4 );
 		add_action( 'updated_post_meta', array( __CLASS__, 'on_thumbnail_meta' ), 30, 4 );
 		add_action( 'wp_ajax_tuex_sm_sync_images_from_wc', array( __CLASS__, 'ajax_sync_all' ) );
 		add_action( 'wp_ajax_tuex_sm_push_covers_to_wc', array( __CLASS__, 'ajax_push_covers_to_wc' ) );
@@ -232,7 +233,9 @@ final class Tuexhibidor_Site_Manager_WooCommerce_Image_Sync {
 		if ( ! $entry ) {
 			return;
 		}
-		self::sync_catalog_item( $entry, $image_id );
+		if ( self::sync_catalog_item( $entry, $image_id ) ) {
+			Tuexhibidor_Site_Manager_Data::bump_cache_version();
+		}
 	}
 
 	/**
