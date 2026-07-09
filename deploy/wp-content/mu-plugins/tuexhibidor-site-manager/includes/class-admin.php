@@ -63,13 +63,14 @@ final class Tuexhibidor_Site_Manager_Admin {
 
 		$tab = isset( $_GET['tab'] ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : 'catalog';
 		$tabs = array(
-			'catalog'    => 'Catálogo',
-			'hero'       => 'Hero',
-			'home'       => 'Home estático',
-			'featured'   => 'Más pedidos',
-			'categories' => 'Categorías',
-			'gallery'    => 'Exhibidores en acción',
-			'brand'      => 'Marca',
+			'catalog'       => 'Catálogo',
+			'hero'          => 'Hero',
+			'home'          => 'Home estático',
+			'featured'      => 'Más pedidos',
+			'home-products' => 'Productos del home',
+			'categories'    => 'Categorías',
+			'gallery'       => 'Exhibidores en acción',
+			'brand'         => 'Marca',
 		);
 		if ( ! isset( $tabs[ $tab ] ) ) {
 			$tab = 'catalog';
@@ -122,6 +123,9 @@ final class Tuexhibidor_Site_Manager_Admin {
 						break;
 					case 'featured':
 						self::render_featured_tab();
+						break;
+					case 'home-products':
+						self::render_home_products_tab();
 						break;
 					case 'categories':
 						self::render_categories_tab();
@@ -283,7 +287,7 @@ final class Tuexhibidor_Site_Manager_Admin {
 		?>
 		<p class="description">
 			Carrusel <strong>Los más pedidos</strong> en la home. Elige productos por código, ordénalos y guarda.
-			Las fotos se editan en la pestaña <strong>Catálogo</strong>.
+			Las fotos se editan en la pestaña <strong><a href="<?php echo esc_url( admin_url( 'admin.php?page=tuexhibidor-site-manager&tab=home-products' ) ); ?>">Productos del home</a></strong>.
 		</p>
 
 		<div class="tuex-sm-featured-editor">
@@ -335,6 +339,78 @@ final class Tuexhibidor_Site_Manager_Admin {
 		</div>
 
 		<script type="application/json" id="tuex-sm-catalog-json"><?php echo wp_json_encode( $catalog_json, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ); ?></script>
+		<?php
+	}
+
+	private static function render_home_products_tab(): void {
+		$site     = Tuexhibidor_Site_Manager_Data::load_site_data();
+		$catalog  = Tuexhibidor_Site_Manager_Data::load_catalog();
+		$products = $catalog['products'];
+		$by_code  = array();
+		foreach ( $products as $product ) {
+			if ( ! empty( $product['code'] ) ) {
+				$by_code[ $product['code'] ] = $product;
+			}
+		}
+
+		$featured_skus = $site['featuredSkus'] ?? array();
+		if ( ! is_array( $featured_skus ) || empty( $featured_skus ) ) {
+			$featured_skus = Tuexhibidor_Site_Manager_Data::default_featured_skus( $products );
+		}
+
+		$home_products = array();
+		foreach ( $featured_skus as $code ) {
+			if ( ! empty( $by_code[ $code ] ) ) {
+				$home_products[] = $by_code[ $code ];
+			}
+		}
+
+		$cache_ver = get_option( 'tuexhibidor_asset_version', '1' );
+		?>
+		<p class="description">
+			Fotos del carrusel <strong>Los más pedidos</strong> en la home
+			(<a href="<?php echo esc_url( home_url( '/site/#featured' ) ); ?>" target="_blank" rel="noopener">ver en el sitio</a>).
+			Para cambiar qué productos aparecen u su orden, usa la pestaña
+			<a href="<?php echo esc_url( admin_url( 'admin.php?page=tuexhibidor-site-manager&tab=featured' ) ); ?>">Más pedidos</a>.
+		</p>
+
+		<p class="description">
+			<label><input type="checkbox" id="tuex-sm-sync-wc" checked> También actualizar imagen en WooCommerce (por SKU)</label>
+		</p>
+
+		<?php if ( empty( $home_products ) ) : ?>
+			<div class="notice notice-warning inline"><p>
+				No hay productos en el carrusel. Configúralos en
+				<a href="<?php echo esc_url( admin_url( 'admin.php?page=tuexhibidor-site-manager&tab=featured' ) ); ?>">Más pedidos</a>.
+			</p></div>
+		<?php else : ?>
+			<p class="tuex-sm-count"><?php echo count( $home_products ); ?> productos en el home</p>
+			<div class="tuex-sm-grid">
+				<?php foreach ( $home_products as $i => $product ) : ?>
+					<?php
+					$img_url = Tuexhibidor_Site_Manager_Data::asset_preview_url( $product['image'] ?? '' );
+					if ( ! $img_url && ! empty( $product['image'] ) ) {
+						$img_url = Tuexhibidor_Site_Manager_Paths::public_url( $product['image'] );
+					}
+					?>
+					<article class="tuex-sm-card" data-type="catalog" data-slug="<?php echo esc_attr( $product['slug'] ?? '' ); ?>" data-code="<?php echo esc_attr( $product['code'] ?? '' ); ?>">
+						<div class="tuex-sm-thumb">
+							<span class="tuex-sm-home-order"><?php echo (int) $i + 1; ?></span>
+							<?php if ( $img_url ) : ?>
+								<img src="<?php echo esc_url( $img_url . '?v=' . $cache_ver ); ?>" alt="">
+							<?php else : ?>
+								<span class="tuex-sm-no-img">Sin imagen</span>
+							<?php endif; ?>
+						</div>
+						<div class="tuex-sm-card-body">
+							<strong><?php echo esc_html( $product['code'] ?? '' ); ?></strong>
+							<p><?php echo esc_html( wp_trim_words( $product['name'] ?? '', 8, '…' ) ); ?></p>
+							<button type="button" class="button button-primary tuex-sm-replace">Cambiar imagen</button>
+						</div>
+					</article>
+				<?php endforeach; ?>
+			</div>
+		<?php endif; ?>
 		<?php
 	}
 
