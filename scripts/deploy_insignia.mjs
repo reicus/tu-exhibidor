@@ -17,6 +17,7 @@ const FILES = [
   'site/site-data.js',
   'site/index.html',
   'site/styles.css',
+  'site/app.js',
 ];
 
 function upload(local, remote) {
