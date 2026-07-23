@@ -48,6 +48,16 @@ Archivos en servidor:
 - `wp-content/mu-plugins/tuexhibidor-site-manager/` (carpeta completa)
 
 
+## Continuidad / backup
+
+Para retomar el proyecto más adelante:
+
+1. [`docs/COMO-RETOMAR.md`](docs/COMO-RETOMAR.md) — checklist ~15 minutos  
+2. [`docs/CONTINUIDAD-PROYECTO.md`](docs/CONTINUIDAD-PROYECTO.md) — handoff completo  
+3. Tag de snapshot: `backup-2026-07-23` en https://github.com/reicus/tu-exhibidor  
+
+Credenciales: solo en `docs/CREDENCIALES-TU-EXHIBIDOR.md` (local, no versionado).
+
 ## Contacto negocio
 
 - WhatsApp Alfonso: +56 9 3749 0214
